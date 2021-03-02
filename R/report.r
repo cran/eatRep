@@ -60,7 +60,7 @@ report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("Nca
                }
           }                                                                     
           frml     <- as.formula(paste0("... ~ ", paste(spltVar,collapse=" + ") ) )
-          jk2wide  <- dcast(data = jk2, formula = frml, value.var = "value")
+          jk2wide  <- reshape2::dcast(data = jk2, formula = frml, value.var = "value")
           if ( round == TRUE) {
                coln<- which(sapply(jk2wide, is.numeric))
                if ( length(coln)>0) {
@@ -103,11 +103,11 @@ seCorrect.wec_se_correction <- function( SE_correction, jk2, grpv ) {
     single_grpv <- SE_correction[[i]][["focGrp"]]
 
     SEs <- output[!output$parameter %in% c("(Intercept)", "Nvalid", "R2"), c("parameter", "value", "coefficient")]
-    SEs[, "parameter"] <- gsub(single_grpv, "", SEs[, "parameter"])
-    SEs <- as.data.frame(pivot_wider(SEs, names_from = "coefficient", values_from = "value"))
+    SEs[, "parameter"] <- gsub(paste0("^", single_grpv), "", SEs[, "parameter"])
+    SEs <- as.data.frame(tidyr::pivot_wider(SEs, names_from = "coefficient", values_from = "value"))
 
     for(param in SEs[["parameter"]]) {
-      esc_param <- escapeRegex(param)
+      esc_param <- Hmisc::escapeRegex(param)
       if(identical(SE_correction[[i]]$refGrp, "all")) { 
         grp_regexp <- paste0("^", esc_param, "\\.vs")
         compare_point_estimates(old_est = cross_diff[cross_diff$parameter == "mean" & grepl(grp_regexp, cross_diff$group) & cross_diff$coefficient == "est", "value"],
