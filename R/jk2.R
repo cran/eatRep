@@ -528,7 +528,8 @@ jackknife.quantile <- function ( dat.i , allNam, na.rm, type, repA, probs, group
                       typeS          <- car::recode(type, "'JK2'='JKn'")        
                       design         <- svrepdesign(data = dat.i[,c(allNam[["group"]], allNam[["dependent"]]) ], weights = dat.i[,allNam[["wgt"]]], type=typeS, scale = scale, rscales = rscales, mse=mse, repweights = repA[match(dat.i[,allNam[["ID"]]], repA[,allNam[["ID"]]] ),-1,drop = FALSE], combined.weights = TRUE, rho=rho)
                       formel         <- as.formula(paste("~ ",allNam[["dependent"]], sep = "") )
-                      quantile.imp   <- svyby(formula = formel, by = as.formula(paste("~", paste(allNam[["group"]], collapse = " + "))), design = design, FUN = svyquantile, quantiles = probs, return.replicates = TRUE, na.rm = na.rm)
+    ### Hotfix: return.replicates = FALSE gesetzt, weil es sonst ab survey version 4.1-1 eine fehlermeldung gibt ... weiss nicht, ob man die replicates spaeter nochmal braucht, ich glaube nicht
+                      quantile.imp   <- svyby(formula = formel, by = as.formula(paste("~", paste(allNam[["group"]], collapse = " + "))), design = design, FUN = svyquantile, quantiles = probs, return.replicates = FALSE, na.rm = na.rm)
                       molt           <- reshape2::melt(data=quantile.imp, id.vars=allNam[["group"]], na.rm=TRUE)
                       molt[,"parameter"]   <- eatTools::removeNonNumeric(as.character(molt[,"variable"]))
                       recString      <- paste("'",names(table(molt[,"parameter"])) , "' = '" , as.character(probs), "'" ,sep = "", collapse="; ")
@@ -540,7 +541,7 @@ jackknife.quantile <- function ( dat.i , allNam, na.rm, type, repA, probs, group
 conv.table      <- function ( dat.i , allNam, na.rm, group.delimiter, separate.missing.indicator , correct, expected.values, modus) {
                    table.cast <- do.call("rbind", by(data = dat.i, INDICES = dat.i[,allNam[["group"]]], FUN = function ( sub.dat) {
                                  prefix <- data.frame(sub.dat[1,allNam[["group"]], drop=FALSE], row.names = NULL, stringsAsFactors = FALSE )
-                                 foo    <- make.indikator(variable = sub.dat[,allNam[["dependent"]]], name.var = "ind", force.indicators =expected.values, separate.missing.indikator = ifelse(separate.missing.indicator==TRUE, "always","no"))
+                                 foo    <- make.indikator(variable = sub.dat[,allNam[["dependent"]]], name.var = "ind", force.indicators =expected.values, separate.missing.indikator = "no")
                                  if(all(dat.i[,allNam[["wgt"]]] == 1)) {ret    <- data.frame ( prefix , eatTools::descr(foo[,-1, drop = FALSE],na.rm=TRUE)[,c("Mean", "std.err")], stringsAsFactors = FALSE )
                                  } else { ret    <- data.frame ( prefix , eatTools::descr(foo[,-1, drop = FALSE], p.weights = sub.dat[,allNam[["wgt"]]],na.rm=TRUE)[,c("Mean", "std.err")], stringsAsFactors = FALSE )}
                                  ret[,"parameter"] <- substring(rownames(ret),5)
@@ -561,7 +562,7 @@ conv.table      <- function ( dat.i , allNam, na.rm, group.delimiter, separate.m
                                       chisq  <- chisq.test(tbl, correct = correct)
                                       scumm  <- iii[!duplicated(iii[,res.group]),res.group,drop = FALSE]
                                       group  <- paste( paste( colnames(scumm), as.character(scumm[1,]), sep="="), sep="", collapse = ", ")
-                                      dif.iii<- data.frame(group = group, parameter = "chiSquareTest", comparison = "groupDiff", modus=modus, coefficient = c("chi2","df","pValue"), value = c(chisq[["statistic"]],chisq[["parameter"]],chisq[["p.value"]]) , stringsAsFactors = FALSE )
+                                      dif.iii<- data.frame(group = group, parameter = "chiSquareTest", comparison = "groupDiff", depVar = allNam[["dependent"]], modus=modus, coefficient = c("chi2","df","pValue"), value = c(chisq[["statistic"]],chisq[["parameter"]],chisq[["p.value"]]) , stringsAsFactors = FALSE )
                                       return(dif.iii)}))                        
                    }                                                            
                    ret        <- reshape2::melt(table.cast, measure.vars = c("Mean", "std.err"), na.rm=TRUE)
@@ -602,7 +603,7 @@ jackknife.table <- function ( dat.i , allNam, na.rm, group.delimiter, type, repA
                                         tbl       <- svychisq(formula = formel, design = designSel, statistic = "Chisq")
                                         scumm     <- iii[!duplicated(iii[,res.group]),res.group,drop = FALSE]
                                         group     <- paste( paste( colnames(scumm), as.character(scumm[1,]), sep="="), sep="", collapse = ", ")
-                                        dif.iii   <- data.frame(group = group, parameter = "chiSquareTest", modus = paste(modus,"survey", sep="__"), coefficient = c("chi2","df","pValue"), value = c(tbl[["statistic"]],tbl[["parameter"]],tbl[["p.value"]]) , stringsAsFactors = FALSE )
+                                        dif.iii   <- data.frame(group = group, parameter = "chiSquareTest", depVar = allNam[["dependent"]], modus = paste(modus,"survey", sep="__"), coefficient = c("chi2","df","pValue"), value = c(tbl[["statistic"]],tbl[["parameter"]],tbl[["p.value"]]) , stringsAsFactors = FALSE )
                                         return(dif.iii)                         
                       } ))                                                      
                       difs[,"comparison"] <- "groupDiff"
@@ -643,7 +644,7 @@ conv.mean      <- function (dat.i , allNam, na.rm, group.delimiter, modus) {
                                                                  ret <- data.frame ( paste ( unique(vgl.iii[,gg]), collapse = ".vs."))
                                                                  colnames(ret) <- gg
                                                                  return(ret)}))
-                                                    dif.iii   <- data.frame(dummy, group = paste(group, paste(k, collapse = ".vs."),sep="____"), parameter = "mean", coefficient = c("est","se"), modus=modus, value = c(true.diff, sqrt( sum(vgl.iii[,"sd"]^2 / vgl.iii[,"nValidUnweighted"]) )) , stringsAsFactors = FALSE )
+                                                    dif.iii   <- data.frame(dummy, group = paste(group, paste(k, collapse = ".vs."),sep="____"), parameter = "mean", coefficient = c("est","se"), depVar = allNam[["dependent"]], modus=modus, value = c(true.diff, sqrt( sum(vgl.iii[,"sd"]^2 / vgl.iii[,"nValidUnweighted"]) )) , stringsAsFactors = FALSE )
                                                     stopifnot(nrow(dif.iii)==2, nrow(vgl.iii) == 2)
                                                     dummy2    <- dif.iii[1,]
                                                     dummy2[,"coefficient"] <- "es"
@@ -819,6 +820,7 @@ jackknife.mean <- function (dat.i , allNam, na.rm, group.delimiter, type, repA, 
                 difsL<- data.frame ( depVar = allNam[["dependent"]], reshape2::melt(data = difs, measure.vars = c("dif", "se", "es") , variable.name = "coefficient" , na.rm=TRUE), modus=paste(modus,"survey", sep="__"), parameter = "mean", stringsAsFactors = FALSE)
                 difsL[,"coefficient"] <- car::recode(difsL[,"coefficient"], "'se'='se'; 'es'='es'; else = 'est'")
                 difsL[,"comparison"]  <- "groupDiff"
+                difsL[,"depVar"]      <- allNam[["dependent"]]
                 difsL[,"group"] <- apply(difsL[,c("group","vgl")],1,FUN = function (z) {paste(z,collapse="____")})
                 resAl<- rbind(resAl,difsL[,-match("vgl", colnames(difsL))])
              }
@@ -1044,6 +1046,7 @@ dG <- function ( jk2.out , analyses = NULL, digits = 3, printDeviance, add ) {
                            ret[,"t.value"] <- ret[,"est"] / ret[,"se"]
                            df     <- spl[ spl[,"parameter"] == "Nvalid" & spl[,"coefficient"] == "est"  ,"value"] - nrow(ret)
                            ret[,"p.value"] <- 2*(1-pt( q = abs(ret[,"t.value"]), df = df ))
+                           ret[,"sig"]     <- eatTools::num.to.cat(x = ret[,"p.value"], cut.points = c(0.001, 0.01, 0.05, 0.1), cat.values = c("***", "**", "*", ".", ""))
                            retNR  <- ret
                            ret    <- data.frame ( lapply(ret, FUN = function ( y ) {if(class(y)=="numeric") {y <- round(y, digits = digits)}; return(y)}), stringsAsFactors = FALSE)
                            groupNamen <- setdiff(colnames(spl), c("group","depVar","modus", "parameter", "coefficient","value", "comparison"))
@@ -1321,7 +1324,13 @@ checkGroupVars <- function ( datL, allNam, auchUV) {
           if(!is.null(allNam[["group"]]) || !is.null(auchUV) ) {
              chk <- lapply(allNam[["group"]], FUN = function ( v ) { if ( !class(datL[,v]) %in% c("factor", "character", "logical", "integer")) {stop(paste0("Grouping variable '",v,"' must be of class 'factor', 'character', 'logical', or 'integer'.\n"))} })
                  for ( gg in c(allNam[["group"]], auchUV) ) {                   ### levels der Gruppen duerfen keine "." oder "_" enthalten, falls cross differences berechnet werden sollen
-                       chk2 <- lme4::isNested(datL[,allNam[["ID"]]], datL[,gg]) ### personen muessen in gruppierungsvariable genestet sein
+    ### personen muessen in gruppierungsvariable genestet sein, aber fuer jede Imputation und jedes Nest separat!
+                       if ( is.null(allNam[["nest"]]) && is.null(allNam[["imp"]])) {
+                            if ( length(which(is.na(datL[,gg])))>0) { stop("Grouping variable '",gg,"' contains ",length(which(is.na(datL[,gg])))," missing values.")}
+                            chk2 <- lme4::isNested(datL[,allNam[["ID"]]], datL[,gg])
+                       }  else  {
+                            chk2 <- all(by(data = datL, INDICES = datL[,c(allNam[["nest"]], allNam[["imp"]])], FUN = function ( i ) { lme4::isNested(i[,allNam[["ID"]]], i[,gg])}))
+                       }
                        if (isFALSE(chk2)) { warning("Grouping variable '",gg,"' is not nested within persons (variable '",allNam[["ID"]],"').") }
                        if ( class(datL[,gg]) %in% c("factor", "character") && length(grep("\\.|_", datL[,gg])) > 0) {
                            message( "Levels of grouping variable '",gg, "' contain '.' and/or '_' which is not allowed. '.' and '_' will be deleted.")
@@ -1336,7 +1345,7 @@ checkGroupVars <- function ( datL, allNam, auchUV) {
           }
           if(!is.null(allNam[["group"]]) | !is.null(allNam[["independent"]]) ) {
              for ( gg in c(allNam[["group"]], allNam[["independent"]]) ) {
-                 if (class ( datL[,gg] ) == "factor") {                         
+                 if (class ( datL[,gg] ) == "factor") {                         ### ausserdem duerfen fuer Gruppierungs- und unabhaengig Variablen keine factor levels ohne Beobachtungen drinsein
                      if ( any(table(datL[,gg]) == 0)) {
                           lev <- names(which(table(datL[,gg]) !=0))
                           nlv <- names(which(table(datL[,gg]) ==0))
@@ -1347,7 +1356,7 @@ checkGroupVars <- function ( datL, allNam, auchUV) {
              }
           }
           return(datL)}
-          
+
 checkForAdjustment <- function(datL, allNam, groupWasNULL) {
           if(!is.null(allNam[["adjust"]])) {
              chk <- lapply(allNam[["adjust"]], FUN = function ( v ) { if ( !class(datL[,v]) %in% c("numeric", "integer")) {stop(paste0("Adjusting variable '",v,"' must be of class 'numeric' or 'integer'.\n"))} })
@@ -1514,7 +1523,7 @@ prepExpecVal <- function (toCall, expected.values, separate.missing.indicator, a
                 if(length(misInd)>0) { datL[misInd,allNam[["dependent"]]] <- "<NA>"}
              }  else {
                 if(length(misInd)>0) {
-                   warning("No seperate missing categorie was chosen. ", length(misInd), " missings were found anyhow for ",allNam[["dependent"]],". Missings will be detected from the data.")
+                   warning("No seperate missing categorie was chosen. ", length(misInd), " missings were found anyhow for ",allNam[["dependent"]],". Missings will be deleted from the data.")
                    if(length(misInd) == nrow(datL)) {stop()}
                    datL <- datL[-misInd,]
                 }

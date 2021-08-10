@@ -1,250 +1,356 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Introduction</title>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Sebastian Weirich and Benjamin Becker" />
+
+
+<title>Replication analyses with eatRep</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
-};
-</script>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
 
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
 }
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
 }
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
 }
-
-h1 {
-   font-size:2.2em;
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
 }
-
-h2 {
-   font-size:1.8em;
+#TOC ul ul {
+margin-left: -2em;
 }
-
-h3 {
-   font-size:1.4em;
+#TOC li {
+line-height: 16px;
 }
-
-h4 {
-   font-size:1.0em;
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
 }
-
-h5 {
-   font-size:0.9em;
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
 }
-
-h6 {
-   font-size:0.8em;
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
 }
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
 }
-
-pre, img {
-  max-width: 100%;
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
 }
 pre {
-  overflow-x: auto;
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
 }
-pre code {
-   display: block; padding: 0.5em;
+pre:not([class]) {
+background-color: #f7f7f7;
 }
-
 code {
-  font-size: 92%;
-  border: 1px solid #ccc;
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
 }
-
-code[class] {
-  background-color: #F8F8F8;
+p > code, li > code {
+padding: 2px 0px;
 }
-
-table, td, th {
-  border: none;
+div.figure {
+text-align: center;
 }
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
 }
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
 }
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
 }
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
+
 
 
 
 </head>
 
 <body>
+
+
+
+
+<h1 class="title toc-ignore">Replication analyses with eatRep</h1>
+<h4 class="author">Sebastian Weirich and Benjamin Becker</h4>
+<h4 class="date">February 2021</h4>
+
+
+
+<div id="introduction" class="section level2">
 <h2>Introduction</h2>
-
-<p>The following vignette demonstrates some analyses based on replication methods. Replication methods are quite common in the context of survey or large-scale assessment data like the &ldquo;National Assessment Studies and IQB Trends in Student Achievement&rdquo; (<a href="https://www.iqb.hu-berlin.de/bt">study description</a>). The following examples are closely related to the &ldquo;IQB&rdquo; context (e.g., jackknife-2 methods are used instead of balanced repeated replicates), but may be adapted for PISA or TIMSS analyses as well. An illustration how <code>eatRep</code> can be applied to PISA data and its specific replication design, see the last example in the documentation of the <code>repMean()</code> function. </p>
-
-<p>Please note that the theoretical foundations of the presented methods are beyond the scope of this vignette&mdash;literature recommendations for in depth theoretical discussions can be found in the package documentation (type <code>package?eatRep</code> into the console). Instead, this vignette focuses on some prototypical analyses. </p>
-
-<p>Furthermore, note that IRT item calibration or &ldquo;plausible values&rdquo; imputation are not covered in this vignette. All the outlined analyses base on survey data in which &ldquo;plausible values&rdquo; are already included. Such kind of data is provided by the <a href="https://webfs.oecd.org/pisa/">OECD</a> or can be requested from the <a href="https://www.iqb.hu-berlin.de/fdz">&ldquo;Research Data Centre (FDZ) at the IQB&rdquo;</a>. Most of the analyses comprise of descriptive statistics (means, standard deviations), frequency distributions, and linear or logistic regression models. Usually, sampling designs for large-scale assessments have the following, specific characteristics:</p>
-
-<ol>
-<li><p>Often, individuals in survey data are not randomly drawn from the population. In educational assessments which aim to compare countries, for example, the proportions in the sample do not necessarily correspond to the proportions in the population. Often, institutions like the OECD provide sampling weights according with their data which allow to estimate population parameters.  </p></li>
-<li><p>The (primary) sampling units in educational data are classes instead of individuals. Hence, the sample is clustered. Students within a class are more alike than students from different classes. Therefore, clustered sampled students are more homogeneous than randomly sampled students which may lead to biased standard error estimates in inference-based analyses. </p></li>
-<li><p>Variables of interest (e.g. educational achievement) are latent and not directly observable (they are inherently missing). Additionally, questionnaire data frequently include missing responses. Therefore, institutions like the OECD or the IQB provide imputed data. </p></li>
+<p>The following vignette demonstrates some analyses based on replication methods. Replication methods are quite common in the context of survey or large-scale assessment data like the “National Assessment Studies and IQB Trends in Student Achievement” (<a href="https://www.iqb.hu-berlin.de/bt">study description</a>). The following examples are closely related to the “IQB” context (e.g., jackknife-2 methods are used instead of balanced repeated replicates), but may be adapted for PISA or TIMSS analyses as well. An illustration how <code>eatRep</code> can be applied to PISA data and its specific replication design, see the last example in the documentation of the <code>repMean()</code> function.</p>
+<p>Please note that the theoretical foundations of the presented methods are beyond the scope of this vignette—literature recommendations for in depth theoretical discussions can be found in the package documentation (type <code>package?eatRep</code> into the console). Instead, this vignette focuses on some prototypical analyses.</p>
+<p>Furthermore, note that IRT item calibration or “plausible values” imputation are not covered in this vignette. All the outlined analyses base on survey data in which “plausible values” are already included. Such kind of data is provided by the <a href="https://webfs.oecd.org/pisa/">OECD</a> or can be requested from the <a href="https://www.iqb.hu-berlin.de/fdz">“Research Data Centre (FDZ) at the IQB”</a>. Most of the analyses comprise of descriptive statistics (means, standard deviations), frequency distributions, and linear or logistic regression models. Usually, sampling designs for large-scale assessments have the following, specific characteristics:</p>
+<ol style="list-style-type: decimal">
+<li><p>Often, individuals in survey data are not randomly drawn from the population. In educational assessments which aim to compare countries, for example, the proportions in the sample do not necessarily correspond to the proportions in the population. Often, institutions like the OECD provide sampling weights according with their data which allow to estimate population parameters.</p></li>
+<li><p>The (primary) sampling units in educational data are classes instead of individuals. Hence, the sample is clustered. Students within a class are more alike than students from different classes. Therefore, clustered sampled students are more homogeneous than randomly sampled students which may lead to biased standard error estimates in inference-based analyses.</p></li>
+<li><p>Variables of interest (e.g. educational achievement) are latent and not directly observable (they are inherently missing). Additionally, questionnaire data frequently include missing responses. Therefore, institutions like the OECD or the IQB provide imputed data.</p></li>
 </ol>
-
-<p><code>eatRep</code> allows to compute (adjusted) means and mean differences, frequency tables, percentiles, and parameter of (log) linear regression models, taking the clustered and/or imputed sample into account. Trend analyses are possible as well. <code>eatRep</code> meets the special features mentioned above (if the apply) in the following way: </p>
-
-<p>1.: include sampling weights for the analyses. </p>
-
-<p>2.: Use replication methods (Bootstrap, jackknife or &ldquo;Balanced repeated replicates&rdquo;) for inference statistics. </p>
-
+<p><code>eatRep</code> allows to compute (adjusted) means and mean differences, frequency tables, percentiles, and parameter of (log) linear regression models, taking the clustered and/or imputed sample into account. Trend analyses are possible as well. <code>eatRep</code> meets the special features mentioned above (if the apply) in the following way:</p>
+<p>1.: include sampling weights for the analyses.</p>
+<p>2.: Use replication methods (Bootstrap, jackknife or “Balanced repeated replicates”) for inference statistics.</p>
 <p>3.: Pool the results according to Rubin (1987).</p>
-
-<p>However, <code>eatRep</code> is also suitable if the data is clustered without imputations or imputed without clustered. The three mentioned methods (using weights, replication methods, pooling methods) can be called independently from each other. </p>
-
+<p>However, <code>eatRep</code> is also suitable if the data is clustered without imputations or imputed without clustered. The three mentioned methods (using weights, replication methods, pooling methods) can be called independently from each other.</p>
+</div>
+<div id="installation" class="section level2">
 <h2>0. Installation</h2>
-
-<p>We recommend to use R version 4.0.0 or higher. <code>eatRep</code> is available from CRAN:  </p>
-
-<pre><code class="r">install.packages(&quot;eatRep&quot;)
-</code></pre>
-
+<p>We recommend to use R version 4.0.0 or higher. <code>eatRep</code> is available from CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;eatRep&quot;</span>)</a></code></pre></div>
+</div>
+<div id="example-data" class="section level2">
 <h2>1. Example data</h2>
-
-<p><code>eatRep</code> contains exemplary data named <code>lsa</code> (&ldquo;large scale assessment&rdquo;), which resembles the &ldquo;IQB Gesamtanalysedatensatz (GADS)&rdquo;. <code>lsa</code>, however, is reduced in numbers of examinees, imputations, and variables. Once the package is loaded, the structure of <code>lsa</code> can be inspected via: </p>
-
-<pre><code class="r">library(eatRep)
-data(lsa, package=&quot;eatRep&quot;)
-str(lsa, give.attr = FALSE)
-</code></pre>
-
-<pre><code>## &#39;data.frame&#39;:    90216 obs. of  22 variables:
+<p><code>eatRep</code> contains exemplary data named <code>lsa</code> (“large scale assessment”), which resembles the “IQB Gesamtanalysedatensatz (GADS)”. <code>lsa</code>, however, is reduced in numbers of examinees, imputations, and variables. Once the package is loaded, the structure of <code>lsa</code> can be inspected via:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(eatRep)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">data</span>(lsa, <span class="dt">package=</span><span class="st">&quot;eatRep&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">str</span>(lsa, <span class="dt">give.attr =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 'data.frame':    90216 obs. of  22 variables:
 ##  $ year     : num  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
 ##  $ idstud   : Factor w/ 7518 levels &quot;P0001&quot;,&quot;P0002&quot;,..: 2362 175 1283 783 728 2122 732 2429 2899 2191 ...
 ##  $ wgt      : num  2.51 5.19 6.1 4.71 4.42 ...
@@ -266,63 +372,46 @@ str(lsa, give.attr = FALSE)
 ##  $ leComp   : num  0.00582 0.00582 0.00582 0.00582 0.00582 ...
 ##  $ leFailMin: num  0.00494 0.00494 0.00494 0.00494 0.00494 ...
 ##  $ lePassReg: num  0.00601 0.00601 0.00601 0.00601 0.00601 ...
-##  $ lePassOpt: num  0.00141 0.00141 0.00141 0.00141 0.00141 ...
-</code></pre>
-
-<p><code>lsa</code> is in the long format; this means the data set contains multiple rows per individual person. Imputed variables (e.g., migration background, <code>mig</code>) do <em>not</em> occur in several columns (<code>mig_Imp_1</code>, <code>mig_Imp_2</code>, <code>mig_Imp_3</code>, and so on), but only once: <code>mig</code>. Multiple imputations are stored in multiple rows, and the variable <code>imp</code> yields the number of the imputed data set. Furthermore, variables which refer to different competence domains (reading, listening) <em>and</em> different imputations <em>and</em> different times of measurement (i.e., the competence variable <code>score</code>) do not occur in multiple columns (<code>reading_2010_score_Imp_1</code>, <code>reading_2010_score_Imp_2</code>, &hellip;, <code>listening_2010_score_Imp_1</code>, <code>listening_2015_score_Imp_1</code>, &hellip;). <code>score</code> only occurs once, and <code>imp</code> defines the imputation, whereas <code>domain</code> gives the competence domain. To reshape data between the long and wide format, see for example the package <code>tidyr</code> (<code>pivot_wider()</code>, <code>pivot_longer()</code>) or the function <code>wideToLong()</code> from the package <code>eatTools</code>. See section 1.1 for more details. </p>
-
-<p><code>lsa</code> contains the following variables: </p>
-
+##  $ lePassOpt: num  0.00141 0.00141 0.00141 0.00141 0.00141 ...</code></pre>
+<p><code>lsa</code> is in the long format; this means the data set contains multiple rows per individual person. Imputed variables (e.g., migration background, <code>mig</code>) do <em>not</em> occur in several columns (<code>mig_Imp_1</code>, <code>mig_Imp_2</code>, <code>mig_Imp_3</code>, and so on), but only once: <code>mig</code>. Multiple imputations are stored in multiple rows, and the variable <code>imp</code> yields the number of the imputed data set. Furthermore, variables which refer to different competence domains (reading, listening) <em>and</em> different imputations <em>and</em> different times of measurement (i.e., the competence variable <code>score</code>) do not occur in multiple columns (<code>reading_2010_score_Imp_1</code>, <code>reading_2010_score_Imp_2</code>, …, <code>listening_2010_score_Imp_1</code>, <code>listening_2015_score_Imp_1</code>, …). <code>score</code> only occurs once, and <code>imp</code> defines the imputation, whereas <code>domain</code> gives the competence domain. To reshape data between the long and wide format, see for example the package <code>tidyr</code> (<code>pivot_wider()</code>, <code>pivot_longer()</code>) or the function <code>wideToLong()</code> from the package <code>eatTools</code>. See section 1.1 for more details.</p>
+<p><code>lsa</code> contains the following variables:</p>
 <ul>
 <li><code>year</code>: year of assessment (2010 or 2015)</li>
-<li><code>idstud</code>: individual student identifier; the data set contains 7518 persons overall </li>
+<li><code>idstud</code>: individual student identifier; the data set contains 7518 persons overall</li>
 <li><code>wgt</code>: sampling weight</li>
-<li><code>jkzone</code>: jackknife zone </li>
-<li><code>jkrep</code>: jackknife replicate </li>
+<li><code>jkzone</code>: jackknife zone</li>
+<li><code>jkrep</code>: jackknife replicate</li>
 <li><code>imp</code>: number of imputation (1, 2, or 3)</li>
 <li><code>nest</code>: number of nest (for nested imputation which is not yet considered here, but see the examples of <code>repMean()</code> for further details)</li>
-<li><code>country</code>: federal state the student stems from </li>
+<li><code>country</code>: federal state the student stems from</li>
 <li><code>sex</code>: students sex (male, female)</li>
 <li><code>ses</code>: socio economical status</li>
 <li><code>mig</code>: migration background</li>
 <li><code>domain</code>: competence domain (listening or reading)</li>
-<li><code>score</code>: point estimate (e.g., plausible value) for the corresponding imputation and domain </li>
-<li><code>comp</code>: competence level according to pre-defined cut scores </li>
-<li><code>failMin</code>: does the student fail to achieve the minimum standard? </li>
+<li><code>score</code>: point estimate (e.g., plausible value) for the corresponding imputation and domain</li>
+<li><code>comp</code>: competence level according to pre-defined cut scores</li>
+<li><code>failMin</code>: does the student fail to achieve the minimum standard?</li>
 <li><code>passReg</code>: does the student achieve regular standard?</li>
 <li><code>passOpt</code>: does the student achieve optimal standard?</li>
 <li><code>leScore</code>: linking error according to <code>score</code> variable</li>
-<li><code>leComp</code>: linking error according to <code>comp</code> variable </li>
-<li><code>leFailMin</code>: linking error according to <code>failMin</code> variable </li>
-<li><code>lePassReg</code>: linking error according to <code>passReg</code> variable </li>
-<li><code>lePassOpt</code>: linking error according to <code>passOpt</code> variable </li>
+<li><code>leComp</code>: linking error according to <code>comp</code> variable</li>
+<li><code>leFailMin</code>: linking error according to <code>failMin</code> variable</li>
+<li><code>lePassReg</code>: linking error according to <code>passReg</code> variable</li>
+<li><code>lePassOpt</code>: linking error according to <code>passOpt</code> variable</li>
 </ul>
-
-<p><code>lsa</code> includes more than 90.000 observations. Actual large scale assessment data, however, have much more observations. <code>lsa</code> only represents a small section with only 3 imputations (instead of 10 used in PISA), 3 federal states (PISA includes 35 OECD countries), and two domains. Most variables have variable and value labels, stored as attributes: </p>
-
-<pre><code class="r">attributes(lsa[,&quot;year&quot;])
-</code></pre>
-
+<p><code>lsa</code> includes more than 90.000 observations. Actual large scale assessment data, however, have much more observations. <code>lsa</code> only represents a small section with only 3 imputations (instead of 10 used in PISA), 3 federal states (PISA includes 35 OECD countries), and two domains. Most variables have variable and value labels, stored as attributes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">attributes</span>(lsa[,<span class="st">&quot;year&quot;</span>])</a></code></pre></div>
 <pre><code>## $varLabel
-## [1] &quot;year of assessment&quot;
-</code></pre>
-
-<p>As nested imputations are not considered here, we reduce the data to the first nest: </p>
-
-<pre><code class="r">bt &lt;- lsa[which(lsa[,&quot;nest&quot;] == 1),]
-</code></pre>
-
+## [1] &quot;year of assessment&quot;</code></pre>
+<p>As nested imputations are not considered here, we reduce the data to the first nest:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">bt &lt;-<span class="st"> </span>lsa[<span class="kw">which</span>(lsa[,<span class="st">&quot;nest&quot;</span>] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),]</a></code></pre></div>
+<div id="excursus-reshape-imputed-data-from-wide-into-long-format" class="section level3">
 <h3>1.1 Excursus: reshape imputed data from wide into long format</h3>
-
-<p>Institutions like PISA provide imputed data in the wide format. Each row in the data matrix represents one person. <code>eatRep</code>, however, needs the long format. (Without imputations, this procedure is not necessary.) Wide format data stores different imputations of the same variable in different columns. The number of imputations is not stored in a variable but results from the number of additional columns per variable. Long format data stores different imputations of the same variable in additional rows. A variable like <code>imp</code> defines the number of the imputation. </p>
-
-<p><code>reshape2</code>, <code>tidyr</code> or <code>data.table</code> provide functions for reshaping. Moreover, <code>eatTools</code> provides the <code>wideToLong()</code> function for easy reshaping into the required long format. We illustrate the functionality with the help of the wide format data <code>data.timss3</code> from the <code>BIFIEsurvey</code> package: </p>
-
-<pre><code class="r">data(data.timss3, package=&quot;BIFIEsurvey&quot;)
-str(data.timss3, give.attr = FALSE)
-</code></pre>
-
-<pre><code>## &#39;data.frame&#39;:    4668 obs. of  20 variables:
+<p>Institutions like PISA provide imputed data in the wide format. Each row in the data matrix represents one person. <code>eatRep</code>, however, needs the long format. (Without imputations, this procedure is not necessary.) Wide format data stores different imputations of the same variable in different columns. The number of imputations is not stored in a variable but results from the number of additional columns per variable. Long format data stores different imputations of the same variable in additional rows. A variable like <code>imp</code> defines the number of the imputation.</p>
+<p><code>reshape2</code>, <code>tidyr</code> or <code>data.table</code> provide functions for reshaping. Moreover, <code>eatTools</code> provides the <code>wideToLong()</code> function for easy reshaping into the required long format. We illustrate the functionality with the help of the wide format data <code>data.timss3</code> from the <code>BIFIEsurvey</code> package:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">data</span>(data.timss3, <span class="dt">package=</span><span class="st">&quot;BIFIEsurvey&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">str</span>(data.timss3, <span class="dt">give.attr =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 'data.frame':    4668 obs. of  20 variables:
 ##  $ IDSTUD : num  4e+08 4e+08 4e+08 4e+08 4e+08 ...
 ##  $ TOTWGT : num  17.5 17.5 17.5 17.5 17.5 ...
 ##  $ JKZONE : num  1 1 1 1 1 1 1 1 1 1 ...
@@ -342,194 +431,125 @@ str(data.timss3, give.attr = FALSE)
 ##  $ ASMMAT4: num  524 511 473 497 488 ...
 ##  $ ASSSCI4: num  560 506 550 597 483 ...
 ##  $ ASMMAT5: num  578 546 457 528 583 ...
-##  $ ASSSCI5: num  607 565 546 623 578 ...
-</code></pre>
-
-<p>Data contains 4668 rows according to 4668 persons. The following variables should be considered for reshaping: </p>
-
+##  $ ASSSCI5: num  607 565 546 623 578 ...</code></pre>
+<p>Data contains 4668 rows according to 4668 persons. The following variables should be considered for reshaping:</p>
 <ul>
-<li><code>IDSTUD</code>: individual student identifier </li>
+<li><code>IDSTUD</code>: individual student identifier</li>
 <li><code>TOTWGT</code>: weighting variable</li>
-<li><code>JKZONE</code>: jackknife zone </li>
-<li><code>JKREP</code>: jackknife replicate </li>
+<li><code>JKZONE</code>: jackknife zone</li>
+<li><code>JKREP</code>: jackknife replicate</li>
 <li><code>female</code>: students sex (1 = female; 0 = male)</li>
 <li><code>books</code>: number of books at home</li>
 <li><code>lang</code>: language at home (How often is the language used in the test spoken at home?)</li>
 <li><code>migrant</code>: migration background</li>
-<li><code>ASMMAT1</code>: first imputation (first plausible value) for math competence </li>
-<li><code>ASMMAT2</code>: second imputation (second plausible value) for math competence </li>
-<li><code>ASMMAT3</code>: third imputation (third plausible value) for math competence </li>
-<li><code>ASMMAT4</code>: fourth imputation (fourth plausible value) for math competence </li>
-<li><code>ASMMAT5</code>: fifth imputation (fifth plausible value) for math competence </li>
-<li><code>ASSSCI1</code>: first imputation (first plausible value) for science competence </li>
-<li><code>ASSSCI2</code>: second imputation (second plausible value) for science competence </li>
-<li><code>ASSSCI3</code>: third imputation (third plausible value) for science competence </li>
-<li><code>ASSSCI4</code>: fourth imputation (fourth plausible value) for science competence </li>
-<li><code>ASSSCI5</code>: fifth imputation (fifth plausible value) for science competence </li>
+<li><code>ASMMAT1</code>: first imputation (first plausible value) for math competence</li>
+<li><code>ASMMAT2</code>: second imputation (second plausible value) for math competence</li>
+<li><code>ASMMAT3</code>: third imputation (third plausible value) for math competence</li>
+<li><code>ASMMAT4</code>: fourth imputation (fourth plausible value) for math competence</li>
+<li><code>ASMMAT5</code>: fifth imputation (fifth plausible value) for math competence</li>
+<li><code>ASSSCI1</code>: first imputation (first plausible value) for science competence</li>
+<li><code>ASSSCI2</code>: second imputation (second plausible value) for science competence</li>
+<li><code>ASSSCI3</code>: third imputation (third plausible value) for science competence</li>
+<li><code>ASSSCI4</code>: fourth imputation (fourth plausible value) for science competence</li>
+<li><code>ASSSCI5</code>: fifth imputation (fifth plausible value) for science competence</li>
 </ul>
-
-<p>As TIMSS data is in the wide format, no imputation variable exists. In contrast to the long format, we can easily see which variables are imputed (<code>ASMMAT</code> occurs five times), and which are not (<code>female</code> only occurs once). For reshaping, number of imputations must be constant across imputed variables&mdash;hence, <code>wideToLong()</code> cannot be used for nested imputed data. <code>wideToLong()</code> needs to know all variables which should be used for further analyses&mdash;the remaining variables can be ignored. The functionality differentiates between imputed and non-imputed variables: </p>
-
-<pre><code class="r">library(eatTools)
-timssLong &lt;- wideToLong(datWide = data.timss3, 
-             noImp = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
-             imp = list ( mat = c(&quot;ASMMAT1&quot;, &quot;ASMMAT2&quot;, &quot;ASMMAT3&quot;, &quot;ASMMAT4&quot;, &quot;ASMMAT5&quot;), 
-                         nawi = c(&quot;ASSSCI1&quot;, &quot;ASSSCI2&quot;, &quot;ASSSCI3&quot;, &quot;ASSSCI4&quot;, &quot;ASSSCI5&quot;)))
-</code></pre>
-
-<p>The non-imputed variables can be defined in a single string, whereas imputed variables should be defined in a named list with one or more character strings. In our example, variable <code>mat</code> consists of five imputations <code>ASMMAT1</code>, <code>ASMMAT2</code>, <code>ASMMAT3</code>, <code>ASMMAT4</code>, and <code>ASMMAT5</code>. Resulting data <code>timssLong</code> now is suitable for <code>eatRep</code> analyses. For many imputations (e.g., 15), specifying character strings is more straightforward by using the <code>paste()</code> or <code>paste0()</code> function:  </p>
-
-<pre><code class="r">timssLong &lt;- wideToLong(datWide = data.timss3, 
-             noImp = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
-             imp = list ( mat = paste0(&quot;ASMMAT&quot;,1:5),  
-                         nawi = paste0(&quot;ASSSCI&quot;,1:5)))
-</code></pre>
-
-<p>Alternatively, reshaping can be performed with <code>melt()</code> from the <code>data.table</code> package: </p>
-
-<pre><code class="r">library(data.table)
-timssLong2&lt;- data.table::melt(setDT(data.timss3), 
-                id = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
-                measure = patterns(&quot;^ASMMAT&quot;, &quot;^ASSSCI&quot;), 
-                value.name = c(&quot;mat&quot;, &quot;nawi&quot;), variable.name=&quot;imp&quot;)
-</code></pre>
-
-<h2>2. Main functions of &ldquo;eatRep&rdquo;</h2>
-
-<p>The four main functions can be seen as &ldquo;replication variants&rdquo; of the base <code>R</code> functions <code>mean()</code>, <code>table()</code>, <code>quantile()</code>, and <code>glm()</code>:  </p>
-
-<ol>
-<li><p><code>repMean()</code>: computes means, standard deviations, mean differences, and standard deviation differences </p></li>
-<li><p><code>repTable()</code>: computes frequency tables and differences thereof  </p></li>
-<li><p><code>repQuantile()</code> for quantiles, percentiles, and so on </p></li>
+<p>As TIMSS data is in the wide format, no imputation variable exists. In contrast to the long format, we can easily see which variables are imputed (<code>ASMMAT</code> occurs five times), and which are not (<code>female</code> only occurs once). For reshaping, number of imputations must be constant across imputed variables—hence, <code>wideToLong()</code> cannot be used for nested imputed data. <code>wideToLong()</code> needs to know all variables which should be used for further analyses—the remaining variables can be ignored. The functionality differentiates between imputed and non-imputed variables:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(eatTools)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">timssLong &lt;-<span class="st"> </span><span class="kw">wideToLong</span>(<span class="dt">datWide =</span> data.timss3, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">             <span class="dt">noImp =</span> <span class="kw">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">             <span class="dt">imp =</span> <span class="kw">list</span> ( <span class="dt">mat =</span> <span class="kw">c</span>(<span class="st">&quot;ASMMAT1&quot;</span>, <span class="st">&quot;ASMMAT2&quot;</span>, <span class="st">&quot;ASMMAT3&quot;</span>, <span class="st">&quot;ASMMAT4&quot;</span>, <span class="st">&quot;ASMMAT5&quot;</span>), </a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">                         <span class="dt">nawi =</span> <span class="kw">c</span>(<span class="st">&quot;ASSSCI1&quot;</span>, <span class="st">&quot;ASSSCI2&quot;</span>, <span class="st">&quot;ASSSCI3&quot;</span>, <span class="st">&quot;ASSSCI4&quot;</span>, <span class="st">&quot;ASSSCI5&quot;</span>)))</a></code></pre></div>
+<p>The non-imputed variables can be defined in a single string, whereas imputed variables should be defined in a named list with one or more character strings. In our example, variable <code>mat</code> consists of five imputations <code>ASMMAT1</code>, <code>ASMMAT2</code>, <code>ASMMAT3</code>, <code>ASMMAT4</code>, and <code>ASMMAT5</code>. Resulting data <code>timssLong</code> now is suitable for <code>eatRep</code> analyses. For many imputations (e.g., 15), specifying character strings is more straightforward by using the <code>paste()</code> or <code>paste0()</code> function:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">timssLong &lt;-<span class="st"> </span><span class="kw">wideToLong</span>(<span class="dt">datWide =</span> data.timss3, </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">             <span class="dt">noImp =</span> <span class="kw">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">             <span class="dt">imp =</span> <span class="kw">list</span> ( <span class="dt">mat =</span> <span class="kw">paste0</span>(<span class="st">&quot;ASMMAT&quot;</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),  </a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">                         <span class="dt">nawi =</span> <span class="kw">paste0</span>(<span class="st">&quot;ASSSCI&quot;</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)))</a></code></pre></div>
+<p>Alternatively, reshaping can be performed with <code>melt()</code> from the <code>data.table</code> package:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">timssLong2&lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">melt</span>(<span class="kw">setDT</span>(data.timss3), </a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">                <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">                <span class="dt">measure =</span> <span class="kw">patterns</span>(<span class="st">&quot;^ASMMAT&quot;</span>, <span class="st">&quot;^ASSSCI&quot;</span>), </a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">                <span class="dt">value.name =</span> <span class="kw">c</span>(<span class="st">&quot;mat&quot;</span>, <span class="st">&quot;nawi&quot;</span>), <span class="dt">variable.name=</span><span class="st">&quot;imp&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="main-functions-of-eatrep" class="section level2">
+<h2>2. Main functions of “eatRep”</h2>
+<p>The four main functions can be seen as “replication variants” of the base <code>R</code> functions <code>mean()</code>, <code>table()</code>, <code>quantile()</code>, and <code>glm()</code>:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>repMean()</code>: computes means, standard deviations, mean differences, and standard deviation differences</p></li>
+<li><p><code>repTable()</code>: computes frequency tables and differences thereof</p></li>
+<li><p><code>repQuantile()</code> for quantiles, percentiles, and so on</p></li>
 <li><p><code>repGlm()</code>: linear and generalized linear regression models</p></li>
 </ol>
-
+<div id="mean-analysis" class="section level3">
 <h3>2.1 Mean analysis</h3>
-
 <p>For the first example, we want to compute means and standard deviations (along with their standard errors) in reading competencies for several federal states at one distinct time of measurement (2010). As <code>bt</code> contains data from 2010 and 2015 as well as both competencies reading and listening, we subset the data set:</p>
-
-<pre><code class="r">bt2010     &lt;- bt[which(bt[,&quot;year&quot;] == 2010),]
-bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;),]
-</code></pre>
-
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">bt2010     &lt;-<span class="st"> </span>bt[<span class="kw">which</span>(bt[,<span class="st">&quot;year&quot;</span>] <span class="op">==</span><span class="st"> </span><span class="dv">2010</span>),]</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">bt2010read &lt;-<span class="st"> </span>bt2010[<span class="kw">which</span>(bt2010[,<span class="st">&quot;domain&quot;</span>] <span class="op">==</span><span class="st"> &quot;reading&quot;</span>),]</a></code></pre></div>
 <p>We now call <code>repMean()</code> with the reduced data set <code>bt1010read</code>:</p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;country&quot;, dependent = &quot;score&quot;, 
-           progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, </a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">           <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<p>We use <code>country</code> as a grouping variable&mdash;all analyses are computed for each country separately. Important: persons in the data must be nested within the grouping variable. This is true for <code>country</code>; each person belongs to only one federal state. For another possible grouping variable, <code>domain</code>, this is not the case, as one single person may have worked on items from more than one domain. To check whether persons are nested within a grouping variable, the function <code>isNested()</code> from the <code>lme4</code> package package can be called: </p>
-
-<pre><code class="r">lme4::isNested(bt2010[,&quot;idstud&quot;], bt2010[,&quot;country&quot;])
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">lme4::isNested(bt2010[,&quot;idstud&quot;], bt2010[,&quot;domain&quot;])
-</code></pre>
-
-<pre><code>## [1] FALSE
-</code></pre>
-
-<p>To conduct the analyses for both domains in a single call, we recommend using a loop, according to &ldquo;listening&rdquo; and &ldquo;reading&rdquo;. We demonstrate this usage in section 2.5. To collect the results in a single <code>data.frame</code> which can be exported to excel, for example, the reporting function <code>report()</code> should be called.   </p>
-
-<pre><code class="r">resReading &lt;- report(results, add = list(kb=&quot;reading&quot;))
-</code></pre>
-
-<p>The argument <code>add</code> augments the output with additional columns. The function does not know that the analysis is about &ldquo;reading&rdquo; competence. If this information should be incorporated in the output, the <code>add</code> argument allows to define one or multiple additional columns with scalar information of character type, for example:</p>
-
-<pre><code class="r">resReading &lt;- report(results, add = list(kb=&quot;reading&quot;, year = &quot;2010&quot;))
-</code></pre>
-
-<p>The analysis above includes one grouping variable (&ldquo;country&rdquo;) and one competence domain (&ldquo;reading&rdquo;) without any group comparisons. The output therefore is rather sparse. </p>
-
-<p>However, the results can be computed according to more than one grouping variable. If the results should be computed for each country and each migration group, both are specified as grouping variables:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;mig&quot;), dependent = &quot;score&quot;, 
-           progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<p>We use <code>country</code> as a grouping variable—all analyses are computed for each country separately. Important: persons in the data must be nested within the grouping variable. This is true for <code>country</code>; each person belongs to only one federal state. For another possible grouping variable, <code>domain</code>, this is not the case, as one single person may have worked on items from more than one domain. To check whether persons are nested within a grouping variable, the function <code>isNested()</code> from the <code>lme4</code> package package can be called:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">lme4<span class="op">::</span><span class="kw">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;country&quot;</span>])</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">lme4<span class="op">::</span><span class="kw">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;domain&quot;</span>])</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>To conduct the analyses for both domains in a single call, we recommend using a loop, according to “listening” and “reading”. We demonstrate this usage in section 2.5. To collect the results in a single <code>data.frame</code> which can be exported to excel, for example, the reporting function <code>report()</code> should be called.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">resReading &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>The argument <code>add</code> augments the output with additional columns. The function does not know that the analysis is about “reading” competence. If this information should be incorporated in the output, the <code>add</code> argument allows to define one or multiple additional columns with scalar information of character type, for example:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">resReading &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>, <span class="dt">year =</span> <span class="st">&quot;2010&quot;</span>))</a></code></pre></div>
+<p>The analysis above includes one grouping variable (“country”) and one competence domain (“reading”) without any group comparisons. The output therefore is rather sparse.</p>
+<p>However, the results can be computed according to more than one grouping variable. If the results should be computed for each country and each migration group, both are specified as grouping variables:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;mig&quot;</span>), <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, </a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">           <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>Frequently, one might not only be interested in group means but also the total mean. Hence, we want to know the mean of each single country <em>and</em> the mean of Germany as a whole. You can repeat the analysis two times, one including grouping variables and one excluding grouping variables, but it is easier to use only one single call:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;country&quot;, group.splits = 0:1, 
-           dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 2 analyse(s) overall according to: &#39;group.splits = 0 1&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>Frequently, one might not only be interested in group means but also the total mean. Hence, we want to know the mean of each single country <em>and</em> the mean of Germany as a whole. You can repeat the analysis two times, one including grouping variables and one excluding grouping variables, but it is easier to use only one single call:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">           <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 2 analyse(s) overall according to: 'group.splits = 0 1'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                     NA
 ##                2               1           country                   NA
 ## 
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>The argument Argument <code>group.splits</code> defines &ldquo;hierarchy levels&rdquo; for the analyses, indicating whether the analysis should be conducted within or across groups. The number of hierarchy levels always equals the number of grouping variables plus one. One grouping variable means two hierarchy levels, two grouping variables mean three levels, and so on. Without any grouping variables, only one level, the &ldquo;zeroth&rdquo; level, exists. At the zeroth level, no differentiation takes place; all statistics are computed for the whole population. With one grouping variable (<code>country</code>, for example) two levels can be defined: at the zeroth level, statistics are computed for the whole population, and at the first level, statistics are computed for <code>countryA</code>, <code>countryB</code>, and <code>countryC</code> separately. With two grouping variables (<code>country</code> and migration background: <code>mig</code>), three hierarchy levels are defined. The entire group (zeroth level), statistics computed for <code>countryA</code>, <code>countryB</code>, and <code>countryC</code> (first level, according to <code>country</code>), statistics computed for <code>no migration background</code> and <code>migration background</code> (first level, according to <code>mig</code>), and at the second level, statistics separately computed for migrants in <code>countryA</code>, migrants in <code>countryB</code>, migrants in <code>countryB</code>, natives in <code>countryA</code>, natives in <code>countryB</code>, natives in <code>countryC</code>. <code>group.splits</code> is a numeric vector which contains all desired hierarchy levels. Without specifying <code>group.splits</code>, only the highest hierarchy level is considered for analysis.  </p>
-
-<p>Assume only one grouping variable. <code>group.splits = c(0,1)</code> or <code>group.splits = 0:1</code> additionally computes statistics for the zeroth level. For two grouping variables, <code>group.splits = 1:2</code> computes statistics for the first and second level. The zeroth level is omitted. To yield statistics for all possible level, type <code>group.splits = 0:x</code>, where &ldquo;x&rdquo; equals the number of grouping variables.  </p>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>The argument Argument <code>group.splits</code> defines “hierarchy levels” for the analyses, indicating whether the analysis should be conducted within or across groups. The number of hierarchy levels always equals the number of grouping variables plus one. One grouping variable means two hierarchy levels, two grouping variables mean three levels, and so on. Without any grouping variables, only one level, the “zeroth” level, exists. At the zeroth level, no differentiation takes place; all statistics are computed for the whole population. With one grouping variable (<code>country</code>, for example) two levels can be defined: at the zeroth level, statistics are computed for the whole population, and at the first level, statistics are computed for <code>countryA</code>, <code>countryB</code>, and <code>countryC</code> separately. With two grouping variables (<code>country</code> and migration background: <code>mig</code>), three hierarchy levels are defined. The entire group (zeroth level), statistics computed for <code>countryA</code>, <code>countryB</code>, and <code>countryC</code> (first level, according to <code>country</code>), statistics computed for <code>no migration background</code> and <code>migration background</code> (first level, according to <code>mig</code>), and at the second level, statistics separately computed for migrants in <code>countryA</code>, migrants in <code>countryB</code>, migrants in <code>countryB</code>, natives in <code>countryA</code>, natives in <code>countryB</code>, natives in <code>countryC</code>. <code>group.splits</code> is a numeric vector which contains all desired hierarchy levels. Without specifying <code>group.splits</code>, only the highest hierarchy level is considered for analysis.</p>
+<p>Assume only one grouping variable. <code>group.splits = c(0,1)</code> or <code>group.splits = 0:1</code> additionally computes statistics for the zeroth level. For two grouping variables, <code>group.splits = 1:2</code> computes statistics for the first and second level. The zeroth level is omitted. To yield statistics for all possible level, type <code>group.splits = 0:x</code>, where “x” equals the number of grouping variables.</p>
+</div>
+<div id="group-differences-in-means" class="section level3">
 <h3>2.2 Group differences in means</h3>
-
-<p>Do boys and girls significantly differ in their mean competencies? Do Bavarian students outperform Saxonian students in &ldquo;reading&rdquo;? Is the mean score of Canadian students significantly above the OECD average? These examples can be distinguished regarding whether both units, which should be compared, share the same hierarchy level. Differences within a hierarchy level (e.g., boys vs. girls) are referred to as &ldquo;group differences&rdquo;. Differences between (adjacent) hierarchy level (e.g., Canadian vs. OECD average, as Canada itself is part of the OECD average) are referred to as &ldquo;cross-level differences&rdquo;. The following example deals with group differences according to <code>sex</code>&mdash;we compare, whether boys and girls significantly differ in their means:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;sex&quot;, group.differences.by = &quot;sex&quot;, 
-           dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+<p>Do boys and girls significantly differ in their mean competencies? Do Bavarian students outperform Saxonian students in “reading”? Is the mean score of Canadian students significantly above the OECD average? These examples can be distinguished regarding whether both units, which should be compared, share the same hierarchy level. Differences within a hierarchy level (e.g., boys vs. girls) are referred to as “group differences”. Differences between (adjacent) hierarchy level (e.g., Canadian vs. OECD average, as Canada itself is part of the OECD average) are referred to as “cross-level differences”. The following example deals with group differences according to <code>sex</code>—we compare, whether boys and girls significantly differ in their means:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">           <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>The argument <code>group.differences.by</code> defines the grouping variable for which differences should be computed. Note that only one variable can be specified in <code>group.differences.by</code>, and this variable must also occur in <code>groups</code> (which may, however, contain further variables). All pairwise contrasts are computed for the levels in the <code>group.differences.by</code>-variable. If the grouping variable is dichotomous with two levels (boys, girls), only one contrast (boys vs. girls) can be defined. If the grouping variable is polytomous with three levels (for example, <code>country</code> with countryA, countryB, countryC), three contrasts will be computed (countryA vs. countryB, countryA vs. countryC, countryB vs. countryC). A polytomous variable with four levels defines six contrasts, and so on. If <code>groups</code> includes more than one variable, <code>group.differences.by</code> defines for which of these variables group differences should be computed. If sex differences should be computed for each country separately, consider the following call:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-           group.differences.by = &quot;sex&quot;, dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>The argument <code>group.differences.by</code> defines the grouping variable for which differences should be computed. Note that only one variable can be specified in <code>group.differences.by</code>, and this variable must also occur in <code>groups</code> (which may, however, contain further variables). All pairwise contrasts are computed for the levels in the <code>group.differences.by</code>-variable. If the grouping variable is dichotomous with two levels (boys, girls), only one contrast (boys vs. girls) can be defined. If the grouping variable is polytomous with three levels (for example, <code>country</code> with countryA, countryB, countryC), three contrasts will be computed (countryA vs. countryB, countryA vs. countryC, countryB vs. countryC). A polytomous variable with four levels defines six contrasts, and so on. If <code>groups</code> includes more than one variable, <code>group.differences.by</code> defines for which of these variables group differences should be computed. If sex differences should be computed for each country separately, consider the following call:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">           <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>Compute sex differences in each country and additionally for the whole group:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.splits = 0:2, 
-           group.differences.by = &quot;sex&quot;, dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>Compute sex differences in each country and additionally for the whole group:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">           <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -538,20 +558,13 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 ##                4               2     country + sex                  sex
 ## 
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>Compute country differences within each sex group and additionally for the whole group:    </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.splits = 0:2, 
-           group.differences.by = &quot;country&quot;, dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>Compute country differences within each sex group and additionally for the whole group:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">           <span class="dt">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -560,65 +573,51 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 ##                4               2     country + sex              country
 ## 
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+</div>
+<div id="cross-level-differences-in-means" class="section level3">
 <h3>2.3 cross-level differences in means</h3>
-
-<p>For the easiest case, assume only one grouping variable and two hierarchy levels&mdash;the zeroth and the first level. Cross-level differences then refer to the difference of one group mean and the total mean. With two or more grouping variables, cross-level differences can be thought of differences of one distinct group with all higher-ranking hierarchy levels. Assuming two grouping variables (<code>country</code> with three levels, and migration background <code>mig</code> with two levels), 23 cross-level differences are theoretically possible: </p>
-
-<p><strong>level 2 vs. level 1:</strong></p>
-
+<p>For the easiest case, assume only one grouping variable and two hierarchy levels—the zeroth and the first level. Cross-level differences then refer to the difference of one group mean and the total mean. With two or more grouping variables, cross-level differences can be thought of differences of one distinct group with all higher-ranking hierarchy levels. Assuming two grouping variables (<code>country</code> with three levels, and migration background <code>mig</code> with two levels), 23 cross-level differences are theoretically possible:</p>
+<p><strong>level 2 vs. level 1:</strong></p>
 <ul>
-<li>migrants in countryA vs. migrants</li>
-<li>migrants in countryB vs. migrants</li>
-<li>migrants in countryC vs. migrants</li>
-<li>natives in countryA vs. natives</li>
-<li>natives in countryB vs. natives</li>
-<li>natives in countryC vs. natives</li>
-<li>migrants in countryA vs. countryA</li>
-<li>migrants in countryB vs. countryB</li>
-<li>migrants in countryC vs. countryC</li>
-<li>natives in countryA vs. countryA</li>
-<li>natives in countryB vs. countryB</li>
-<li>natives in countryC vs. countryC</li>
+<li>migrants in countryA vs. migrants</li>
+<li>migrants in countryB vs. migrants</li>
+<li>migrants in countryC vs. migrants</li>
+<li>natives in countryA vs. natives</li>
+<li>natives in countryB vs. natives</li>
+<li>natives in countryC vs. natives</li>
+<li>migrants in countryA vs. countryA</li>
+<li>migrants in countryB vs. countryB</li>
+<li>migrants in countryC vs. countryC</li>
+<li>natives in countryA vs. countryA</li>
+<li>natives in countryB vs. countryB</li>
+<li>natives in countryC vs. countryC</li>
 </ul>
-
-<p><strong>level 1 vs. level 0:</strong></p>
-
+<p><strong>level 1 vs. level 0:</strong></p>
 <ul>
-<li>migrants vs. whole population</li>
-<li>natives vs. whole population</li>
-<li>countryA vs. whole population </li>
-<li>countryB vs. whole population </li>
-<li>countryC vs. whole population </li>
+<li>migrants vs. whole population</li>
+<li>natives vs. whole population</li>
+<li>countryA vs. whole population</li>
+<li>countryB vs. whole population</li>
+<li>countryC vs. whole population</li>
 </ul>
-
-<p><strong>level 2 vs. level 0:</strong></p>
-
+<p><strong>level 2 vs. level 0:</strong></p>
 <ul>
-<li>migrants in countryA vs. whole population</li>
-<li>migrants in countryB vs. whole population</li>
-<li>migrants in countryC vs. whole population</li>
-<li>natives in countryA vs. whole population</li>
-<li>natives in countryB vs. whole population</li>
-<li>natives in countryC vs. whole population</li>
+<li>migrants in countryA vs. whole population</li>
+<li>migrants in countryB vs. whole population</li>
+<li>migrants in countryC vs. whole population</li>
+<li>natives in countryA vs. whole population</li>
+<li>natives in countryB vs. whole population</li>
+<li>natives in countryC vs. whole population</li>
 </ul>
-
-<p>Each cross-level difference &ldquo;connects&rdquo; two hierarchy levels. Hierarchy levels are neighboring, if their difference equals 1. Levels 2 and 1 are neighboring, but levels 2 and 0 are not. To compute cross-level differences, <code>group.splits</code> must be specified as a numeric vector of at least two distinct elements. To reduce number of cross-level differences, the argument <code>cross.differences</code> allows to define for which pairs of hierarchy levels cross-level differences should be computed.  </p>
-
-<p>To give an example: Consider both grouping variables <code>country</code> (3 levels) and <code>mig</code> (2 levels). Means should be computed for each of the three hierarchy levels. Group differences should be computed for the <code>country</code> variable (e.g., countryA vs. countryB, countryA vs. countryC, and countryB vs. countryC). Cross-level differences should be computed only in relation to the zeroth level, e.g. level 1 vs. level 0, and level 2 vs. level 0. The following command should be called:  </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.splits = 0:2, 
-           group.differences.by = &quot;country&quot;, cross.differences = list(c(0,1), c(0,2)), 
-           dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+<p>Each cross-level difference “connects” two hierarchy levels. Hierarchy levels are neighboring, if their difference equals 1. Levels 2 and 1 are neighboring, but levels 2 and 0 are not. To compute cross-level differences, <code>group.splits</code> must be specified as a numeric vector of at least two distinct elements. To reduce number of cross-level differences, the argument <code>cross.differences</code> allows to define for which pairs of hierarchy levels cross-level differences should be computed.</p>
+<p>To give an example: Consider both grouping variables <code>country</code> (3 levels) and <code>mig</code> (2 levels). Means should be computed for each of the three hierarchy levels. Group differences should be computed for the <code>country</code> variable (e.g., countryA vs. countryB, countryA vs. countryC, and countryB vs. countryC). Cross-level differences should be computed only in relation to the zeroth level, e.g. level 1 vs. level 0, and level 2 vs. level 0. The following command should be called:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">           <span class="dt">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">cross.differences =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">           <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -629,29 +628,21 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p><code>cross.differences</code> requests a list of numeric vectors with distinct elements each. Each vector must consist of two integers, specifying the hierarchy levels for which cross-differences should be computed. For simplicity, <code>cross.differences = TRUE</code> requests all possible cross-level differences. Conversely, <code>cross.differences = FALSE</code> omits all cross-level differences.  </p>
-
-<p>Combining <code>group.differences.by</code> and <code>cross.differences</code> allows to compute cross-level differences of group differences, for example, if researchers want to know whether the difference &ldquo;boys vs. girls&rdquo; in &ldquo;countryA&rdquo; differs from the difference &ldquo;boys vs. girls&rdquo; in the total population: </p>
-
-<pre><code class="r">results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.splits = 0:2, 
-           group.differences.by = &quot;sex&quot;, cross.differences = TRUE, dependent = &quot;score&quot;, 
-           progress = FALSE)
-</code></pre>
-
-<pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p><code>cross.differences</code> requests a list of numeric vectors with distinct elements each. Each vector must consist of two integers, specifying the hierarchy levels for which cross-differences should be computed. For simplicity, <code>cross.differences = TRUE</code> requests all possible cross-level differences. Conversely, <code>cross.differences = FALSE</code> omits all cross-level differences.</p>
+<p>Combining <code>group.differences.by</code> and <code>cross.differences</code> allows to compute cross-level differences of group differences, for example, if researchers want to know whether the difference “boys vs. girls” in “countryA” differs from the difference “boys vs. girls” in the total population:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">           <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">cross.differences =</span> <span class="ot">TRUE</span>, <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, </a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">           <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -662,66 +653,56 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## Compute cross level differences using &#39;wec&#39; method. Assume heteroscedastic variances.
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Compute cross level differences using 'wec' method. Assume heteroscedastic variances.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 39 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 46 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 39 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>In the output data.frame created by <code>report()</code>, cross-level differences of group differences are marked with the entry <code>crossDiff_of_groupDiff</code> in the <code>comparison</code> column.  </p>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>In the output data.frame created by <code>report()</code>, cross-level differences of group differences are marked with the entry <code>crossDiff_of_groupDiff</code> in the <code>comparison</code> column.</p>
+</div>
+<div id="statistical-remarks" class="section level3">
 <h3>2.4 Statistical remarks</h3>
-
-<p>For cross-level differences, the groups are not independent&mdash;when comparing <code>countryA</code> with the whole population, one must consider that <code>countryA</code> is part of the whole population. Hence, a <em>t</em> test is not appropriate. <code>eatRep</code> supports &ldquo;weighted effect coding&rdquo; or replication methods (e.g, bootstrap), with &ldquo;weighted effect coding&rdquo; (wec) being the default. Alternative methods can be chosen with the <code>crossDiffSE</code> argument. The method <code>old</code> uses an inappropriate <em>t</em> test and should not be used. The method is maintained in the package to provide compatibility with older versions. </p>
-
+<p>For cross-level differences, the groups are not independent—when comparing <code>countryA</code> with the whole population, one must consider that <code>countryA</code> is part of the whole population. Hence, a <em>t</em> test is not appropriate. <code>eatRep</code> supports “weighted effect coding” or replication methods (e.g, bootstrap), with “weighted effect coding” (wec) being the default. Alternative methods can be chosen with the <code>crossDiffSE</code> argument. The method <code>old</code> uses an inappropriate <em>t</em> test and should not be used. The method is maintained in the package to provide compatibility with older versions.</p>
+</div>
+<div id="trend-analyses" class="section level3">
 <h3>2.5 Trend analyses</h3>
-
-<p>In general, trends are just group differences. If the groups are distinct, persons are nested within the trend variable (each person belongs to solely one point in time). The major factor distinguishing trends from &ldquo;conventional&rdquo; group differences is the item sample: For group differences, the item sample is usually identical, for trends, this is not necessarily the case. Moreover, comparisons across different points in time run the risk of being affected by differential item functioning (DIF) or item parameter drift (IPD). If DIF can be considered as random, it should be incorporated into the computation of standard errors of trend estimates. If standard error of trend estimates should be computed, <code>eatRep</code> allows to take the &ldquo;linking error&rdquo; according to differently functioning items into account.  </p>
-
-<p>When computing trends, the analysis is conducted in both cohorts (for example, 2010 and 2015) separately. Afterwards, for each combination of grouping variables, the difference \(\bar{m}_{2015}-\bar{m}_{2010}\) is estimated. The standard error of this difference is: 
-\begin{equation}
-SE<em>{trend}=\sqrt{SE</em>{2010}<sup>2+SE<em>{2015}<sup>2+SE</sup></em>{link}<sup>2}.</sup></sup> 
-\end{equation}</p>
-
-<p>Trends can be computed for simple means, group differences, and cross-level differences. For illustration the last analysis now will be repeated with additional trend estimation. The former used data object <code>bt2010read</code> cannot be used any longer as only 2010 data are included. We use &ldquo;reading competence&rdquo; for 2010 and 2015 by subsetting the <code>bt</code> data. In the function call, the trend variable <code>trend = &quot;year&quot;</code> as well as the linking error <code>linkErr = &quot;leScore&quot;</code> have to be defined. Without specifying the <code>linkErr</code> argument, the linking error is defaulted to 0.  </p>
-
-<pre><code class="r">btread  &lt;- bt[which(bt[,&quot;domain&quot;] == &quot;reading&quot;),]
-results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.splits = 0:2, 
-           group.differences.by = &quot;country&quot;, cross.differences = list(c(0,1), c(0,2)), 
-           dependent = &quot;score&quot;, trend = &quot;year&quot;, linkErr = &quot;leScore&quot;, progress = FALSE)
-</code></pre>
-
+<p>In general, trends are just group differences. If the groups are distinct, persons are nested within the trend variable (each person belongs to solely one point in time). The major factor distinguishing trends from “conventional” group differences is the item sample: For group differences, the item sample is usually identical, for trends, this is not necessarily the case. Moreover, comparisons across different points in time run the risk of being affected by differential item functioning (DIF) or item parameter drift (IPD). If DIF can be considered as random, it should be incorporated into the computation of standard errors of trend estimates. If standard error of trend estimates should be computed, <code>eatRep</code> allows to take the “linking error” according to differently functioning items into account.</p>
+<p>When computing trends, the analysis is conducted in both cohorts (for example, 2010 and 2015) separately. Afterwards, for each combination of grouping variables, the difference <span class="math inline">\(\bar{m}_{2015}-\bar{m}_{2010}\)</span> is estimated. The standard error of this difference is: <span class="math display">\[\begin{equation}
+SE_{trend}=\sqrt{SE_{2010}^2+SE_{2015}^2+SE_{link}^2}. 
+\end{equation}\]</span></p>
+<p>Trends can be computed for simple means, group differences, and cross-level differences. For illustration the last analysis now will be repeated with additional trend estimation. The former used data object <code>bt2010read</code> cannot be used any longer as only 2010 data are included. We use “reading competence” for 2010 and 2015 by subsetting the <code>bt</code> data. In the function call, the trend variable <code>trend = &quot;year&quot;</code> as well as the linking error <code>linkErr = &quot;leScore&quot;</code> have to be defined. Without specifying the <code>linkErr</code> argument, the linking error is defaulted to 0.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">btread  &lt;-<span class="st"> </span>bt[<span class="kw">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="op">==</span><span class="st"> &quot;reading&quot;</span>),]</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> btread, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">           <span class="dt">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">cross.differences =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">           <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2010'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -733,8 +714,8 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2015'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -746,55 +727,43 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 75 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
-<pre><code class="r">res     &lt;- report(results, add = list(kb=&quot;reading&quot;))           
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">res     &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))           </a></code></pre></div>
+</div>
+<div id="loops-across-non-nested-grouping-variables" class="section level3">
 <h3>2.6 Loops across non-nested (grouping) variables</h3>
-
-<p>Arguments <code>groups</code> and <code>group.splits</code> allow to analyze different groups and different hierarchy levels with just one single call. Alternatively, <code>repMean()</code> may be called two times, once without grouping variabe(s), and one with additional grouping variable(s). The argument <code>groups</code> requires that individuals are nested within grouping variables. Individuals, however, are not nested within competence domains (&ldquo;reading&rdquo; and &ldquo;listening&rdquo;)&mdash;<code>domain</code> cannot be used as grouping variable. Alternatively, if both domains should be analyzed with one single call, an additional outer loop is necessary. We demonstrate this procedure with exemplary data <code>bt</code>, containing both domains &ldquo;reading&rdquo; and &ldquo;listening&rdquo;. As in the example before, we analyze group, cross-level, and trend differences.  </p>
-
-<pre><code class="r">results &lt;- by(data = bt, INDICES = bt[,&quot;domain&quot;], FUN = function ( teildatensatz) {
-           repMean(datL = teildatensatz, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-                    repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-                    group.splits = 0:2, group.differences.by = &quot;country&quot;, 
-                    cross.differences = list(c(0,1), c(0,2)), dependent = &quot;score&quot;, 
-                    trend = &quot;year&quot;, linkErr = &quot;leScore&quot;, progress = FALSE) } )
-</code></pre>
-
+<p>Arguments <code>groups</code> and <code>group.splits</code> allow to analyze different groups and different hierarchy levels with just one single call. Alternatively, <code>repMean()</code> may be called two times, once without grouping variable(s), and one with additional grouping variable(s). The argument <code>groups</code> requires that individuals are nested within grouping variables. Individuals, however, are not nested within competence domains (“reading” and “listening”)—<code>domain</code> cannot be used as grouping variable. Alternatively, if both domains should be analyzed with one single call, an additional outer loop is necessary. We demonstrate this procedure with exemplary data <code>bt</code>, containing both domains “reading” and “listening”. As in the example before, we analyze group, cross-level, and trend differences.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">by</span>(<span class="dt">data =</span> bt, <span class="dt">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="dt">FUN =</span> <span class="cf">function</span> ( teildatensatz) {</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">           <span class="kw">repMean</span>(<span class="dt">datL =</span> teildatensatz, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">                    <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">                    <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, </a>
+<a class="sourceLine" id="cb51-5" data-line-number="5">                    <span class="dt">cross.differences =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, </a>
+<a class="sourceLine" id="cb51-6" data-line-number="6">                    <span class="dt">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>) } )</a></code></pre></div>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2010'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -806,8 +775,8 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2015'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -819,40 +788,32 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 75 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2010'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -864,8 +825,8 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
+## Trend group: '2015'
+## 4 analyse(s) overall according to: 'group.splits = 0 1 2'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
 ##                1               0                                   &lt;NA&gt;
@@ -877,340 +838,249 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Create 75 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code>## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.
-</code></pre>
-
-<p>The <code>by</code>-loop around <code>repMean</code> splits the data in two subsets which are analyzed consecutively. The <code>results</code> object is a list with two elements, &ldquo;listening&rdquo; and &ldquo;reading&rdquo;. The reporting function must be called for these two list elements separately. We now see that the argument <code>add</code> can help to distinguish both resulting data.frames. First, the processing is demonstrated without using a loop: </p>
-
-<pre><code class="r">names(results)
-</code></pre>
-
-<pre><code>## [1] &quot;listening&quot; &quot;reading&quot;
-</code></pre>
-
-<pre><code class="r">resultsListening &lt;- report(results[[&quot;listening&quot;]], add = list(kb = &quot;listening&quot;))
-resultsReading   &lt;- report(results[[&quot;reading&quot;]], add = list(kb = &quot;reading&quot;))
-alleResults1     &lt;- rbind (resultsListening, resultsReading)
-</code></pre>
-
-<p>Using a loop shortens the call, especially if more than two competence domains are used:  </p>
-
-<pre><code class="r">alleResults2     &lt;- lapply(names(results), FUN = function ( x ) { 
-                           report(results[[x]], add = list(kb=x))})
-alleResults2     &lt;- do.call(&quot;rbind&quot;, alleResults2)
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
+<p>The <code>by</code>-loop around <code>repMean</code> splits the data in two subsets which are analyzed consecutively. The <code>results</code> object is a list with two elements, “listening” and “reading”. The reporting function must be called for these two list elements separately. We now see that the argument <code>add</code> can help to distinguish both resulting data.frames. First, the processing is demonstrated without using a loop:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">names</span>(results)</a></code></pre></div>
+<pre><code>## [1] &quot;listening&quot; &quot;reading&quot;</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">resultsListening &lt;-<span class="st"> </span><span class="kw">report</span>(results[[<span class="st">&quot;listening&quot;</span>]], <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb =</span> <span class="st">&quot;listening&quot;</span>))</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">resultsReading   &lt;-<span class="st"> </span><span class="kw">report</span>(results[[<span class="st">&quot;reading&quot;</span>]], <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb =</span> <span class="st">&quot;reading&quot;</span>))</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">alleResults1     &lt;-<span class="st"> </span><span class="kw">rbind</span> (resultsListening, resultsReading)</a></code></pre></div>
+<p>Using a loop shortens the call, especially if more than two competence domains are used:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">alleResults2     &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">names</span>(results), <span class="dt">FUN =</span> <span class="cf">function</span> ( x ) { </a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">                           <span class="kw">report</span>(results[[x]], <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span>x))})</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">alleResults2     &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, alleResults2)</a></code></pre></div>
+</div>
+<div id="adjusted-means" class="section level3">
 <h3>2.7 Adjusted means</h3>
-
-<p><code>eatRep</code> also allows to compute &ldquo;adjusted&rdquo; means. We will not elaborate on theoretical issues about adjusted means&mdash;broadly speaking, unadjusted comparisons between two countries, say, Japan and Vietnam, may be difficult to interpret, because both countries differ substantially in terms of mean socio-economical status, migration background, and other background variables. Adjusted means can be thought of as weighted means to answer the question: would both countries still differ in their mean competencies, if the distribution of background variables would be equal? The researcher is free to select which background or demographic variables should be chosen for adjustment. </p>
-
-<p>We demonstrate the computation of adjusted means for the domain &ldquo;reading&rdquo; in 2010, where we adjust for <code>sex</code>, migration background (<code>mig</code>) and socio-economical status (<code>ses</code>). All variables selected for adjustment must be numeric. For polytomous variables (e.g., language at home: &ldquo;german&rdquo;, &ldquo;german and another language&rdquo;, &ldquo;only another language&rdquo;) dichotomous indicator variables must be generated beforehand. In the following example, we transform the non-numeric adjustment variables <code>sex</code> and <code>mig</code> to be numeric.  </p>
-
-<pre><code class="r">sapply(bt2010read[,c(&quot;sex&quot;, &quot;mig&quot;, &quot;ses&quot;)], class) 
-</code></pre>
-
+<p><code>eatRep</code> also allows to compute “adjusted” means. We will not elaborate on theoretical issues about adjusted means—broadly speaking, unadjusted comparisons between two countries, say, Japan and Vietnam, may be difficult to interpret, because both countries differ substantially in terms of mean socio-economical status, migration background, and other background variables. Adjusted means can be thought of as weighted means to answer the question: would both countries still differ in their mean competencies, if the distribution of background variables would be equal? The researcher is free to select which background or demographic variables should be chosen for adjustment.</p>
+<p>We demonstrate the computation of adjusted means for the domain “reading” in 2010, where we adjust for <code>sex</code>, migration background (<code>mig</code>) and socio-economical status (<code>ses</code>). All variables selected for adjustment must be numeric. For polytomous variables (e.g., language at home: “german”, “german and another language”, “only another language”) dichotomous indicator variables must be generated beforehand. In the following example, we transform the non-numeric adjustment variables <code>sex</code> and <code>mig</code> to be numeric.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">sapply</span>(bt2010read[,<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;mig&quot;</span>, <span class="st">&quot;ses&quot;</span>)], class) </a></code></pre></div>
 <pre><code>##       sex       mig       ses 
-##  &quot;factor&quot; &quot;logical&quot; &quot;numeric&quot;
-</code></pre>
-
-<pre><code class="r">bt2010read[,&quot;sexnum&quot;] &lt;- car::recode(bt2010read[,&quot;sex&quot;], &quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;, 
-                         as.factor = FALSE)
-bt2010read[,&quot;mignum&quot;] &lt;- as.numeric(bt2010read[,&quot;mig&quot;])
-results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-           repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;country&quot;, group.splits = 0:1, 
-           cross.differences = TRUE, adjust = c(&quot;sexnum&quot;, &quot;mignum&quot;, &quot;ses&quot;), 
-           dependent = &quot;score&quot;, progress = FALSE)
-</code></pre>
-
-<pre><code>## 2 analyse(s) overall according to: &#39;group.splits = 0 1&#39;.
+##  &quot;factor&quot; &quot;logical&quot; &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">bt2010read[,<span class="st">&quot;sexnum&quot;</span>] &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">recode</span>(bt2010read[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;'male'=0; 'female'=1&quot;</span>, </a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">                         <span class="dt">as.factor =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">bt2010read[,<span class="st">&quot;mignum&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(bt2010read[,<span class="st">&quot;mig&quot;</span>])</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4">results &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb66-5" data-line-number="5">           <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">group.splits =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb66-6" data-line-number="6">           <span class="dt">cross.differences =</span> <span class="ot">TRUE</span>, <span class="dt">adjust =</span> <span class="kw">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), </a>
+<a class="sourceLine" id="cb66-7" data-line-number="7">           <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 2 analyse(s) overall according to: 'group.splits = 0 1'.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by adjust
 ##                1               0                                     NA  FALSE
 ##                2               1           country                   NA   TRUE
 ## 
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res &lt;- report(results, add = list( kb=&quot;reading&quot;))
-</code></pre>
-
-<p>Please note that, to date, cross-level differences for adjusted means can only be computed using the methods <code>old</code>. In the zeroth hierarchy level, no adjustment takes place. As the distribution of background variables in the total population is used as the reference for the adjusted group means, the adjusted population mean is equal to the unadjusted population mean.  </p>
-
-<p>If trends should be computed for adjusted means, the procedure sketched above cannot be adopted without further ado. If the adjusted mean of <code>countryA</code> in 2015 should be compared with the adjusted mean of <code>countryA</code> in 2010, the reference group is no longer the total population (e.g., all countries). Unadjusted means do no depend on the specific research questions, but for adjusted means, the research questions matters: Does <code>countryA</code> differ from <code>countryB</code> in 2015? Or does <code>countryA</code> in 2010 differ from <code>countryA</code> in 2015? Both questions require different adjustment approaches. </p>
-
-<p>In the previous section, the adjustment for only one time of measurement was sketched: Would Japan still differ from Vietnam, if the distribution of background variables were equivalent? For trend analyses, the research question could be: Would there be differences between 2010 and 2015 for Japan, if the composition of students according to some demographic variables would not have changed? The package <code>eatRep</code> does not differentiate between both types of research questions. To compute adjusted trends, the formerly known trend variable <code>year</code> must be used as grouping variable. If adjusted trends for different groups should be estimated, the subsetting according to groups must be done by hand or via an outer loop. The incorporation of linking errors, if desired, must be done by hand likewise. The following example illustrates the procedure. The standard error of the trend estimate is computed as the square root of the sum of the squared standard errors for 2010, 2015 and the link:  </p>
-
-<pre><code class="r">btread  &lt;- bt[which(bt[,&quot;domain&quot;] == &quot;reading&quot;),]
-btread[,&quot;sexnum&quot;] &lt;- car::recode(btread[,&quot;sex&quot;], &quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;, as.factor = FALSE)
-btread[,&quot;mignum&quot;] &lt;- as.numeric(btread[,&quot;mig&quot;])
-btread[,&quot;year&quot;] &lt;- as.integer(btread[,&quot;year&quot;])
-results &lt;- by(data = btread,  INDICES = btread[,&quot;country&quot;], FUN = function(sub.dat) {
-           res &lt;- repMean(datL = sub.dat, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-                  repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;year&quot;), 
-                  adjust = c(&quot;sexnum&quot;, &quot;mignum&quot;, &quot;ses&quot;), dependent = &quot;score&quot;,
-                  progress = FALSE)
-           res &lt;- report(res, add = list( kb=&quot;reading&quot;, 
-                                          country= as.character(sub.dat[1,&quot;country&quot;])))
-           res[,&quot;trend&quot;]   &lt;- diff(res[,&quot;est&quot;])
-           res[,&quot;trendSE&quot;] &lt;- sqrt(sum(res[,&quot;se&quot;]^2) + unique(sub.dat[,&quot;leScore&quot;])^2)
-           return(res)})
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">report</span>(results, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>Please note that, to date, cross-level differences for adjusted means can only be computed using the methods <code>old</code>. In the zeroth hierarchy level, no adjustment takes place. As the distribution of background variables in the total population is used as the reference for the adjusted group means, the adjusted population mean is equal to the unadjusted population mean.</p>
+<p>If trends should be computed for adjusted means, the procedure sketched above cannot be adopted without further ado. If the adjusted mean of <code>countryA</code> in 2015 should be compared with the adjusted mean of <code>countryA</code> in 2010, the reference group is no longer the total population (e.g., all countries). Unadjusted means do no depend on the specific research questions, but for adjusted means, the research questions matters: Does <code>countryA</code> differ from <code>countryB</code> in 2015? Or does <code>countryA</code> in 2010 differ from <code>countryA</code> in 2015? Both questions require different adjustment approaches.</p>
+<p>In the previous section, the adjustment for only one time of measurement was sketched: Would Japan still differ from Vietnam, if the distribution of background variables were equivalent? For trend analyses, the research question could be: Would there be differences between 2010 and 2015 for Japan, if the composition of students according to some demographic variables would not have changed? The package <code>eatRep</code> does not differentiate between both types of research questions. To compute adjusted trends, the formerly known trend variable <code>year</code> must be used as grouping variable. If adjusted trends for different groups should be estimated, the subsetting according to groups must be done by hand or via an outer loop. The incorporation of linking errors, if desired, must be done by hand likewise. The following example illustrates the procedure. The standard error of the trend estimate is computed as the square root of the sum of the squared standard errors for 2010, 2015 and the link:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">btread  &lt;-<span class="st"> </span>bt[<span class="kw">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="op">==</span><span class="st"> &quot;reading&quot;</span>),]</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">btread[,<span class="st">&quot;sexnum&quot;</span>] &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">recode</span>(btread[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;'male'=0; 'female'=1&quot;</span>, <span class="dt">as.factor =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">btread[,<span class="st">&quot;mignum&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(btread[,<span class="st">&quot;mig&quot;</span>])</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">btread[,<span class="st">&quot;year&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.integer</span>(btread[,<span class="st">&quot;year&quot;</span>])</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">results &lt;-<span class="st"> </span><span class="kw">by</span>(<span class="dt">data =</span> btread,  <span class="dt">INDICES =</span> btread[,<span class="st">&quot;country&quot;</span>], <span class="dt">FUN =</span> <span class="cf">function</span>(sub.dat) {</a>
+<a class="sourceLine" id="cb69-6" data-line-number="6">           res &lt;-<span class="st"> </span><span class="kw">repMean</span>(<span class="dt">datL =</span> sub.dat, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb69-7" data-line-number="7">                  <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>), </a>
+<a class="sourceLine" id="cb69-8" data-line-number="8">                  <span class="dt">adjust =</span> <span class="kw">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>,</a>
+<a class="sourceLine" id="cb69-9" data-line-number="9">                  <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb69-10" data-line-number="10">           res &lt;-<span class="st"> </span><span class="kw">report</span>(res, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb=</span><span class="st">&quot;reading&quot;</span>, </a>
+<a class="sourceLine" id="cb69-11" data-line-number="11">                                          <span class="dt">country=</span> <span class="kw">as.character</span>(sub.dat[<span class="dv">1</span>,<span class="st">&quot;country&quot;</span>])))</a>
+<a class="sourceLine" id="cb69-12" data-line-number="12">           res[,<span class="st">&quot;trend&quot;</span>]   &lt;-<span class="st"> </span><span class="kw">diff</span>(res[,<span class="st">&quot;est&quot;</span>])</a>
+<a class="sourceLine" id="cb69-13" data-line-number="13">           res[,<span class="st">&quot;trendSE&quot;</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(res[,<span class="st">&quot;se&quot;</span>]<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">unique</span>(sub.dat[,<span class="st">&quot;leScore&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb69-14" data-line-number="14">           <span class="kw">return</span>(res)})</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
 ## Create 67 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
 ## Create 98 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
-## Create 65 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">results &lt;- do.call(&quot;rbind&quot;, results)
-</code></pre>
-
+## Create 65 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, results)</a></code></pre></div>
+</div>
+</div>
+<div id="frequency-analyses-reptable" class="section level2">
 <h2>3. Frequency analyses (repTable)</h2>
-
-<p>Univariate frequency analyses of polytomous variables can be thought of mean analyses of dichotomous indicator variables. <code>repTable()</code> would not be necessary then&mdash;for example, you can redefine a 5-level polytomous variable into five dichotomous indicators and call <code>repMean()</code> five times. The main differences between frequency and mean analyses is the underlying statistic for group differences: mean analyses typically uses a <em>t</em> test for independent samples (e.g., &ldquo;Differ males and females in their mean reading competencies?&rdquo;). Frequency tables, however, use \(\chi^2\) tests, for example (&ldquo;Differ males and females in their distribution of competence levels?&rdquo;). In theory, you can test for each competence level 1, 2, 3, 4, and 5 with a separate <em>t</em> test, whether males and females differ. The comparisons, however, are not independent&mdash;a Bonferroni correction might be appropriate then. In the following, both variants are sketched: </p>
-
-<pre><code class="r">### first example: group comparisons with a chi^2-Test: we check for each country 
-### whether the distribution of competence levels differs between males and females
-freq1 &lt;- repTable(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-         repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-         group.differences.by = &quot;sex&quot;, cross.differences = FALSE, dependent = &quot;comp&quot;, 
-         chiSquare = TRUE, progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+<p>Univariate frequency analyses of polytomous variables can be thought of mean analyses of dichotomous indicator variables. <code>repTable()</code> would not be necessary then—for example, you can redefine a 5-level polytomous variable into five dichotomous indicators and call <code>repMean()</code> five times. The main differences between frequency and mean analyses is the underlying statistic for group differences: mean analyses typically uses a <em>t</em> test for independent samples (e.g., “Differ males and females in their mean reading competencies?”). Frequency tables, however, use <span class="math inline">\(\chi^2\)</span> tests, for example (“Differ males and females in their distribution of competence levels?”). In theory, you can test for each competence level 1, 2, 3, 4, and 5 with a separate <em>t</em> test, whether males and females differ. The comparisons, however, are not independent—a Bonferroni correction might be appropriate then. In the following, both variants are sketched:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">### first example: group comparisons with a chi^2-Test: we check for each country </a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">### whether the distribution of competence levels differs between males and females</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">freq1 &lt;-<span class="st"> </span><span class="kw">repTable</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">         <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb72-5" data-line-number="5">         <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">cross.differences =</span> <span class="ot">FALSE</span>, <span class="dt">dependent =</span> <span class="st">&quot;comp&quot;</span>, </a>
+<a class="sourceLine" id="cb72-6" data-line-number="6">         <span class="dt">chiSquare =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res1  &lt;- report(freq1, add = list( kb = &quot;reading&quot;))
-</code></pre>
-
-<p>In the second example, the group comparisons are conducted applying five separate <em>t</em> tests. For each country and each single competence level, <code>repTable()</code> checks whether the distribution differs between males and females. Technically, <code>repMean()</code> is called five times consecutively.  </p>
-
-<pre><code class="r">freq2 &lt;- repTable(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-         repInd=&quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), group.differences.by = &quot;sex&quot;, 
-         cross.differences = FALSE, dependent = &quot;comp&quot;, chiSquare = FALSE, progress = FALSE)
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">res1  &lt;-<span class="st"> </span><span class="kw">report</span>(freq1, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb =</span> <span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>In the second example, the group comparisons are conducted applying five separate <em>t</em> tests. For each country and each single competence level, <code>repTable()</code> checks whether the distribution differs between males and females. Technically, <code>repMean()</code> is called five times consecutively.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">freq2 &lt;-<span class="st"> </span><span class="kw">repTable</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">         <span class="dt">repInd=</span><span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">         <span class="dt">cross.differences =</span> <span class="ot">FALSE</span>, <span class="dt">dependent =</span> <span class="st">&quot;comp&quot;</span>, <span class="dt">chiSquare =</span> <span class="ot">FALSE</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res2  &lt;- report(freq2, add = list( kb = &quot;reading&quot;))
-</code></pre>
-
-<p>In <code>repTable()</code>, the computation of cross-level differences and trends works analogously to <code>repMean()</code>.  </p>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">res2  &lt;-<span class="st"> </span><span class="kw">report</span>(freq2, <span class="dt">add =</span> <span class="kw">list</span>( <span class="dt">kb =</span> <span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+<p>In <code>repTable()</code>, the computation of cross-level differences and trends works analogously to <code>repMean()</code>.</p>
+<div id="looping-across-several-dependent-variables" class="section level3">
 <h3>3.1 Looping across several dependent variables</h3>
-
-<p>Section 2.5 demonstrates the use of <code>by()</code> loops to analyze more than one domain with one single call. The same principle works for several dependent variables within one domain. Suppose you have several dichotomous criteria (e.g. &ldquo;failed to reach minimal standard&rdquo;, &ldquo;pass regular standard&rdquo;, &ldquo;pass optimal standard&rdquo;), represented by several variables. A <code>lapply()</code> loop ca be applied then:  </p>
-
-<pre><code class="r">### abhaengige Variablen definieren
-DVs   &lt;- c(&quot;failMin&quot;, &quot;passReg&quot;, &quot;passOpt&quot;)
-freq3 &lt;- lapply(DVs, FUN = function (dv) { 
-         repTable(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-            repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-            group.differences.by = &quot;sex&quot;, cross.differences = FALSE, 
-            dependent = dv, progress = FALSE) })
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+<p>Section 2.5 demonstrates the use of <code>by()</code> loops to analyze more than one domain with one single call. The same principle works for several dependent variables within one domain. Suppose you have several dichotomous criteria (e.g. “failed to reach minimal standard”, “pass regular standard”, “pass optimal standard”), represented by several variables. A <code>lapply()</code> loop ca be applied then:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">### abhaengige Variablen definieren</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">DVs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</a>
+<a class="sourceLine" id="cb78-3" data-line-number="3">freq3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(DVs, <span class="dt">FUN =</span> <span class="cf">function</span> (dv) { </a>
+<a class="sourceLine" id="cb78-4" data-line-number="4">         <span class="kw">repTable</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb78-5" data-line-number="5">            <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb78-6" data-line-number="6">            <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">cross.differences =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb78-7" data-line-number="7">            <span class="dt">dependent =</span> dv, <span class="dt">progress =</span> <span class="ot">FALSE</span>) })</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
 <p>The reporting function <code>report()</code> must be called three times, likewise in a <code>lapply()</code> loop:</p>
-
-<pre><code class="r">alleResults3     &lt;- do.call(&quot;rbind&quot;, lapply(freq3, report))
-</code></pre>
-
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">alleResults3     &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(freq3, report))</a></code></pre></div>
+</div>
+<div id="nested-loops" class="section level3">
 <h3>3.2 Nested loops</h3>
-
-<p>Both types of loops (across non-nested grouping variables and across several dependent variables) may be combined. In the following example, we want to analyze three dependent variables for two domains. Hence, a two-stage loop for \(3\times 2=6\) analyses is necessary:</p>
-
-<pre><code class="r">DVs   &lt;- c(&quot;failMin&quot;, &quot;passReg&quot;, &quot;passOpt&quot;)
-freq4 &lt;- lapply(DVs, FUN = function (dv) { 
-         f4 &lt;- by ( data = bt2010, INDICES = bt2010[,&quot;domain&quot;], FUN = function (sub.dat) {
-               repTable(datL = sub.dat, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-                         repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-                         group.differences.by = &quot;sex&quot;, cross.differences = FALSE, 
-                         dependent = dv, progress = FALSE)})})
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+<p>Both types of loops (across non-nested grouping variables and across several dependent variables) may be combined. In the following example, we want to analyze three dependent variables for two domains. Hence, a two-stage loop for <span class="math inline">\(3\times 2=6\)</span> analyses is necessary:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">DVs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">freq4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(DVs, <span class="dt">FUN =</span> <span class="cf">function</span> (dv) { </a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">         f4 &lt;-<span class="st"> </span><span class="kw">by</span> ( <span class="dt">data =</span> bt2010, <span class="dt">INDICES =</span> bt2010[,<span class="st">&quot;domain&quot;</span>], <span class="dt">FUN =</span> <span class="cf">function</span> (sub.dat) {</a>
+<a class="sourceLine" id="cb81-4" data-line-number="4">               <span class="kw">repTable</span>(<span class="dt">datL =</span> sub.dat, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">                         <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb81-6" data-line-number="6">                         <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">cross.differences =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb81-7" data-line-number="7">                         <span class="dt">dependent =</span> dv, <span class="dt">progress =</span> <span class="ot">FALSE</span>)})})</a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
-## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
+## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<p>To convert the results in a more user-friendly format: </p>
-
-<pre><code class="r">alleResults4     &lt;- lapply(freq4, FUN = function (av) { 
-                           do.call(&quot;rbind&quot;, lapply(names(av), FUN = function ( x ) { 
-                                   report(av[[x]], add = list(kb=x))}))})
-alleResults4     &lt;- do.call(&quot;rbind&quot;, alleResults4)
-</code></pre>
-
-<p>A combination of two loops also works for trend analyses. Please note that each dependent variable potentially has its own linking error. If so, one solution is to store the variable name along with its linking error in a <code>data.frame</code> and use an <code>apply()</code> loop: </p>
-
-<pre><code class="r">### two-stage nested loop with trend analysis
-### first we define the dependent variables (dv) and their linking errors (le)
-DVs   &lt;- data.frame ( dv = c(&quot;failMin&quot;, &quot;passReg&quot;, &quot;passOpt&quot;), 
-                      le = c(&quot;leFailMin&quot;, &quot;lePassReg&quot;, &quot;lePassOpt&quot;), 
-                      stringsAsFactors = FALSE)
-freq5 &lt;- apply(DVs, MARGIN = 1, FUN = function (depVars) { 
-         f4 &lt;- by ( data = bt, INDICES = bt[,&quot;domain&quot;], FUN = function (sub.dat) {
-               repTable(datL = sub.dat, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-                         repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = c(&quot;country&quot;, &quot;sex&quot;), 
-                         group.differences.by = &quot;sex&quot;, cross.differences = FALSE, 
-                         trend = &quot;year&quot;, dependent = depVars[[&quot;av&quot;]],
-                         linkErr = depVars[[&quot;le&quot;]], progress = FALSE)})})
-</code></pre>
-
-<pre><code>## Error in depVars[[&quot;av&quot;]]: Indizierung außerhalb der Grenzen
-</code></pre>
-
-<p>To convert the results in a more user-friendly format: </p>
-
-<pre><code class="r">alleResults5     &lt;- lapply(freq5, FUN = function (av) { 
-                           do.call(&quot;rbind&quot;, lapply(names(av), FUN = function ( x ) { 
-                                   report(av[[x]], add = list(kb=x))}))})
-</code></pre>
-
-<pre><code>## Error in lapply(freq5, FUN = function(av) {: Objekt &#39;freq5&#39; nicht gefunden
-</code></pre>
-
-<pre><code class="r">alleResults5     &lt;- do.call(&quot;rbind&quot;, alleResults5)
-</code></pre>
-
-<pre><code>## Error in do.call(&quot;rbind&quot;, alleResults5): Objekt &#39;alleResults5&#39; nicht gefunden
-</code></pre>
-
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<p>To convert the results in a more user-friendly format:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">alleResults4     &lt;-<span class="st"> </span><span class="kw">lapply</span>(freq4, <span class="dt">FUN =</span> <span class="cf">function</span> (av) { </a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">                           <span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(<span class="kw">names</span>(av), <span class="dt">FUN =</span> <span class="cf">function</span> ( x ) { </a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">                                   <span class="kw">report</span>(av[[x]], <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span>x))}))})</a>
+<a class="sourceLine" id="cb83-4" data-line-number="4">alleResults4     &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, alleResults4)</a></code></pre></div>
+<p>A combination of two loops also works for trend analyses. Please note that each dependent variable potentially has its own linking error. If so, one solution is to store the variable name along with its linking error in a <code>data.frame</code> and use an <code>apply()</code> loop:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">### two-stage nested loop with trend analysis</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">### first we define the dependent variables (dv) and their linking errors (le)</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3">DVs   &lt;-<span class="st"> </span><span class="kw">data.frame</span> ( <span class="dt">dv =</span> <span class="kw">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>), </a>
+<a class="sourceLine" id="cb84-4" data-line-number="4">                      <span class="dt">le =</span> <span class="kw">c</span>(<span class="st">&quot;leFailMin&quot;</span>, <span class="st">&quot;lePassReg&quot;</span>, <span class="st">&quot;lePassOpt&quot;</span>), </a>
+<a class="sourceLine" id="cb84-5" data-line-number="5">                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb84-6" data-line-number="6">freq5 &lt;-<span class="st"> </span><span class="kw">apply</span>(DVs, <span class="dt">MARGIN =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span> (depVars) { </a>
+<a class="sourceLine" id="cb84-7" data-line-number="7">         f4 &lt;-<span class="st"> </span><span class="kw">by</span> ( <span class="dt">data =</span> bt, <span class="dt">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="dt">FUN =</span> <span class="cf">function</span> (sub.dat) {</a>
+<a class="sourceLine" id="cb84-8" data-line-number="8">               <span class="kw">repTable</span>(<span class="dt">datL =</span> sub.dat, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb84-9" data-line-number="9">                         <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </a>
+<a class="sourceLine" id="cb84-10" data-line-number="10">                         <span class="dt">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="dt">cross.differences =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb84-11" data-line-number="11">                         <span class="dt">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">dependent =</span> depVars[[<span class="st">&quot;av&quot;</span>]],</a>
+<a class="sourceLine" id="cb84-12" data-line-number="12">                         <span class="dt">linkErr =</span> depVars[[<span class="st">&quot;le&quot;</span>]], <span class="dt">progress =</span> <span class="ot">FALSE</span>)})})</a></code></pre></div>
+<pre><code>## Error in depVars[[&quot;av&quot;]]: Indizierung außerhalb der Grenzen</code></pre>
+<p>To convert the results in a more user-friendly format:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">alleResults5     &lt;-<span class="st"> </span><span class="kw">lapply</span>(freq5, <span class="dt">FUN =</span> <span class="cf">function</span> (av) { </a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">                           <span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(<span class="kw">names</span>(av), <span class="dt">FUN =</span> <span class="cf">function</span> ( x ) { </a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">                                   <span class="kw">report</span>(av[[x]], <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">kb=</span>x))}))})</a></code></pre></div>
+<pre><code>## Error in lapply(freq5, FUN = function(av) {: Objekt 'freq5' nicht gefunden</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">alleResults5     &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, alleResults5)</a></code></pre></div>
+<pre><code>## Error in do.call(&quot;rbind&quot;, alleResults5): Objekt 'alleResults5' nicht gefunden</code></pre>
+</div>
+</div>
+<div id="analyses-of-ranges-repquantile" class="section level2">
 <h2>4. Analyses of ranges (repQuantile)</h2>
-
-<p>When analyzing quartiles, quantiles or percentiles, please note that the computation of group differences is not supported yet. <code>repQuantile</code> requires to specify the probabilities via the <code>probs</code> argument. The following example illustrates the usage of the function for the domain &ldquo;reading&rdquo; for 2010 and 2015. We compute the 5., 10., 25., 75., 90., and 95. percentile: </p>
-
-<pre><code class="r">btRead &lt;- bt[which(bt[,&quot;domain&quot;] == &quot;reading&quot;),]
-quan   &lt;- repQuantile(datL = btRead, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-               repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;country&quot;, trend = &quot;year&quot;, 
-               dependent = &quot;score&quot;, linkErr = &quot;leScore&quot;, 
-               probs = c(0, .05, .1, .25, .75, .90, .95, 1), progress = FALSE )
-</code></pre>
-
+<p>When analyzing quartiles, quantiles or percentiles, please note that the computation of group differences is not supported yet. <code>repQuantile</code> requires to specify the probabilities via the <code>probs</code> argument. The following example illustrates the usage of the function for the domain “reading” for 2010 and 2015. We compute the 5., 10., 25., 75., 90., and 95. percentile:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">btRead &lt;-<span class="st"> </span>bt[<span class="kw">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="op">==</span><span class="st"> &quot;reading&quot;</span>),]</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">quan   &lt;-<span class="st"> </span><span class="kw">repQuantile</span>(<span class="dt">datL =</span> btRead, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">               <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="dt">trend =</span> <span class="st">&quot;year&quot;</span>, </a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">               <span class="dt">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="dt">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, </a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">               <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.05</span>, <span class="fl">.1</span>, <span class="fl">.25</span>, <span class="fl">.75</span>, <span class="fl">.90</span>, <span class="fl">.95</span>, <span class="dv">1</span>), <span class="dt">progress =</span> <span class="ot">FALSE</span> )</a></code></pre></div>
 <pre><code>## 
-## Trend group: &#39;2010&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+## Trend group: '2010'
+## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
 ## 
 ## 
-## Trend group: &#39;2015&#39;
-## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+## Trend group: '2015'
+## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
-## Create 75 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res    &lt;- report(quan, add = list(domain = &quot;reading&quot;))
-</code></pre>
-
+## Create 75 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">res    &lt;-<span class="st"> </span><span class="kw">report</span>(quan, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">domain =</span> <span class="st">&quot;reading&quot;</span>))</a></code></pre></div>
+</div>
+<div id="regression-analyses-repglm" class="section level2">
 <h2>5. Regression analyses (repGlm)</h2>
-
-<p><code>repGlm</code> allows to estimate linear and logistic regression models. To date, trend analyses do not incorporate linking errors. The reporting function <code>report()</code> optionally allows to print the results to the console (if <code>printGlm</code> is set to <code>TRUE</code>). In the first example, the regression of reading competence on sex, SES is estimated in each country separately.  </p>
-
-<pre><code class="r">reg1   &lt;- repGlm(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-               repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;country&quot;,  formula = score~sex*ses, 
-               family=gaussian(link=&quot;identity&quot;), progress = FALSE) 
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
+<p><code>repGlm</code> allows to estimate linear and logistic regression models. To date, trend analyses do not incorporate linking errors. The reporting function <code>report()</code> optionally allows to print the results to the console (if <code>printGlm</code> is set to <code>TRUE</code>). In the first example, the regression of reading competence on sex, SES is estimated in each country separately.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">reg1   &lt;-<span class="st"> </span><span class="kw">repGlm</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">               <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">groups =</span> <span class="st">&quot;country&quot;</span>,  <span class="dt">formula =</span> score<span class="op">~</span>sex<span class="op">*</span>ses, </a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">               <span class="dt">family=</span><span class="kw">gaussian</span>(<span class="dt">link=</span><span class="st">&quot;identity&quot;</span>), <span class="dt">progress =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 1'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res1   &lt;- report(reg1, add = list(domain = &quot;reading&quot;), printGlm = TRUE)
-</code></pre>
-
-<pre><code>##        Trend group: &#39;noTrend&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">res1   &lt;-<span class="st"> </span><span class="kw">report</span>(reg1, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="dt">printGlm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##        Trend group: 'noTrend'.
 ##             groups: country = LandA
 ##             domain: reading
 ## dependent Variable: score
@@ -1251,25 +1121,16 @@ quan   &lt;- repQuantile(datL = btRead, ID=&quot;idstud&quot;, wgt=&quot;wgt&quo
 ## 
 ##             R-squared: 0.169; SE(R-squared): NA
 ## Nagelkerkes R-squared: NaN; SE(Nagelkerkes R-squared): NA
-## 1243 observations and 1239 degrees of freedom.
-</code></pre>
-
-<p>The second example illustrates a logistic regression. Whether or not the regular standard was passed (<code>passReg</code>) is the dependent variable. The variable <code>country</code> is now used as a predictor. </p>
-
-<pre><code class="r">reg2   &lt;- repGlm(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
-               repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, formula = passReg~country*ses, 
-               family=binomial(link=&quot;logit&quot;), progress = FALSE) 
-</code></pre>
-
-<pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
+## 1243 observations and 1239 degrees of freedom.</code></pre>
+<p>The second example illustrates a logistic regression. Whether or not the regular standard was passed (<code>passReg</code>) is the dependent variable. The variable <code>country</code> is now used as a predictor.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">reg2   &lt;-<span class="st"> </span><span class="kw">repGlm</span>(<span class="dt">datL =</span> bt2010read, <span class="dt">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="dt">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="dt">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="dt">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </a>
+<a class="sourceLine" id="cb97-2" data-line-number="2">               <span class="dt">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="dt">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="dt">formula =</span> passReg<span class="op">~</span>country<span class="op">*</span>ses, </a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">               <span class="dt">family=</span><span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">progress =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
+<pre><code>## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 62 replicate weights according to JK2 procedure.
-</code></pre>
-
-<pre><code class="r">res2   &lt;- report(reg2, add = list(domain = &quot;reading&quot;), printGlm = TRUE)
-</code></pre>
-
-<pre><code>##        Trend group: &#39;noTrend&#39;.
+## Create 62 replicate weights according to JK2 procedure.</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">res2   &lt;-<span class="st"> </span><span class="kw">report</span>(reg2, <span class="dt">add =</span> <span class="kw">list</span>(<span class="dt">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="dt">printGlm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##        Trend group: 'noTrend'.
 ##             domain: reading
 ## dependent Variable: passReg
 ##  
@@ -1283,11 +1144,24 @@ quan   &lt;- repQuantile(datL = btRead, ID=&quot;idstud&quot;, wgt=&quot;wgt&quo
 ## 
 ##             R-squared: 0.134; SE(R-squared): NA
 ## Nagelkerkes R-squared: 0.125; SE(Nagelkerkes R-squared): NA
-## 3709 observations and 3703 degrees of freedom.
-</code></pre>
+## 3709 observations and 3703 degrees of freedom.</code></pre>
+<p>The output gives the <span class="math inline">\(R^2\)</span> (for linear regression models) as well as Nagelkerke’s <span class="math inline">\(R^2\)</span> (for logistic regression models).</p>
+</div>
 
-<p>The output gives the \(R^2\) (for linear regression models) as well as Nagelkerke&#39;s \(R^2\) (for logistic regression models).  </p>
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>

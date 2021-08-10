@@ -1,3 +1,9 @@
+# eatRep 0.13.6
+
+* add asterisks for significance in the console output of the reporting function for `repGlm()`
+* bug fix: fixed inadvertent warning message in function for group checks
+* bug fix: call svyby with return.replicates = FALSE for quantile function
+
 # eatRep 0.13.5
 
 * added vignette
