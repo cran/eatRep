@@ -1,3 +1,10 @@
+# eatRep 0.14.0
+
+* sorting of parameters and determination coefficient enhanced in reporting function for `repGlm()`
+* add function `checkLEs` which checks consistency of linking errors with data which stem from an eatGADS data base
+* trend estimation was broadened for more than two measurement occasions
+* add class identifier in exemplary data
+
 # eatRep 0.13.7
 
 * add CR0 and CR2 methods for weighted effect coding with heterogeneous variances in `repMean()` and `repGlm()`, including a cluster argument

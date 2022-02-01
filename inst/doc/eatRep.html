@@ -382,7 +382,7 @@ pre code {
 <pre class="r"><code>library(eatRep)
 data(lsa, package=&quot;eatRep&quot;)
 str(lsa, give.attr = FALSE)</code></pre>
-<pre><code>## 'data.frame':    77370 obs. of  23 variables:
+<pre><code>## 'data.frame':    77322 obs. of  23 variables:
 ##  $ year     : num  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
 ##  $ idstud   : Factor w/ 11655 levels &quot;P00001&quot;,&quot;P00002&quot;,..: 1 1 6 6 6 6 6 9 9 9 ...
 ##  $ idclass  : Factor w/ 434 levels &quot;C001&quot;,&quot;C002&quot;,..: 1 1 1 1 1 1 1 2 2 2 ...
@@ -410,8 +410,8 @@ str(lsa, give.attr = FALSE)</code></pre>
 <p><code>lsa</code> contains the following variables:</p>
 <ul>
 <li><code>year</code>: year of assessment (2010 or 2015)</li>
-<li><code>idstud</code>: individual student identifier; the data set contains 11645 persons overall</li>
-<li><code>idclass</code>: class identifier; the data set contains 434 classes overall</li>
+<li><code>idstud</code>: individual student identifier; the data set contains 11637 persons overall</li>
+<li><code>idclass</code>: class identifier; the data set contains 433 classes overall</li>
 <li><code>wgt</code>: sampling weight</li>
 <li><code>jkzone</code>: jackknife zone</li>
 <li><code>jkrep</code>: jackknife replicate</li>
@@ -435,12 +435,13 @@ str(lsa, give.attr = FALSE)</code></pre>
 </ul>
 <p><code>lsa</code> includes more than 77.000 observations. Actual large scale assessment data, however, have much more observations. <code>lsa</code> only represents a small section with only 3 imputations (instead of 10 used in PISA), 3 federal states (PISA includes 35 OECD countries), and two domains. Most variables have labels, stored as attributes:</p>
 <pre class="r"><code>attributes(lsa[,&quot;year&quot;])</code></pre>
-<pre><code>## NULL</code></pre>
+<pre><code>## $varLabel
+## [1] &quot;year of assessment (2010 or 2015)&quot;</code></pre>
 <p>As nested imputations are not considered here, we reduce the data to the first nest:</p>
 <pre class="r"><code>bt &lt;- lsa[which(lsa[,&quot;nest&quot;] == 1),]</code></pre>
 <div id="excursus-reshape-imputed-data-from-wide-into-long-format" class="section level3">
 <h3>1.1 Excursus: reshape imputed data from wide into long format</h3>
-<p>Institutions like PISA provide imputed data in the wide format. Each row in the data matrix represents one person. <code>eatRep</code>, however, needs the long format. (Without imputations, this procedure is not necessary.) Wide format data stores different imputations of the same variable in different columns. The number of imputations is not stored in a variable but results from the number of additional columns per variable. Long format data stores different imputations of the same variable in additional rows. A variable like <code>imp</code> defines the number of the imputation.</p>
+<p>Institutions like PISA provide imputed data in the wide format. Each row in the data matrix represents one person. <code>eatRep</code>, however, needs the long format. (Without imputations, this procedure is not necessary.) Wide format data stores different imputations of the same variable in different columns. The number of imputations is not stored in an explicit variable but results from the number of additional columns per variable. Long format data stores different imputations of the same variable in additional rows. A variable like <code>imp</code> defines the number of the imputation.</p>
 <p><code>reshape2</code>, <code>tidyr</code> or <code>data.table</code> provide functions for reshaping. Moreover, <code>eatTools</code> provides the <code>wideToLong()</code> function for easy reshaping into the required long format. We illustrate the functionality with the help of the wide format data <code>data.timss3</code> from the <code>BIFIEsurvey</code> package:</p>
 <pre class="r"><code>data(data.timss3, package=&quot;BIFIEsurvey&quot;)
 str(data.timss3, give.attr = FALSE)</code></pre>
@@ -487,23 +488,23 @@ str(data.timss3, give.attr = FALSE)</code></pre>
 <li><code>ASSSCI5</code>: fifth imputation (fifth plausible value) for science competence</li>
 </ul>
 <p>As TIMSS data is in the wide format, no imputation variable exists. In contrast to the long format, we can easily see which variables are imputed (<code>ASMMAT</code> occurs five times), and which are not (<code>female</code> only occurs once). For reshaping, number of imputations must be constant across imputed variables—hence, <code>wideToLong()</code> cannot be used for nested imputed data. <code>wideToLong()</code> needs to know all variables which should be used for further analyses—the remaining variables can be ignored. The functionality differentiates between imputed and non-imputed variables:</p>
-<pre class="r"><code>library(eatTools)
-timssLong &lt;- wideToLong(datWide = data.timss3, 
-             noImp = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
-             imp = list ( mat = c(&quot;ASMMAT1&quot;, &quot;ASMMAT2&quot;, &quot;ASMMAT3&quot;, &quot;ASMMAT4&quot;, &quot;ASMMAT5&quot;), 
-                         nawi = c(&quot;ASSSCI1&quot;, &quot;ASSSCI2&quot;, &quot;ASSSCI3&quot;, &quot;ASSSCI4&quot;, &quot;ASSSCI5&quot;)))</code></pre>
-<p>The non-imputed variables can be defined in a single string, whereas imputed variables should be defined in a named list with one or more character strings. In our example, variable <code>mat</code> consists of five imputations <code>ASMMAT1</code>, <code>ASMMAT2</code>, <code>ASMMAT3</code>, <code>ASMMAT4</code>, and <code>ASMMAT5</code>. Resulting data <code>timssLong</code> now is suitable for <code>eatRep</code> analyses. For many imputations (e.g., 15), specifying character strings is more straightforward by using the <code>paste()</code> or <code>paste0()</code> function:</p>
+<pre class="r"><code>library(eatTools)</code></pre>
+<pre><code>## Loading required package: lme4</code></pre>
 <pre class="r"><code>timssLong &lt;- wideToLong(datWide = data.timss3, 
              noImp = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
-             imp = list ( mat = paste0(&quot;ASMMAT&quot;,1:5),  
-                         nawi = paste0(&quot;ASSSCI&quot;,1:5)))</code></pre>
+             imp = list ( math = c(&quot;ASMMAT1&quot;, &quot;ASMMAT2&quot;, &quot;ASMMAT3&quot;, &quot;ASMMAT4&quot;, &quot;ASMMAT5&quot;), 
+                       science = c(&quot;ASSSCI1&quot;, &quot;ASSSCI2&quot;, &quot;ASSSCI3&quot;, &quot;ASSSCI4&quot;, &quot;ASSSCI5&quot;)))</code></pre>
+<p>The non-imputed variables can be defined in a single character string, whereas imputed variables should be defined in a named list with one or more character strings. In our example, variable <code>math</code> consists of five imputations <code>ASMMAT1</code>, <code>ASMMAT2</code>, <code>ASMMAT3</code>, <code>ASMMAT4</code>, and <code>ASMMAT5</code>. Variable <code>science</code> also consists of five imputations, <code>ASSSCI1</code>, <code>ASSSCI2</code>, <code>ASSSCI3</code>, <code>ASSSCI4</code>, and <code>ASSSCI5</code>. Resulting data <code>timssLong</code> now is suitable for <code>eatRep</code> analyses. For many imputations (e.g., 15), specifying character strings is more straightforward by using the <code>paste()</code> or <code>paste0()</code> function:</p>
+<pre class="r"><code>timssLong &lt;- wideToLong(datWide = data.timss3, 
+             noImp = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
+             imp = list ( math = paste0(&quot;ASMMAT&quot;,1:5),  
+                       science = paste0(&quot;ASSSCI&quot;,1:5)))</code></pre>
 <p>Alternatively, reshaping can be performed with <code>melt()</code> from the <code>data.table</code> package:</p>
-<pre class="r"><code>library(data.table)</code></pre>
-<pre><code>## data.table 1.14.0 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com</code></pre>
-<pre class="r"><code>timssLong2&lt;- data.table::melt(setDT(data.timss3), 
+<pre class="r"><code>library(data.table)
+timssLong2&lt;- data.table::melt(setDT(data.timss3), 
                 id = c(&quot;IDSTUD&quot;, &quot;TOTWGT&quot;, &quot;JKZONE&quot;, &quot;JKREP&quot;, &quot;female&quot;), 
                 measure = patterns(&quot;^ASMMAT&quot;, &quot;^ASSSCI&quot;), 
-                value.name = c(&quot;mat&quot;, &quot;nawi&quot;), variable.name=&quot;imp&quot;)</code></pre>
+                value.name = c(&quot;math&quot;, &quot;science&quot;), variable.name=&quot;imp&quot;)</code></pre>
 </div>
 </div>
 <div id="main-functions-of-eatrep" class="section level2">
@@ -563,7 +564,7 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 </div>
 <div id="group-differences-in-means" class="section level3">
 <h3>2.2 Group differences in means</h3>
-<p>Do boys and girls significantly differ in their mean competencies? Do Bavarian students outperform Saxonian students in “reading”? Is the mean score of Canadian students significantly above the OECD average? These examples can be distinguished regarding whether both units, which should be compared, share the same hierarchy level. Differences within a hierarchy level (e.g., boys vs. girls) are referred to as “group differences”. Differences between (adjacent) hierarchy level (e.g., Canadian vs. OECD average, as Canada itself is part of the OECD average) are referred to as “cross-level differences”. The following example deals with group differences according to <code>sex</code>—we compare, whether boys and girls significantly differ in their means:</p>
+<p>Do boys and girls significantly differ in their mean competencies? Do Bavarian students outperform Saxonian students in “reading”? Is the mean score of Canadian students significantly above the OECD average? These examples can be distinguished regarding whether both units, which should be compared, share the same hierarchy level. Differences within a hierarchy level (e.g., boys vs. girls) are referred to as “group differences”. Differences between (adjacent) hierarchy levels (e.g., Canadian vs. OECD average, as Canada itself is part of the OECD average) are referred to as “cross-level differences”. The following example deals with group differences according to <code>sex</code>—we compare, whether boys and girls significantly differ in their means:</p>
 <pre class="r"><code>results &lt;- repMean(datL = bt2010read, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;, type=&quot;jk2&quot;, PSU=&quot;jkzone&quot;, 
            repInd = &quot;jkrep&quot;, imp=&quot;imp&quot;, groups = &quot;sex&quot;, group.differences.by = &quot;sex&quot;, 
            dependent = &quot;score&quot;, progress = FALSE)</code></pre>
@@ -612,7 +613,7 @@ bt2010read &lt;- bt2010[which(bt2010[,&quot;domain&quot;] == &quot;reading&quot;
 </div>
 <div id="cross-level-differences-in-means" class="section level3">
 <h3>2.3 cross-level differences in means</h3>
-<p>For the easiest case, assume only one grouping variable and two hierarchy levels—the zeroth and the first level. Cross-level differences then refer to the difference of one group mean and the total mean. With two or more grouping variables, cross-level differences can be thought of differences of one distinct group with all higher-ranking hierarchy levels. Assuming two grouping variables (<code>country</code> with three levels, and migration background <code>mig</code> with two levels), 23 cross-level differences are theoretically possible:</p>
+<p>For the easiest case, assume only one grouping variable (<code>sex</code> with levels <code>boys</code> and <code>girls</code>) and two hierarchy levels—the zeroth and the first level. Cross-level differences then refer to the difference of one group mean (e.g., <code>boys</code> mean) and the total mean. With two or more grouping variables, cross-level differences can be thought of differences of one distinct group with all higher-ranking hierarchy levels. Assuming two grouping variables (<code>country</code> with three levels, and migration background <code>mig</code> with two levels), 23 cross-level differences are theoretically possible:</p>
 <p><strong>level 2 vs. level 1:</strong></p>
 <ul>
 <li>migrants in countryA vs. migrants</li>
@@ -819,7 +820,7 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ##                4               2     country + sex              country
 ## 
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.
+## Create 73 replicate weights according to JK2 procedure.
 ## 
 ## 
 ## Trend group: '2010'
@@ -831,7 +832,7 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Trend group: '2015'
 ## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.</code></pre>
+## Create 73 replicate weights according to JK2 procedure.</code></pre>
 <pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
 ## Trend group: '2010'
@@ -843,7 +844,7 @@ results &lt;- repMean(datL = btread, ID=&quot;idstud&quot;, wgt=&quot;wgt&quot;,
 ## Trend group: '2015'
 ## 1 analyse(s) overall according to: 'group.splits = 0'.
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.</code></pre>
+## Create 73 replicate weights according to JK2 procedure.</code></pre>
 <pre><code>## Note: No linking error was defined. Linking error will be defaulted to '0'.</code></pre>
 <pre><code>## 
 ## Trend group: '2010'
@@ -1083,7 +1084,7 @@ freq5 &lt;- apply(DVs, MARGIN = 1, FUN = function (depVars) {
 ## Trend group: '2015'
 ## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.
+## Create 73 replicate weights according to JK2 procedure.
 ## 
 ## 
 ## Trend group: '2010'
@@ -1107,7 +1108,7 @@ freq5 &lt;- apply(DVs, MARGIN = 1, FUN = function (depVars) {
 ## Trend group: '2015'
 ## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.
+## Create 73 replicate weights according to JK2 procedure.
 ## 
 ## 
 ## Trend group: '2010'
@@ -1131,7 +1132,7 @@ freq5 &lt;- apply(DVs, MARGIN = 1, FUN = function (depVars) {
 ## Trend group: '2015'
 ## 1 analyse(s) overall according to: 'group.splits = 2'.
 ## Assume unnested structure with 3 imputations.
-## Create 74 replicate weights according to JK2 procedure.
+## Create 73 replicate weights according to JK2 procedure.
 ## 
 ## 
 ## Trend group: '2010'

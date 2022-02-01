@@ -87,7 +87,7 @@ grouping variables must be equal in both 'sub populations' partitioned by the tr
 }
   \item{linkErr}{
 %%     ~~Describe \code{sig.dif.bound} here~~
-Optional: name or column number of the trend variable. If \code{NULL}, a linking error of 0 will be assumed in trend estimation.
+Optional: name or column number of the linking error variable. If \code{NULL}, a linking error of 0 will be assumed in trend estimation.
 }
   \item{formula}{
 %%     ~~Describe \code{sig.dif.bound} here~~
@@ -193,9 +193,6 @@ If groups were specified, further columns which are denoted by the group names a
 te Grotenhuis, M., Pelzer, B., Eisinga, R., Nieuwenhuis, R., Schmidt-Catran, A., & Konig, R. (2017).
 When size matters: advantages of weighted effect coding in observational studies. \emph{International Journal of Public Health.} \bold{62}, 163--167.
 }
-\author{
-Sebastian Weirich
-}
 \examples{
 ### load example data (long format)
 data(lsa)
@@ -206,8 +203,8 @@ bt2010     <- bt[which(bt[,"year"] == 2010),]
 ## use only reading data
 bt2010read <- bt2010[which(bt2010[,"domain"] == "reading"),]
 
-### Example 1: Computes linear regression from reading score on gender separately for each
-### country. Assume no nested structure. 
+### Example 1: Computes linear regression from reading score on gender separately
+### for each country. Assume no nested structure.
 mod1 <- repGlm(datL = bt2010read, ID = "idstud", wgt = "wgt", type = "jk2",
         PSU = "jkzone", repInd = "jkrep", imp = "imp", groups = "country",
         formula = score~sex, family ="gaussian")
@@ -215,8 +212,8 @@ res1 <- report(mod1, printGlm = TRUE)
 
 \donttest{
 ### Example 2: Computes log linear regression from pass/fail on ses and gender
-### separately for each country in a nested structure. Assuming equally weighted cases
-### by omitting "wgt" argument
+### separately for each country in a nested structure. Assuming equally weighted
+### cases by omitting "wgt" argument
 dat  <- lsa[intersect(which(lsa[,"year"] == 2010), which(lsa[,"domain"] == "reading")),]
 mod2 <- repGlm(datL = dat, ID = "idstud", type = "JK2",  PSU = "jkzone",
         repInd = "jkrep", imp = "imp", nest="nest", groups = "country",
@@ -235,7 +232,8 @@ res3 <- report(mod3, printGlm = TRUE)
 ### all countries). The procedure adapts the weighted effect coding procedures 
 ### described in te Grotenhuis (2017) for multiple imputation and replication methods. 
 mod4 <- repGlm(datL = bt2010read, ID = "idstud", wgt = "wgt", type = "jk2",
-        PSU = "jkzone", repInd = "jkrep", imp = "imp", formula = score~country, useWec=TRUE)
+        PSU = "jkzone", repInd = "jkrep", imp = "imp", formula = score~country,
+        useWec=TRUE)
 res4 <- report(mod4, printGlm = FALSE)
 }}
 

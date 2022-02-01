@@ -337,8 +337,17 @@ eatRep <- function (datL, ID, wgt = NULL, type = c("none", "JK2", "JK1", "BRR", 
           }  else  {
              groupWasNULL <- FALSE
           }
+          if ( length(linkErr) > 1 ) {
+             leFrame <- linkErr
+             linkErr <- NULL
+          }  else  {
+             leFrame <- NULL
+          }
           allVar<- list(ID = ID, wgt = wgt, PSU = PSU, repInd = repInd, repWgt = repWgt, nest=nest, imp=imp, group = groups, trend=trend, linkErr = linkErr, group.differences.by=group.differences.by, dependent = dependent, independent=independent, adjust=adjust, clusters=clusters)
           allNam<- lapply(allVar, FUN=function(ii) {eatTools::existsBackgroundVariables(dat = datL, variable=ii, warnIfMissing = TRUE)})
+          if ( !is.null(leFrame)){
+             allNam[["linkErr"]] <- leFrame
+          }
           if(forceSingularityTreatment == TRUE && !is.null(allNam[["PSU"]]) ) { poolMethod <- "scalar"}
           if ( type %in% c("JK1", "JK2")) {
                if ( is.null(repWgt)) {
@@ -371,8 +380,6 @@ eatRep <- function (datL, ID, wgt = NULL, type = c("none", "JK2", "JK1", "BRR", 
               ret <- allNam
           }  else  {
               if(!is.null(allNam[["trend"]])) {                                 
-                  lev <- sort ( unique(datL[,allNam[["trend"]]]))
-                  if(length(lev) != 2) {stop(paste(length(lev), " levels ('",paste(lev, collapse="', '"),"') found for the 'trend' variable '",allNam[["trend"]],"'. 2 levels are allowed.\n",sep=""))}
                   if (!is.null(allNam[["group"]])) {
                        foo <- lapply(allNam[["group"]], FUN = function ( gr ) {
                               ch <- by(data = datL, INDICES = datL[,allNam[["trend"]]], FUN = function ( subdat ) { table(subdat[,gr]) }, simplify = FALSE )
@@ -500,31 +507,38 @@ checkRegression <- function ( dat, allNam, useWec ) {
                          } })   }                                               
 
 createLinkingError <- function  ( allNam = allNam, resT = resT, datL = datL, fc, toCall) {
-          if ( is.null ( allNam[["linkErr"]] ) ) {
-               message("Note: No linking error was defined. Linking error will be defaulted to '0'.")
-               allNam[["linkErr"]] <- "le"
-               datL[,"le"]         <- 0
-          }
-          if ( fc == "repTable") {
-               le <- data.frame ( depVar = unique(resT[[1]][["out1"]][,"depVar"]), unique(datL[, c(unique(resT[[1]][["out1"]][,"depVar"]), allNam[["linkErr"]]),drop=FALSE]), stringsAsFactors = FALSE)
-          }
-          if ( fc == "repMean") {
-               stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
-               le <- unique(datL[,allNam[["linkErr"]]])                         
-               le <- data.frame ( depVar = unique(resT[[1]][["out1"]][,"depVar"]), parameter = c("mean", "sd"), le = c(le,0), stringsAsFactors = FALSE)
-          }
-          if ( fc == "repGlm") {
-               stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
-               le <- unique(datL[,allNam[["linkErr"]]])
-               le <- data.frame ( depVar = unique(as.character(resT[[1]][["out1"]][,"depVar"])), parameter = unique(as.character(resT[[1]][["out1"]][,"parameter"])), le = le, stringsAsFactors = FALSE)
-          }
-          if ( fc == "repQuantile") {
-               stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
-               le <- data.frame ( unique(resT[[1]][["out1"]][,c("depVar", "parameter")]), le = unique(datL[,allNam[["linkErr"]]]), stringsAsFactors = FALSE)
-          }
-          colnames(le)[2:3] <- c("parameter", "le")
-          if ( nrow(le) > length(unique(le[,"parameter"]))) {
-               stop("Linking errors must be unique for levels of dependent variable.\n")
+          if (length(allNam[["linkErr"]]) > 1) {                                
+              le <- allNam[["linkErr"]]
+              attr(le, "linkingErrorFrame") <- TRUE                             
+              return(le)
+          }  else  {
+              if ( is.null ( allNam[["linkErr"]] ) ) {
+                   message("Note: No linking error was defined. Linking error will be defaulted to '0'.")
+                   allNam[["linkErr"]] <- "le"
+                   datL[,"le"]         <- 0
+              }
+              init <- data.frame ( trendVar = allNam[["trend"]], trendLevel1 = sort(unique(datL[,allNam[["trend"]]]))[1] , trendLevel2 = sort(unique(datL[,allNam[["trend"]]]))[2], stringsAsFactors = FALSE)
+              if ( fc == "repTable") {
+                   le <- data.frame ( init, depVar = unique(resT[[1]][["out1"]][,"depVar"]), unique(datL[, c(unique(resT[[1]][["out1"]][,"depVar"]), allNam[["linkErr"]]),drop=FALSE]), stringsAsFactors = FALSE)
+              }
+              if ( fc == "repMean") {
+                   stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
+                   le <- unique(datL[,allNam[["linkErr"]]])                     
+                   le <- data.frame ( init, depVar = unique(resT[[1]][["out1"]][,"depVar"]), parameter = c("mean", "sd"), le = c(le,0), stringsAsFactors = FALSE)
+              }
+              if ( fc == "repGlm") {
+                   stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
+                   le <- unique(datL[,allNam[["linkErr"]]])
+                   le <- data.frame ( init, depVar = unique(as.character(resT[[1]][["out1"]][,"depVar"])), parameter = unique(as.character(resT[[1]][["out1"]][,"parameter"])), le = le, stringsAsFactors = FALSE)
+              }
+              if ( fc == "repQuantile") {
+                   stopifnot (length(unique(datL[,allNam[["linkErr"]]])) == 1)
+                   le <- data.frame ( init, unique(resT[[1]][["out1"]][,c("depVar", "parameter")]), le = unique(datL[,allNam[["linkErr"]]]), stringsAsFactors = FALSE)
+              }
+              colnames(le)[5:6] <- c("parameter", "le")
+              if ( nrow(le) > length(unique(le[,"parameter"]))) {
+                   stop("Linking errors must be unique for levels of dependent variable.\n")
+              }
           }
           return(le)}
 
@@ -1058,7 +1072,7 @@ dG <- function ( jk2.out , analyses = NULL, digits = 3, printDeviance, add ) {
                            ret[,"p.value"] <- 2*(1-pt( q = abs(ret[,"t.value"]), df = df ))
                            ret[,"sig"]     <- eatTools::num.to.cat(x = ret[,"p.value"], cut.points = c(0.001, 0.01, 0.05, 0.1), cat.values = c("***", "**", "*", ".", ""))
                            retNR  <- ret
-                           ret    <- data.frame ( lapply(ret, FUN = function ( y ) {if(class(y)=="numeric") {y <- round(y, digits = digits)}; return(y)}), stringsAsFactors = FALSE)
+                           ret    <- eatTools::roundDF(ret, digits=digits)
                            groupNamen <- setdiff(colnames(spl), c("group","depVar","modus", "parameter", "coefficient","value", "comparison"))
                            if ( length(groupNamen)>0) {
                                 cat ( paste( "            groups: ", paste( groupNamen, unlist(lapply(spl[1,groupNamen], as.character)), sep=" = ", collapse = "; "),"\n",sep=""))
@@ -1379,8 +1393,8 @@ checkForAdjustment <- function(datL, allNam, groupWasNULL) {
           return(allNam)}
           
 checkNameConvention <- function( allNam) {
-          na    <- c("isClear", "N_weightedValid", "N_weighted",  "wgtOne")
-          naGr  <- c("wholePop", "group", "depVar", "modus", "parameter", "coefficient", "value", "linkErr", "comparison", "sum", "trendvariable", "g")
+          na    <- c("isClear", "N_weightedValid", "N_weighted",  "wgtOne", "le")
+          naGr  <- c("wholePop", "group", "depVar", "modus", "parameter", "coefficient", "value", "linkErr", "comparison", "sum", "trendvariable", "g", "le")
           naInd <- c("(Intercept)", "Ncases", "Nvalid", "R2",  "R2nagel", "linkErr")
           naGr1 <- which ( allNam[["group"]] %in% naGr )                        ### hier kuenftig besser: "verbotene" Variablennamen sollen automatisch umbenannt werden!
           if(length(naGr1)>0)  {stop(paste0("Following name(s) of grouping variables in data set are forbidden due to danger of confusion with result structure:\n     '", paste(allNam[["group"]][naGr1], collapse="', '"), "'\n  Please rename these variable(s) in the data set.\n"))}
