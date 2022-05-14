@@ -6,13 +6,16 @@
 
 \description{
 Summarizes the output of the four main functions \code{\link{repMean}},\code{\link{repTable}},
-\code{\link{repQuantile}}, and \code{\link{repGlm}}.
+\code{\link{repQuantile}}, and \code{\link{repGlm}}, and provides a single data.frame with all
+results.
 }
 
 \usage{
 report(repFunOut, trendDiffs = FALSE, add = list(),
       exclude = c("Ncases", "NcasesValid", "var", "sampleSize"), printGlm = FALSE,
-      round = TRUE, digits = 3, printDeviance = FALSE)
+      round = TRUE, digits = 3, printDeviance = FALSE,
+      target = c("default", "BT2021", "BT2021.table"),
+      wholeGroupName = "Deutschland")
 }
 \arguments{
   \item{repFunOut}{output of one of the four \code{eatRep}-functions. }
@@ -27,6 +30,13 @@ report(repFunOut, trendDiffs = FALSE, add = list(),
   Should the deviance information printed additionally? Note: To print deviance information,
   the argument \code{poolMethod} of the \code{\link{repGlm}} function must be set
   to \code{"scalar"}. }
+  \item{target}{The target format for the reported data.frame. Option \code{"BT2021"}
+  optimizes the \code{\link{repMean}} and \code{\link{repTable}} output format according
+  to the BT2021 study. Option \code{"BT2021.table"} additionally adapts the
+  \code{\link{repTable}} output format according to the BT2021 study. For general purposes,
+  we recommend to use the \code{"default"} option.}
+  \item{wholeGroupName}{Optional: only relevant if \code{target} is \code{"BT2021"} or \code{"BT2021.table"}.
+  Which notation should be used for whole population in the output?}
 }
 \value{
 A data frame with at least nine columns.
@@ -53,5 +63,5 @@ If mean analysis was applied, the \sQuote{parameter} column takes the values \sQ
 Benjamin Becker, Sebastian Weirich
 }
 \examples{
-### see examples of the jk2-functions.
+### see examples of the eatRep main functions.
 }
