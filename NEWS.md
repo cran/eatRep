@@ -1,6 +1,11 @@
-# eatRep 0.14.2
+# eatRep 0.14.4
 
-* add alterNative output formats for the reporting function (argument `target`)
+* bug fix in computation of adjusted weighted means
+* enhance performance in recursive calls (e.g., trend estimation)
+
+# eatRep 0.14.3
+
+* add alternative output formats for the reporting function (argument `target`)
 * bug fix in standard error computation of trend estimates
 * bug fix in repQuantile when using 0% or 100% percentil
 * enhance performance when using the BIFIEsurvey wrapper
