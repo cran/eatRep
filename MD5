@@ -1,13 +1,13 @@
-9240cbdb9d47c1ad3050e2755ce97425 *DESCRIPTION
+f0d9bf25e29a958c4d4394cb4f093c0a *DESCRIPTION
 01740863f345bd6894076b80b378d15a *NAMESPACE
-2504cc915e31686befc7fd214dbb7066 *NEWS.md
+f1c87fd8ffa8c8bbf9c2512bb4d89712 *NEWS.md
 e70d90b6634f84ed7521f773b34c53ec *R/1_compareDiffs.r
 345f4714c0119285c5b66428ce78f3ba *R/2_doTrends.r
 ee62ffa17bfadc030fd9cbd4b57c2d05 *R/3_compareTrendDiffs.r
 3a9dafef011523fa9d88993a9b0978a1 *R/bifie.r
 9d60dd08a865afeb552b54c04114b30d *R/checkLEs.R
 3e2f6cb40c95f05e51f5995a8da45e9d *R/deprecated_functions.r
-32664babbd4d6245e856028e16a2b7b4 *R/groupToTotalMeanComparisonLavaan_0.0.3.R
+439cca881ef460864d8d48e7b874cc49 *R/groupToTotalMeanComparisonLavaan_0.0.3.R
 80ad0dbd2fa947e299f1ddfdc1c2b661 *R/jk2.R
 d1fe11253dce6f6352ad4a505b1909d8 *R/pool.R
 0d56107e8b71d3673331d16c67a086d6 *R/report.r
@@ -21,7 +21,7 @@ ceb11c2d82c2b342da09bf5a080372c0 *build/vignette.rds
 225a70f6bef87d03ebaa4a65bfd68e90 *inst/extdata/linking_error.rda
 a5673ccd68d746560485af4b52b4f5a7 *man/auxiliaryFunctions.Rd
 640e21ba27461961bac7ce537b04a6db *man/checkLEs.Rd
-cc2f051967c65efb79b01a3b686117da *man/eatRep-package.rd
+ff83a3e186d697822d6e29e392eede4a *man/eatRep-package.rd
 a340f6d16a0d41400259699cf1feb951 *man/generateRandomJk1Zones.Rd
 55fb40ca3d895471f1442a3057d55730 *man/lsa.rd
 f80b7d7aa5b77fbf0799fcefabede034 *man/repGlm.Rd
