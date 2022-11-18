@@ -1,4 +1,4 @@
-report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("Ncases", "NcasesValid", "var", "sampleSize"), printGlm = FALSE,
+report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("NcasesValid", "var", "sampleSize"), printGlm = FALSE,
                      round = TRUE, digits = 3, printDeviance = FALSE, target = c("default", "BT2021", "BT2021.table"), wholeGroupName = "Deutschland" ) {
           if(is.null(repFunOut)) {return(NULL)}
           target   <- match.arg(target, choices = c("default", "BT2021", "BT2021.table"))
@@ -13,7 +13,7 @@ report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("Nca
           grpv     <- setdiff(setdiff(colnames(jk2[[1]]), cols), c("comparison", "coefficient", "value", tv))
           grp_by   <- repFunOut[["allNam"]][["group.differences.by"]]
           cl_diffs <- repFunOut[["allNam"]][["cross.differences"]]
-          funs     <- c("mean", "table", "quantile", "glm")
+          funs     <- c("mean", "table", "quantile", "glm", "lmer")
           fun      <- funs [ which( unlist(lapply(funs, FUN = function ( f ) { length(grep(f, jk2[[1]][1,"modus"]))})) > 0) ]
     ### 2. cross-level diffs bestimmen: ueberschreibt bzw. erweitert das Objekt 'jk2' ... Achtung: sind nur fuer "mean" oder "table" erlaubt
           if ( is.list(cl_diffs) ) {
@@ -30,13 +30,13 @@ report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("Nca
     ### 2.b) SE correction durchfuehren (siehe Paper Weirich & Hecht)
           if(!is.null(repFunOut[["SE_correction"]]) && !is.null(repFunOut[["SE_correction"]][[1]])) {
     ### checks, ob Vergleiche dabei, fuer die keine Korrektur verfuehgbar ist
-            if(length(which(jk2[[1]][["comparison"]] == "crossDiff_of_groupDiff")) > 0 ) {
-                warning("Standard error correction for 'crossDiff_of_groupDiff' is currently not supported.")
-            }
-            mult_hierarchy <- any(unlist(lapply(repFunOut$allNam$cross.differences, function(x) x[2] - x[1] != 1)))
-            if(mult_hierarchy) warning("Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.")
+              if(length(which(jk2[[1]][["comparison"]] == "crossDiff_of_groupDiff")) > 0 ) {
+                  warning("Standard error correction for 'crossDiff_of_groupDiff' is currently not supported.")
+              }
+              mult_hierarchy <- any(unlist(lapply(repFunOut$allNam$cross.differences, function(x) x[2] - x[1] != 1)))
+              if(mult_hierarchy) warning("Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.")
     ### correction durchfuehren
-            jk2 <- lapply(jk2, function(jk2_single) { seCorrect(SE_correction = repFunOut[["SE_correction"]], jk2 = jk2_single, grpv = grpv)   })
+              jk2 <- lapply(jk2, function(jk2_single) { seCorrect(SE_correction = repFunOut[["SE_correction"]], jk2 = jk2_single, grpv = grpv)   })
           }
     ### 3. Trend bestimmen
           if ( !is.null(tv) ) {
@@ -68,6 +68,10 @@ report <- function ( repFunOut, trendDiffs = FALSE, add=list(), exclude = c("Nca
                }
           }                                                                     ### was muss in die Spalten? das haengt davon ab, ob es einen Trend gibt
           frml     <- as.formula(paste0("... ~ ", paste(spltVar,collapse=" + ") ) )
+    ### Hotfix: wenn repTable ueber wiederholten Aufrufen von repMean gewrappt wurde, stehen die Ns mehrmals drin, naemlich fuer
+    ### jede Indikatorvariable einer mehrstufigen Faktorvariable separat. Sie sind aber immer gleich. Durch das Mehrmalsdrinstehen
+    ### misslingt das reshapen, deshalb muessen sie jetzt raus
+          if ( fun == "table") {jk2 <- reduceDoubleN(jk2)}
     ### Hotfix: damit fuer glm im Output die Koeffizienten immer zuerst und R2, R2nagel, Nvalid imer dahinter stehen, werden die jetzt voruebergehen umbenannt (hinterher wieder zurueck benannt)
           if ( fun == "glm") {jk2[,"parameter"] <- car::recode(jk2[,"parameter"], "'Nvalid'='zzzzNvalid'; 'R2'='zzzzR2'; 'R2nagel'='zzzzR2nagel'") }
           jk2wide  <- reshape2::dcast(data = jk2, formula = frml, value.var = "value")
@@ -218,6 +222,14 @@ compare_point_estimates <- function(old_est, new_est, param) {
   }
   return()
 }
+
+
+### Hier kann man nicht subset() nehmen, weil es sonst Warnungen beim Paketebauen gibt,
+### da subset() die Spaltennamen unquoted haben will
+reduceDoubleN <- function(jk2){
+          cases <- unique(jk2[which(jk2[,"parameter"] == "Ncases"),])
+          jk2   <- rbind(jk2[which(jk2[,"parameter"] != "Ncases"),], cases)
+          return(jk2)}
 
 reshapeReport <- function(inp, tv, fun, repFunOut, target, wholeGroupName) {
     ### testweise initialisieren
