@@ -1,4 +1,4 @@
-doBifieAnalyses <- function (dat.i, allNam, na.rm, group.delimiter,separate.missing.indicator, expected.values, probs, formula, glmTransformation, toCall, modus, type, verbose, L1wgt, L2wgt,formula.fixed, formula.random){
+doBifieAnalyses <- function (dat.i, allNam, na.rm, group.delimiter,separate.missing.indicator, expected.values, probs,  jkfac, fayfac, formula, glmTransformation, toCall, modus, type, verbose, L1wgt, L2wgt,formula.fixed, formula.random){
       dat.i<- eatTools::facToChar(dat.i[,intersect(unlist(allNam), colnames(dat.i))], from = "character", to = "factor")
       dat.g<- eatGADS::import_DF(dat.i, checkVarNames = FALSE)                  
       dat2 <- eatGADS::extractData(dat.g, convertLabels = "numeric")            
@@ -6,7 +6,8 @@ doBifieAnalyses <- function (dat.i, allNam, na.rm, group.delimiter,separate.miss
       labsD<- dat.g[["labels"]][which(dat.g[["labels"]][,"varName"] == allNam[["dependent"]]),]
       datL <- by ( data = dat2, INDICES = dat2[,allNam[["imp"]]], FUN = function ( imp.i ) { return(imp.i)})
       jkt  <- car::recode(type, "'JK2'='JK_TIMSS'; 'JK1'='JK_GROUP'")
-      txt  <- capture.output(bo   <- BIFIE.data.jack( data= datL,  wgt = allNam[["wgt"]], jktype=jkt , jkzone = allNam[["PSU"]], jkrep = allNam[["repInd"]], cdata=FALSE))
+	    if(is.null(fayfac)) {if(jkt == "JK_GROUP") {fayfac <- (length(unique(dat.i[, allNam[["PSU"]]]))-1)/length(unique(dat.i[, allNam[["PSU"]]]))   }}
+      txt  <- capture.output(bo   <- BIFIE.data.jack( data= datL,  wgt = allNam[["wgt"]], jktype=jkt , jkzone = allNam[["PSU"]], jkrep = allNam[["repInd"]], jkfac=jkfac, fayfac=fayfac, cdata=FALSE))
       if ( isTRUE(verbose)) { cat("\n"); print(bo)}
       attributes(allNam[["group"]]) <- NULL                                     
       if ( toCall == "mean") {
@@ -16,6 +17,7 @@ doBifieAnalyses <- function (dat.i, allNam, na.rm, group.delimiter,separate.miss
            resML <- bifieTable(bifie.obj = bo, allNam=allNam, dat.g=dat.g, labsD=labsD, toCall=toCall, dat.i=dat.i, modus=modus)
       }
       if ( toCall == "lmer") {
+           foo   <- checkWithinBetweenWeights(dat=dat.i, allNam=allNam)
            resML <- bifieLmer(bifie.obj=bo, allNam=allNam, dat.g=dat.g, labsD=labsD, modus=modus, formula.fixed=formula.fixed, formula.random=formula.random)
       }
       return(resML)}
@@ -172,3 +174,15 @@ aufbMultilevel <- function(resM, allNam, modus) {
           resML<- rbind(resML,data.frame ( group=resL[rows,"group"],depVar = allNam[["dependent"]], modus=modus, parameter=resL[rows,"parameter"], coefficient=tolower(resL[rows,"variable"]),value=resL[rows,"value"], stringsAsFactors = FALSE))
       }
       return(resML)}
+
+checkWithinBetweenWeights <- function(dat, allNam){
+      if(!is.null(allNam[["L2wgt"]]) && !is.null(allNam[["wgt"]])) {
+         if (!is.null(allNam[["imp"]])) {
+             d <- dat[which(dat[,allNam[["imp"]]] == sort(dat[,allNam[["imp"]]])[1]),]
+         }  else  {
+             d <- dat
+         }
+         nUnit <- sapply( d[,c(allNam[["L1wgt"]], allNam[["L2wgt"]], allNam[["wgt"]])], FUN = function (x) {length(unique(x))})
+         if (!is.null(allNam[["L1wgt"]])) {if ( nUnit[[allNam[["wgt"]]]] < nUnit[[allNam[["L1wgt"]]]]) {warning(paste0("Number of distinct units in sampling weights '",allNam[["wgt"]],"' (",nUnit[[allNam[["wgt"]]]],"), is lower than the number of distinct units in level-1 weights '",allNam[["L1wgt"]],"' (",nUnit[[allNam[["L1wgt"]]]],")"))}}
+         if (!is.null(allNam[["L2wgt"]])) {if ( nUnit[[allNam[["wgt"]]]] < nUnit[[allNam[["L2wgt"]]]]) {warning(paste0("Number of distinct units in sampling weights '",allNam[["wgt"]],"' (",nUnit[[allNam[["wgt"]]]],"), is lower than the number of distinct units in level-2 weights '",allNam[["L2wgt"]],"' (",nUnit[[allNam[["L2wgt"]]]],")"))}}
+      }}
