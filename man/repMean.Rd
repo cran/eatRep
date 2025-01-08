@@ -20,7 +20,7 @@ repMean (datL, ID, wgt = NULL, type = c("none", "JK2", "JK1", "BRR", "Fay"), PSU
          engine = c("survey", "BIFIEsurvey"), scale = 1, rscales = 1, mse=TRUE,
          rho=NULL, hetero=TRUE, se_type = c("HC3", "HC0", "HC1", "HC2", "CR0", "CR2"),
          clusters = NULL, crossDiffSE.engine= c("lavaan", "lm"),
-         stochasticGroupSizes = FALSE, verbose = TRUE, progress = TRUE)}
+         stochasticGroupSizes = FALSE, verbose = TRUE, progress = TRUE, nCores=NULL)}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{datL}{
@@ -106,8 +106,11 @@ This argument is only necessary, if \code{crossDiffSE = "rep"} \emph{and} none o
 Character string which separates the group names in the output frame.
 }
   \item{trend}{
-Optional: name or column number of the trend variable. Note: Trend variable must have exact two levels. Levels for
-grouping variables must be equal in both 'sub populations' partitioned by the trend variable.
+Optional: name or column number of the trend variable which contains the measurement time of the survey.
+Note: Levels of all grouping variables must be equal in all 'sub populations' partitioned by the discrete trend variable.
+\code{repMean} computes differences for all pairwise contrasts defined by trend variable levels. or three measurement
+occasions, i.e. 2010, 2015, and 2020, contrasts (i.e. trends) are computed for 2010 vs. 2015, 2010 vs. 2020, and
+2015 vs. 2020.
 }
   \item{linkErr}{
 Optional: Either the name or column number of the linking error variable. If \code{NULL}, a linking error of 0 will be assumed in trend estimation.
@@ -181,6 +184,10 @@ Logical: Show analysis information on console?
   \item{progress}{
 Logical: Show progress bar on console?
 }
+  \item{nCores}{
+integer (default: NULL), number of cores to use for parallel processing, if \code{engine = "survey"}. If \code{NULL},
+single core processing is used.
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -239,6 +246,7 @@ rdN1   <- rd[which(rd[,"nest"] == 1),]
 ### First, we only consider year 2010
 rdN1y10<- rdN1[which(rdN1[,"year"] == 2010),]
 
+\donttest{
 ### mean estimation
 means1 <- repMean(datL = rdN1y10, ID="idstud", wgt="wgt", type = "JK2", PSU = "jkzone",
           repInd = "jkrep", imp="imp", groups = "country", dependent = "score",
@@ -247,7 +255,6 @@ means1 <- repMean(datL = rdN1y10, ID="idstud", wgt="wgt", type = "JK2", PSU = "j
 ### so the user may add new columns in the output using the 'add' argument
 res1   <- report(means1, add = list(domain = "reading"))
 
-\donttest{
 ### Example 1a: Additionally to example 1, we decide to estimate whether
 ### each country's mean differ significantly from the overall mean as well
 ### as from the individual means of the other contries
@@ -257,7 +264,7 @@ means1a<- repMean(datL = rdN1y10, ID="idstud", wgt="wgt", type = "JK2", PSU = "j
           dependent = "score", na.rm=FALSE, doCheck=TRUE, hetero=FALSE)
 res1a  <- report(means1a, add = list(domain = "reading"))
 
-### See that the means of 'countryA' and 'countryB' significantly differ from the overall mean.
+### See that the means of all countries significantly differ from the overall mean.
 print(res1a[intersect(which(res1a[,"comparison"] == "crossDiff"),
       which(res1a[,"parameter"] == "mean")),], digits = 3)
 
@@ -280,7 +287,7 @@ means2a<- repMean(datL = rdN1y10, ID="idstud", wgt="wgt", type = "JK2", PSU = "j
           group.differences.by="sex", cross.differences = list(c(0,1), c(0,2)),
           dependent = "score", na.rm=FALSE, doCheck=TRUE,
           crossDiffSE.engine= "lm", clusters = "idclass")
-res2a  <- report(means2a,add = list(domain = "reading"), trendDiffs = TRUE)
+res2a  <- report(means2a,add = list(domain = "reading"))
 
 ### Third example: like example 2a, but using nested imputations of dependent variable,
 ### and additionally estimating trend: use 'rd' instead of 'rdN1y10'
@@ -324,7 +331,7 @@ means4T<- by ( data = lsa, INDICES = lsa[,"domain"], FUN = function (sub.dat) {
                  na.rm=FALSE, doCheck=TRUE,
                  trend = "year", linkErr = "leScore", crossDiffSE.engine= "lm") })
 ret4T  <- do.call("rbind", lapply(names(means4T), FUN = function ( domain ) {
-          report(means4T[[domain]], trendDiffs = TRUE, add = list(domain = domain))}))
+          report(means4T[[domain]], add = list(domain = domain))}))
           
 ### Fifth example: compute adjusted means, also with trend estimation
 ### Note: all covariates must be numeric or 0/1 dichotomous

@@ -19,7 +19,7 @@ repTable(datL, ID, wgt = NULL, type = c("none", "JK2", "JK1", "BRR", "Fay"), PSU
           trend = NULL, linkErr = NULL, dependent, separate.missing.indicator = FALSE,
           na.rm=FALSE, expected.values = NULL, doCheck = TRUE, forceTable = FALSE,
           engine = c("survey", "BIFIEsurvey"), scale = 1, rscales = 1, mse=TRUE,
-          rho=NULL, verbose = TRUE, progress = TRUE )}
+          rho=NULL, verbose = TRUE, progress = TRUE, nCores=NULL )}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{datL}{
@@ -101,8 +101,11 @@ continuity correction when computing the test statistic for 2 by 2 tables. See h
 Character string which separates the group names in the output frame.
 }
   \item{trend}{
-Optional: name or column number of the trend variable. Note: Trend variable must have exact two levels. Levels for
-grouping variables must be equal in both 'sub populations' partitioned by the trend variable.
+Optional: name or column number of the trend variable which contains the measurement time of the survey.
+Note: Levels of all grouping variables must be equal in all 'sub populations' partitioned by the discrete trend variable.
+\code{repTable} computes differences for all pairwise contrasts defined by trend variable levels. or three measurement
+occasions, i.e. 2010, 2015, and 2020, contrasts (i.e. trends) are computed for 2010 vs. 2015, 2010 vs. 2020, and
+2015 vs. 2020.
 }
   \item{linkErr}{
 Optional: Either the name or column number of the linking error variable. If \code{NULL}, a linking error of 0 will be assumed in trend estimation.
@@ -169,6 +172,10 @@ Logical: Show analysis information on console?
   \item{progress}{
 Logical: Show progress bar on console?
 }
+  \item{nCores}{
+integer (default: NULL), number of cores to use for parallel processing, if \code{engine = "survey"}. If \code{NULL},
+single core processing is used.
+}
 }
 \details{
 Function first creates replicate weights based on PSU and repInd variables according to JK2 procedure
@@ -221,6 +228,7 @@ rdN1   <- rd[which(rd[,"nest"] == 1),]
 ### First, we only consider year 2010
 rdN1y10<- rdN1[which(rdN1[,"year"] == 2010),]
 
+\donttest{
 ### First example: Computes frequencies of polytomous competence levels (1, 2, 3, 4, 5)
 ### conditionally on country, using a chi-square test to decide whether the distribution
 ### varies between countries (it's an overall test, i.e. with three groups, df1=8).
@@ -229,11 +237,10 @@ freq.tab1 <- repTable(datL = rdN1y10, ID = "idstud", wgt = "wgt", imp="imp",
              group.differences.by = "country", dependent = "comp", chiSquare = TRUE)
 res1      <- report(freq.tab1, add = list ( domain = "reading" ))
 
-\donttest{
 ### Second example: Computes frequencies of polytomous competence levels (1, 2, 3, 4, 5)
 ### conditionally on country. Now we test whether the frequency of each single category
 ### differs between pairs of countries (it's not an overall test ... repTable now
-### calls repMean internally, using dummy variables
+### calls repMean internally, using dummy variables)
 freq.tab2 <- repTable(datL = rdN1y10, ID = "idstud", wgt = "wgt", imp="imp",
              type = "JK2", PSU = "jkzone", repInd = "jkrep", groups = "country",
              group.differences.by = "country", dependent = "comp", chiSquare = FALSE)
@@ -249,9 +256,7 @@ freq.tab3 <- by ( data = lsa, INDICES = lsa[,"domain"], FUN = function (subdat) 
                  dependent = "comp", chiSquare = FALSE, trend = "year",
                  linkErr = "leComp") })
 res3      <- do.call("rbind", lapply(names(freq.tab3), FUN = function (domain) {
-             report(freq.tab3[[domain]], trendDiffs = TRUE,
-                    add = list ( domain = domain ))
-             }))
+             report(freq.tab3[[domain]], add = list ( domain = domain )) }))
              
 ### Fourth example: similar to example 3. trend estimation using a linking
 ### error data.frame
@@ -268,9 +273,7 @@ freq.tab4 <- by ( data = lsa, INDICES = lsa[,"domain"], FUN = function (subdat) 
                  linkErr = linkErrs[which(linkErrs[,"domain"] == subdat[1,"domain"]),])
              })
 res4      <- do.call("rbind", lapply(names(freq.tab4), FUN = function (domain) {
-             report(freq.tab4[[domain]], trendDiffs = TRUE,
-                    add = list ( domain = domain ))
-             }))
+             report(freq.tab4[[domain]], add = list ( domain = domain ))  }))
 
 ### Fifth example: minimal example for three measurement occasions
 ### borrow data from the eatGADS package
@@ -289,5 +292,6 @@ freq.tab5 <- repTable(datL = dat[which(dat[,"dimension"] == "reading"),],
              ID = "idstud", type="none", imp="imp", dependent = "traitLevel",
              chiSquare = FALSE, trend = "year",
              linkErr = lErr[which(lErr[,"domain"] == "reading"),])
-res5      <- report(freq.tab5, trendDiffs = TRUE, add = list ( domain = "reading" ))
+res5      <- report(freq.tab5, add = list ( domain = "reading" ))
+res5A     <- report2(freq.tab5, add = list ( domain = "reading" ))
 }}

@@ -83,13 +83,18 @@
   and \code{jk2.glm} now goes under the name of \code{\link{repGlm}}. The old functions are deprecated and will
   be removed in further package publications. Renaming was driven by the fact that the corresponding
   functions now have broader range of methods than only jackknife-2.
+  
+  \emph{Third important note:} Starting with version 0.15.0, the reporting function \code{\link{report}} was deprecated
+  due to inefficient and error-prone programming. The new reporting function \code{\link{report2}} has a new output
+  format which provides an interface for the \code{eatPlot} package. Old functionality was roughly supplied using
+  \code{\link{report}}, but if the 1:1 output of former version is requested, please use version 0.14.7.
 }
 \details{
 \tabular{ll}{
 Package: \tab eatRep\cr
 Type: \tab Package\cr
-Version: \tab 0.14.7\cr
-Date: \tab 2023-03-24\cr
+Version: \tab 0.15.0\cr
+Date: \tab 2025-01-07\cr
 License: \tab GPL(>=2)
 }
 }
