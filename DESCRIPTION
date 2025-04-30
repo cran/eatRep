@@ -1,7 +1,7 @@
 Package: eatRep
 Type: Package
 Title: Educational Assessment Tools for Replication Methods
-Version: 0.15.1
+Version: 0.15.2
 Depends: R (>= 4.1), survey (>= 4.1-1), BIFIEsurvey, progress, lavaan
         (>= 0.6-7), parallel
 Imports: Hmisc, fmsb, mice (>= 2.46), boot, car, reshape2, plyr,
@@ -28,7 +28,7 @@ LazyData: yes
 NeedsCompilation: no
 Suggests: weights, testthat, knitr, rmarkdown, zoo
 VignetteBuilder: knitr
-Packaged: 2025-02-10 13:45:14 UTC; Sebastian Weirich
+Packaged: 2025-04-29 16:14:04 UTC; Sebastian Weirich
 Author: Sebastian Weirich [aut, cre],
   Martin Hecht [aut],
   Karoline Sachse [aut],
@@ -36,4 +36,4 @@ Author: Sebastian Weirich [aut, cre],
   Edna Grewers [ctb]
 Maintainer: Sebastian Weirich <sebastian.weirich@iqb.hu-berlin.de>
 Repository: CRAN
-Date/Publication: 2025-02-10 14:10:02 UTC
+Date/Publication: 2025-04-30 07:50:10 UTC

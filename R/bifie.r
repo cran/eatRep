@@ -61,9 +61,10 @@ aufbNoMultilevel <- function (resM, mv, toCall, allNam, dat.i, modus, grp) {
           resML[setdiff(1:nrow(resML), grep("_", resML[,"variable"])),"variable"] <- paste(resML[setdiff(1:nrow(resML), grep("_", resML[,"variable"])),"variable"], "est", sep="_")
           resML<- data.frame ( resML, reshape2::colsplit(string = resML[,"variable"], pattern="_", names = c("parameter", "coefficient")),stringsAsFactors = FALSE)
           if ( toCall == "table") {
-               resML <- resML[which(resML[,"parameter"] == "perc"),]
-               resML[,"parameter"] <- resML[,"varval"]
-               resML[,"variable"]  <- resML[,"varval"] <- NULL                  ### in der Ergebnisstruktur darf keine Spalte stehen, die 'variable' heisst
+               ncas  <- resML[which(resML[,"parameter"] == "Ncases"),] |> dplyr::mutate(varval = NULL, variable =NULL)
+               ncas  <- do.call("rbind", by(ncas, INDICES = ncas[,grep("groupval", colnames(ncas), value=TRUE, ignore.case=TRUE)], FUN = function (y) {y |> dplyr::mutate(value = sum(value)) |> dplyr::filter(dplyr::row_number()==1) }))
+               resML <- resML[which(resML[,"parameter"] == "perc"),] |> dplyr::mutate(parameter = varval, variable =NULL, varval = NULL)
+               resML <- rbind(resML, ncas)                                      ### in der Ergebnisstruktur darf keine Spalte stehen, die 'variable' heisst
           }  else {
                resML[,"parameter"] <- car::recode(resML[,"parameter"], "'M'='mean'; 'SD'='sd'; 'Nweight'='NcasesValid'")
                resML[,"variable"]  <- NULL
@@ -71,10 +72,6 @@ aufbNoMultilevel <- function (resM, mv, toCall, allNam, dat.i, modus, grp) {
           resML[,"coefficient"] <- car::recode(resML[,"coefficient"], "'SE'='se'")
           recs <- paste("'",grep("groupval", colnames(resML), value=TRUE) , "' = '" , allNam[["group"]],"'",sep="", collapse="; ")
           colnames(resML) <- car::recode(colnames(resML), recs)
-          if ( toCall == "table") {                                             ### Stichprobengroessen fuer table dazu
-               Ns   <- do.call("rbind", by(dat.i, INDICES = dat.i[,allNam[["group"]]], FUN = function (y) {data.frame ( y[1,allNam[["group"]], drop=FALSE], parameter = "Ncases", coefficient="est", value=length(unique(y[,allNam[["ID"]]])), stringsAsFactors = FALSE) }))
-               resML<- plyr::rbind.fill(resML, Ns)
-          }
           resML[,"modus"] <- paste(modus, "BIFIEsurvey", sep="__")
           resML[,"depVar"]<- allNam[["dependent"]]
           resML[,"comparison"] <- NA
@@ -121,8 +118,9 @@ computeGroupDifferences <- function(resM, allNam, dat.g, modus){
            col  <- c(eatTools::removeNumeric(col), eatTools::removeNonNumeric(col))
            res  <- setdiff(grep("^groupval", colnames(liste), value=TRUE), paste0("groupval", col[2]))
            grp  <- do.call("rbind", by(data=liste, INDICES = liste[,res], FUN = function ( x ) {
-                   comb <- data.frame ( combinat::combn(x=x[,"dp"], m=2), stringsAsFactors = FALSE)
+                   comb <- combinat::combn(x=x[,"dp"], m=2, simplify=FALSE)
                    diffs<- do.call("rbind", lapply(comb, FUN = function ( y ) { ### 'dp' = statistics for derived parameters,siehe BIFIE-Hilfeseite von BIFIE.by
+                           y    <- sort(y)
                            dp   <- eval(parse(text=paste("list ( \"groupDiff\" =~ 0 + I(",y[1],"-",y[2],"))")))
                            resMd<- BIFIEsurvey::BIFIE.derivedParameters( resM, derived.parameters=dp )
    ### Achtung: falls 'group.differences.by' definiert, wird bereits auf der innersten Ebene, also quasi jetzt, begonnen, das wieder in die Ergebnisstruktur zurueck zu ueberfuehren
@@ -152,7 +150,7 @@ computeGroupDifferences <- function(resM, allNam, dat.g, modus){
                               add <- data.frame ( v1=vs, stringsAsFactors = FALSE)
                               colnames(add) <- allNam[["group.differences.by"]]
                            }                                                    ### untere Zeile: "est" und "es" werden mit minus 1 multipliziert, damit sie konsistent zu den survey-Ergebnissen sind
-                           ret  <- data.frame ( group = paste(rg, vs, sep="___"), depVar = allNam[["dependent"]], modus = paste(modus,"BIFIEsurvey", sep="__"),  comparison = "groupDiff", parameter = "mean", coefficient = c("est", "se", "p", "es"), value = c( (-1) * resMd[["stat"]][["coef"]],resMd[["stat"]][["se"]],resMd[["stat"]][["p"]], (-1)*es),add, stringsAsFactors = FALSE)
+                           ret  <- data.frame ( group = paste(rg, vs, sep="___"), depVar = allNam[["dependent"]], modus = paste(modus,"BIFIEsurvey", sep="__"),  comparison = "groupDiff", parameter = "mean", coefficient = c("est", "se", "p", "es"), value = c(resMd[["stat"]][["coef"]],resMd[["stat"]][["se"]],resMd[["stat"]][["p"]], es),add, stringsAsFactors = FALSE)
                            return(ret)}))
                    return(diffs)}))
       }
