@@ -30,27 +30,27 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
 <style type="text/css">
-code {
-white-space: pre;
-}
-.sourceCode {
-overflow: visible;
-}
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,54 +64,55 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-{ counter-reset: source-line 0; }
+  { counter-reset: source-line 0; }
 pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
+  { position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-color: #aaaaaa;
-}
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-{ }
+  {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -145,26 +146,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 
 
 <style type="text/css">
-
+/* for pandoc --citeproc since 2.11 */
 div.csl-bib-body { }
 div.csl-entry {
-clear: both;
-margin-bottom: 0em;
+  clear: both;
 }
 .hanging div.csl-entry {
-margin-left:2em;
-text-indent:-2em;
+  margin-left:2em;
+  text-indent:-2em;
 }
 div.csl-left-margin {
-min-width:2em;
-float:left;
+  min-width:2em;
+  float:left;
 }
 div.csl-right-inline {
-margin-left:2em;
-padding-left:1em;
+  margin-left:2em;
+  padding-left:1em;
 }
 div.csl-indent {
-margin-left: 2em;
+  margin-left: 2em;
 }
 </style>
 
@@ -362,7 +362,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Replication analyses with eatRep</h1>
 <h4 class="author">Sebastian Weirich and Benjamin Becker</h4>
-<h4 class="date">Apr 2025</h4>
+<h4 class="date">Feb 2026</h4>
 
 
 
@@ -373,31 +373,29 @@ replication methods <span class="citation">(Krewski &amp; Rao, 1981;
 Rust, 2014; Rust &amp; Rao, 1996; Wolter, 2007)</span>. Replication
 methods are quite common in the context of survey or large-scale
 assessment data <span class="citation">(Foy et al., 2008)</span> like
-the <a href="https://www.iqb.hu-berlin.de/bt">“National Assessment
-Studies and IQB Trends in Student Achievement”</a> . The following
-examples are closely related to the “IQB” context (e.g., jackknife-2
-methods are used instead of balanced repeated replicates), but may be
-adapted for PISA or TIMSS analyses as well. For an illustration how
-<code>eatRep</code> can be applied to PISA data and its specific
-replication design, see the last example in the documentation of the
-<code>repMean()</code> function.</p>
+the <a href="https://www.iqb.hu-berlin.de/de/bista/implementation-und-ueberpruefung/bildungstrend/">“National
+Assessment Studies and IQB Trends in Student Achievement”</a> . The
+following examples are closely related to the “IQB” context (e.g.,
+jackknife-2 methods are used instead of balanced repeated replicates),
+but may be adapted for PISA or TIMSS analyses as well. For an
+illustration how <code>eatRep</code> can be applied to PISA data and its
+specific replication design, see the last example in the documentation
+of the <code>repMean()</code> function.</p>
 <p>Please note that the theoretical foundations of the presented methods
 are beyond the scope of this vignette—literature recommendations for in
 depth theoretical discussions can be found in the package documentation
 (type <code>package?eatRep</code> into the console). Instead, this
 vignette focuses on some prototypical analyses.</p>
-<p>Furthermore, note that IRT item calibration <span class="citation">(Hambleton et al., 1991; Hambleton &amp; Jones, 1993;
-Mislevy, Johnson, et al., 1992)</span> or “plausible values” imputation
-<span class="citation">(Davier et al., 2009; Mislevy, Beaton, et al.,
-1992; Monseur &amp; Adams, 2009)</span> are not covered in this
-vignette. All the outlined analyses base on survey data in which
-“plausible values” are already included. Such kind of data is provided
-by the <a href="https://www.oecd.org/en/data/datasets/pisa-2022-database.html">OECD</a>
-or can be requested from the <a href="https://www.iqb.hu-berlin.de/fdz">“Research Data Centre (FDZ) at
-the IQB”</a>. Most of the analyses comprise of descriptive statistics
-(means, standard deviations), frequency distributions, and linear or
-logistic regression models. Usually, sampling designs for large-scale
-assessments have the following, specific characteristics:</p>
+<p>Furthermore, note that IRT item calibration or “plausible values”
+imputation are not covered in this vignette. All the outlined analyses
+base on survey data in which “plausible values” are already included.
+Such kind of data is provided by the <a href="https://webfs.oecd.org/pisa/">OECD</a> or can be requested from
+the <a href="https://fdz.iqb.hu-berlin.de/de/">“Research Data Centre
+(FDZ) at the IQB”</a>. Most of the analyses comprise of descriptive
+statistics (means, standard deviations), frequency distributions, and
+linear or logistic regression models. Usually, sampling designs for
+large-scale assessments have the following, specific
+characteristics:</p>
 <ol style="list-style-type: decimal">
 <li><p>Often, individuals in survey data are not randomly drawn from the
 population. In educational assessments which aim to compare countries,
@@ -435,7 +433,7 @@ methods) can be called independently from each other.</p>
 <h2>0. Installation</h2>
 <p>We recommend to use R version 4.0.0 or higher. <code>eatRep</code> is
 available from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;eatRep&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;eatRep&quot;</span>)</span></code></pre></div>
 </div>
 <div id="example-data" class="section level2">
 <h2>1. Example data</h2>
@@ -444,9 +442,9 @@ available from CRAN:</p>
 Gesamtanalysedatensatz (GADS)”. <code>lsa</code>, however, is reduced in
 numbers of examinees, imputations, and variables. Once the package is
 loaded, the structure of <code>lsa</code> can be inspected via:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(eatRep)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">data</span>(lsa, <span class="at">package=</span><span class="st">&quot;eatRep&quot;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">str</span>(lsa, <span class="at">give.attr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(eatRep)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lsa, <span class="at">package=</span><span class="st">&quot;eatRep&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lsa, <span class="at">give.attr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    77322 obs. of  25 variables:
 ##  $ year     : num  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
 ##  $ idstud   : Factor w/ 11655 levels &quot;P00001&quot;,&quot;P00002&quot;,..: 1 1 1 1 1 1 2 2 2 2 ...
@@ -542,12 +540,12 @@ scale assessment data, however, have much more observations.
 (instead of 10 used in PISA), 3 federal states (PISA includes 35 OECD
 countries), and two domains. Most variables have labels, stored as
 attributes:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">attributes</span>(lsa[,<span class="st">&quot;year&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(lsa[,<span class="st">&quot;year&quot;</span>])</span></code></pre></div>
 <pre><code>## $varLabel
 ## [1] &quot;year of assessment (2010 or 2015)&quot;</code></pre>
 <p>As nested imputations are not considered here, we reduce the data to
 the first nest:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>bt <span class="ot">&lt;-</span> lsa[<span class="fu">which</span>(lsa[,<span class="st">&quot;nest&quot;</span>] <span class="sc">==</span> <span class="dv">1</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bt <span class="ot">&lt;-</span> lsa[<span class="fu">which</span>(lsa[,<span class="st">&quot;nest&quot;</span>] <span class="sc">==</span> <span class="dv">1</span>),]</span></code></pre></div>
 <div id="excursus-reshape-imputed-data-from-wide-into-long-format" class="section level3">
 <h3>1.1 Excursus: reshape imputed data from wide into long format</h3>
 <p>Institutions like PISA provide imputed data in the wide format. Each
@@ -565,8 +563,8 @@ provides the <code>wideToLong()</code> function for easy reshaping into
 the required long format. We illustrate the functionality with the help
 of the wide format exemplary data <code>data.timss3</code> from the
 <code>BIFIEsurvey</code> package:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">data</span>(data.timss3, <span class="at">package=</span><span class="st">&quot;BIFIEsurvey&quot;</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">str</span>(data.timss3, <span class="at">give.attr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data.timss3, <span class="at">package=</span><span class="st">&quot;BIFIEsurvey&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data.timss3, <span class="at">give.attr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4668 obs. of  20 variables:
 ##  $ IDSTUD : num  4e+08 4e+08 4e+08 4e+08 4e+08 ...
 ##  $ TOTWGT : num  17.5 17.5 17.5 17.5 17.5 ...
@@ -631,11 +629,11 @@ imputations must be constant across imputed variables—hence,
 used for further analyses—the remaining variables can be ignored. The
 functionality differentiates between imputed and non-imputed
 variables:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(eatTools)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>timssLong <span class="ot">&lt;-</span> eatTools<span class="sc">::</span><span class="fu">wideToLong</span>(<span class="at">datWide =</span> data.timss3, </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>             <span class="at">noImp =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>             <span class="at">imp =</span> <span class="fu">list</span> ( <span class="at">math =</span> <span class="fu">c</span>(<span class="st">&quot;ASMMAT1&quot;</span>, <span class="st">&quot;ASMMAT2&quot;</span>, <span class="st">&quot;ASMMAT3&quot;</span>, <span class="st">&quot;ASMMAT4&quot;</span>, <span class="st">&quot;ASMMAT5&quot;</span>), </span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>                       <span class="at">science =</span> <span class="fu">c</span>(<span class="st">&quot;ASSSCI1&quot;</span>, <span class="st">&quot;ASSSCI2&quot;</span>, <span class="st">&quot;ASSSCI3&quot;</span>, <span class="st">&quot;ASSSCI4&quot;</span>, <span class="st">&quot;ASSSCI5&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(eatTools)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>timssLong <span class="ot">&lt;-</span> eatTools<span class="sc">::</span><span class="fu">wideToLong</span>(<span class="at">datWide =</span> data.timss3, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">noImp =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">imp =</span> <span class="fu">list</span> ( <span class="at">math =</span> <span class="fu">c</span>(<span class="st">&quot;ASMMAT1&quot;</span>, <span class="st">&quot;ASMMAT2&quot;</span>, <span class="st">&quot;ASMMAT3&quot;</span>, <span class="st">&quot;ASMMAT4&quot;</span>, <span class="st">&quot;ASMMAT5&quot;</span>), </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">science =</span> <span class="fu">c</span>(<span class="st">&quot;ASSSCI1&quot;</span>, <span class="st">&quot;ASSSCI2&quot;</span>, <span class="st">&quot;ASSSCI3&quot;</span>, <span class="st">&quot;ASSSCI4&quot;</span>, <span class="st">&quot;ASSSCI5&quot;</span>)))</span></code></pre></div>
 <p>The non-imputed variables can be defined in a single character
 string, whereas imputed variables should be defined in a named list with
 one or more character strings. In our example, variable
@@ -648,17 +646,17 @@ Resulting data <code>timssLong</code> now is suitable for
 <code>eatRep</code> analyses. For many imputations (e.g., 15),
 specifying character strings is more straightforward by using the
 <code>paste()</code> or <code>paste0()</code> function:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>timssLong <span class="ot">&lt;-</span> eatTools<span class="sc">::</span><span class="fu">wideToLong</span>(<span class="at">datWide =</span> data.timss3, </span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>             <span class="at">noImp =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>             <span class="at">imp =</span> <span class="fu">list</span> ( <span class="at">math =</span> <span class="fu">paste0</span>(<span class="st">&quot;ASMMAT&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),  </span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                       <span class="at">science =</span> <span class="fu">paste0</span>(<span class="st">&quot;ASSSCI&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>timssLong <span class="ot">&lt;-</span> eatTools<span class="sc">::</span><span class="fu">wideToLong</span>(<span class="at">datWide =</span> data.timss3, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">noImp =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">imp =</span> <span class="fu">list</span> ( <span class="at">math =</span> <span class="fu">paste0</span>(<span class="st">&quot;ASMMAT&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),  </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">science =</span> <span class="fu">paste0</span>(<span class="st">&quot;ASSSCI&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)))</span></code></pre></div>
 <p>Alternatively, reshaping can be performed with <code>melt()</code>
 from the <code>data.table</code> package:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>timssLong2<span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">setDT</span>(data.timss3), </span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                <span class="at">measure =</span> <span class="fu">patterns</span>(<span class="st">&quot;^ASMMAT&quot;</span>, <span class="st">&quot;^ASSSCI&quot;</span>), </span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>                <span class="at">value.name =</span> <span class="fu">c</span>(<span class="st">&quot;math&quot;</span>, <span class="st">&quot;science&quot;</span>), <span class="at">variable.name=</span><span class="st">&quot;imp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>timssLong2<span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">melt</span>(<span class="fu">setDT</span>(data.timss3), </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;IDSTUD&quot;</span>, <span class="st">&quot;TOTWGT&quot;</span>, <span class="st">&quot;JKZONE&quot;</span>, <span class="st">&quot;JKREP&quot;</span>, <span class="st">&quot;female&quot;</span>), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">measure =</span> <span class="fu">patterns</span>(<span class="st">&quot;^ASMMAT&quot;</span>, <span class="st">&quot;^ASSSCI&quot;</span>), </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">value.name =</span> <span class="fu">c</span>(<span class="st">&quot;math&quot;</span>, <span class="st">&quot;science&quot;</span>), <span class="at">variable.name=</span><span class="st">&quot;imp&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="main-functions-of-eatrep" class="section level2">
@@ -683,13 +681,13 @@ deviations (along with their standard errors) in reading competencies
 for several federal states at one distinct time of measurement (2010).
 As <code>bt</code> contains data from 2010 and 2015 as well as both
 competencies reading and listening, we subset the data set:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>bt2010     <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;year&quot;</span>] <span class="sc">==</span> <span class="dv">2010</span>),]</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> bt2010[<span class="fu">which</span>(bt2010[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bt2010     <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;year&quot;</span>] <span class="sc">==</span> <span class="dv">2010</span>),]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> bt2010[<span class="fu">which</span>(bt2010[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span></code></pre></div>
 <p>We now call <code>repMean()</code> with the reduced data set
 <code>bt2010read</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
@@ -702,9 +700,9 @@ case, as one single person may have worked on items from more than one
 domain. To check whether persons are nested within a grouping variable,
 the function <code>isNested()</code> from the <code>lme4</code> package
 package can be called:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;country&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;country&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;domain&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">isNested</span>(bt2010[,<span class="st">&quot;idstud&quot;</span>], bt2010[,<span class="st">&quot;domain&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>To conduct the analyses for both domains in a single call, we
 recommend using a loop, according to “listening” and “reading”. We
@@ -712,7 +710,7 @@ demonstrate this usage in section 2.5. To collect the results in a
 single <code>data.frame</code> which can be exported to excel, for
 example, the reporting function <code>report2()</code> should be
 called.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>resReading <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>resReading <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>To simplify the graphical visualization of the results using the <a href="https://nickhaf.github.io/eatPlot/">eatPlot</a> package, a new
 reporting function called <code>report2()</code> was introduced. If you
 are only interested in a tabular representation of the results, it is
@@ -724,29 +722,29 @@ analysis is about “reading” competence. If this information should be
 incorporated in the output, the <code>add</code> argument allows to
 define one or multiple additional columns with scalar information of
 character type, for example:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>resReading <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>, <span class="at">year =</span> <span class="st">&quot;2010&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>resReading <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>, <span class="at">year =</span> <span class="st">&quot;2010&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>The analysis above includes one grouping variable (“country”) and one
 competence domain (“reading”) without any group comparisons. The output
 therefore is rather sparse.</p>
 <p>However, the results can be computed according to more than one
 grouping variable. If the results should be computed for each country
 and each migration group, both are specified as grouping variables:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;mig&quot;</span>), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;mig&quot;</span>), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>Frequently, one might not only be interested in group means but also
 the total mean. Hence, we want to know the mean of each single country
 <em>and</em> the mean of the whole population. You can repeat the
 analysis two times, one including grouping variables and one ignoring
 all grouping variables, but it is easier to use only one single
 call:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, </span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 2 analyse(s) overall according to: &#39;group.splits = 0 1&#39;.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
@@ -755,7 +753,7 @@ call:</p>
 ## 
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>The argument Argument <code>group.splits</code> defines “hierarchy
 levels” for the analyses, indicating whether the analysis should be
 conducted within or across groups. The number of hierarchy levels always
@@ -804,13 +802,13 @@ Canadian vs. OECD average, as Canada itself is part of the OECD average)
 are referred to as “cross-level differences”. The following example
 deals with group differences according to <code>sex</code>—we compare,
 whether boys and girls significantly differ in their means:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>The argument <code>group.differences.by</code> defines the grouping
 variable for which differences should be computed. Note that only one
 variable can be specified in <code>group.differences.by</code>, and this
@@ -827,18 +825,18 @@ If <code>groups</code> includes more than one variable,
 <code>group.differences.by</code> defines for which of these variables
 group differences should be computed. If sex differences should be
 computed for each country separately, consider the following call:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>Compute sex differences in each country and additionally for the
 whole group:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
@@ -849,12 +847,12 @@ whole group:</p>
 ## 
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>Compute country differences within each sex group and additionally
 for the whole group:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
@@ -865,7 +863,7 @@ for the whole group:</p>
 ## 
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 </div>
 <div id="cross-level-differences-in-means" class="section level3">
 <h3>2.3 cross-level differences in means</h3>
@@ -927,10 +925,10 @@ differences should be computed for the <code>country</code> variable
 vs. countryC). Cross-level differences should be computed only in
 relation to the zeroth level, e.g. level 1 vs. level 0, and level 2
 vs. level 0. The following command should be called:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
-<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </span>
-<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
@@ -948,7 +946,7 @@ vs. level 0. The following command should be called:</p>
 ## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
 <p><code>cross.differences</code> requests a list of numeric vectors
@@ -966,10 +964,10 @@ difference “boys vs. girls” in the total population. Note that we
 explicitly assume heteroscedastic variance in cross-level difference
 estimation by setting <code>hetero = TRUE</code> and
 <code>clusters = &quot;idclass&quot;</code>:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
-<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">TRUE</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
-<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>, <span class="at">clusters =</span> <span class="st">&quot;idclass&quot;</span>, <span class="at">hetero =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">TRUE</span>, <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">progress =</span> <span class="cn">FALSE</span>, <span class="at">clusters =</span> <span class="st">&quot;idclass&quot;</span>, <span class="at">hetero =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
 ##  
 ##  analysis.number hierarchy.level groups.divided.by group.differences.by
@@ -1002,7 +1000,7 @@ estimation by setting <code>hetero = TRUE</code> and
 ## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
 <p>In the output data.frame created by <code>report2()</code>,
@@ -1054,11 +1052,11 @@ the <code>bt</code> data. In the function call, the trend variable
 <code>linkErr = &quot;leScore&quot;</code> have to be defined. Without specifying
 the <code>linkErr</code> argument, the linking error is defaulted to
 0.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>btread  <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
-<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> btread, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
-<span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </span>
-<span id="cb47-5"><a href="#cb47-5" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>btread  <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> btread, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Trend group: &#39;2010&#39;
 ## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
@@ -1112,7 +1110,7 @@ the <code>linkErr</code> argument, the linking error is defaulted to
 ## Assume unnested structure with 3 imputations.
 ## Create 73 replicate weights according to JK2 procedure.
 ## Note: No linking error was defined. Linking error will be defaulted to &#39;0&#39;.</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>res     <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]] </span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>res     <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]] </span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
 </div>
@@ -1131,12 +1129,12 @@ an additional outer loop is necessary. We demonstrate this procedure
 with exemplary data <code>bt</code>, containing both domains “reading”
 and “listening”. As in the example before, we analyze group,
 cross-level, and trend differences.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data =</span> bt, <span class="at">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> ( subsample) {</span>
-<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>           <span class="fu">repMean</span>(<span class="at">datL =</span> subsample, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>                    <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>                    <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, </span>
-<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>                    <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
-<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a>                    <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>) } )</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data =</span> bt, <span class="at">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> ( subsample) {</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">repMean</span>(<span class="at">datL =</span> subsample, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">group.differences.by =</span> <span class="st">&quot;country&quot;</span>, </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cross.differences =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>)), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>) } )</span></code></pre></div>
 <pre><code>## 
 ## Trend group: &#39;2010&#39;
 ## 4 analyse(s) overall according to: &#39;group.splits = 0 1 2&#39;.
@@ -1251,24 +1249,24 @@ in two subsets which are analyzed consecutively. The
 elements separately. We now see that the argument <code>add</code> can
 help to distinguish both resulting data.frames. First, the processing is
 demonstrated without using a loop:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">names</span>(results)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(results)</span></code></pre></div>
 <pre><code>## [1] &quot;listening&quot; &quot;reading&quot;</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>resultsListening <span class="ot">&lt;-</span> <span class="fu">report2</span>(results[[<span class="st">&quot;listening&quot;</span>]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb =</span> <span class="st">&quot;listening&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>resultsListening <span class="ot">&lt;-</span> <span class="fu">report2</span>(results[[<span class="st">&quot;listening&quot;</span>]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb =</span> <span class="st">&quot;listening&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a>resultsReading   <span class="ot">&lt;-</span> <span class="fu">report2</span>(results[[<span class="st">&quot;reading&quot;</span>]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>resultsReading   <span class="ot">&lt;-</span> <span class="fu">report2</span>(results[[<span class="st">&quot;reading&quot;</span>]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a>allResults1      <span class="ot">&lt;-</span> <span class="fu">rbind</span> (resultsListening, resultsReading)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>allResults1      <span class="ot">&lt;-</span> <span class="fu">rbind</span> (resultsListening, resultsReading)</span></code></pre></div>
 <p>Using a loop shortens the call, especially if more than two
 competence domains are used:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a>allResults2      <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(results), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
-<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>                           <span class="fu">report2</span>(results[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]})</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>allResults2      <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(results), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">report2</span>(results[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]})</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for &#39;crossDiff_of_groupDiff&#39; is currently not supported.
 ## Warning in FUN(X[[i]], ...): Standard error correction for crossDifferences across multiple hierarchy levels is currently not supported.</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a>allResults2      <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults2)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>allResults2      <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults2)</span></code></pre></div>
 </div>
 <div id="adjusted-means" class="section level3">
 <h3>2.7 Adjusted means</h3>
@@ -1292,16 +1290,16 @@ numeric. For polytomous variables (e.g., language at home: “german”,
 indicator variables must be generated beforehand. In the following
 example, we transform the non-numeric adjustment variables
 <code>sex</code> and <code>mig</code> to be numeric.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="fu">sapply</span>(bt2010read[,<span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;mig&quot;</span>, <span class="st">&quot;ses&quot;</span>)], class) </span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(bt2010read[,<span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;mig&quot;</span>, <span class="st">&quot;ses&quot;</span>)], class) </span></code></pre></div>
 <pre><code>##       sex       mig       ses 
 ##  &quot;factor&quot; &quot;logical&quot; &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a>bt2010read[,<span class="st">&quot;sexnum&quot;</span>] <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(bt2010read[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;</span>, </span>
-<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a>                         <span class="at">as.factor =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb65-3"><a href="#cb65-3" tabindex="-1"></a>bt2010read[,<span class="st">&quot;mignum&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bt2010read[,<span class="st">&quot;mig&quot;</span>])</span>
-<span id="cb65-4"><a href="#cb65-4" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb65-5"><a href="#cb65-5" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, </span>
-<span id="cb65-6"><a href="#cb65-6" tabindex="-1"></a>           <span class="at">cross.differences =</span> <span class="cn">TRUE</span>, <span class="at">adjust =</span> <span class="fu">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), </span>
-<span id="cb65-7"><a href="#cb65-7" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>bt2010read[,<span class="st">&quot;sexnum&quot;</span>] <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(bt2010read[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;</span>, </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">as.factor =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>bt2010read[,<span class="st">&quot;mignum&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bt2010read[,<span class="st">&quot;mig&quot;</span>])</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">group.splits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, </span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">cross.differences =</span> <span class="cn">TRUE</span>, <span class="at">adjust =</span> <span class="fu">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), </span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Warning in repMeanList(datL = datL, a = a): To date, for adjusted means, cross-level differences can only be computed with method &#39;old&#39;. Set &#39;crossDiffSE&#39; to &#39;old&#39;.
 ## 2 analyse(s) overall according to: &#39;group.splits = 0 1&#39;.
 ##  
@@ -1311,7 +1309,7 @@ example, we transform the non-numeric adjustment variables
 ## 
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">report2</span>(results, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>Please note that, to date, cross-level differences for adjusted means
 can only be computed using the methods <code>old</code>. In the zeroth
 hierarchy level, no adjustment takes place. As the distribution of
@@ -1343,20 +1341,20 @@ incorporation of linking errors, if desired, must be done by hand
 likewise. The following example illustrates the procedure. The standard
 error of the trend estimate is computed as the square root of the sum of
 the squared standard errors for 2010, 2015 and the link:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a>btread  <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
-<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a>btread[,<span class="st">&quot;sexnum&quot;</span>] <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(btread[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;</span>, <span class="at">as.factor =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a>btread[,<span class="st">&quot;mignum&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(btread[,<span class="st">&quot;mig&quot;</span>])</span>
-<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a>btread[,<span class="st">&quot;year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(btread[,<span class="st">&quot;year&quot;</span>])</span>
-<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data =</span> btread,  <span class="at">INDICES =</span> btread[,<span class="st">&quot;country&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span>(sub.dat) {</span>
-<span id="cb68-6"><a href="#cb68-6" tabindex="-1"></a>           res <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb68-7"><a href="#cb68-7" tabindex="-1"></a>                  <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>), </span>
-<span id="cb68-8"><a href="#cb68-8" tabindex="-1"></a>                  <span class="at">adjust =</span> <span class="fu">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>,</span>
-<span id="cb68-9"><a href="#cb68-9" tabindex="-1"></a>                  <span class="at">progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb68-10"><a href="#cb68-10" tabindex="-1"></a>           res <span class="ot">&lt;-</span> <span class="fu">report2</span>(res, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>, </span>
-<span id="cb68-11"><a href="#cb68-11" tabindex="-1"></a>                          <span class="at">country=</span> <span class="fu">as.character</span>(sub.dat[<span class="dv">1</span>,<span class="st">&quot;country&quot;</span>])))[[<span class="st">&quot;plain&quot;</span>]]</span>
-<span id="cb68-12"><a href="#cb68-12" tabindex="-1"></a>           res[,<span class="st">&quot;trend&quot;</span>]   <span class="ot">&lt;-</span> <span class="fu">diff</span>(res[,<span class="st">&quot;est&quot;</span>])</span>
-<span id="cb68-13"><a href="#cb68-13" tabindex="-1"></a>           res[,<span class="st">&quot;trendSE&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(res[,<span class="st">&quot;se&quot;</span>]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">unique</span>(sub.dat[,<span class="st">&quot;leScore&quot;</span>])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb68-14"><a href="#cb68-14" tabindex="-1"></a>           <span class="fu">return</span>(res)})</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>btread  <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>btread[,<span class="st">&quot;sexnum&quot;</span>] <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(btread[,<span class="st">&quot;sex&quot;</span>], <span class="st">&quot;&#39;male&#39;=0; &#39;female&#39;=1&quot;</span>, <span class="at">as.factor =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>btread[,<span class="st">&quot;mignum&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(btread[,<span class="st">&quot;mig&quot;</span>])</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>btread[,<span class="st">&quot;year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(btread[,<span class="st">&quot;year&quot;</span>])</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data =</span> btread,  <span class="at">INDICES =</span> btread[,<span class="st">&quot;country&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span>(sub.dat) {</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>           res <span class="ot">&lt;-</span> <span class="fu">repMean</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>), </span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">adjust =</span> <span class="fu">c</span>(<span class="st">&quot;sexnum&quot;</span>, <span class="st">&quot;mignum&quot;</span>, <span class="st">&quot;ses&quot;</span>), <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>           res <span class="ot">&lt;-</span> <span class="fu">report2</span>(res, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb=</span><span class="st">&quot;reading&quot;</span>, </span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">country=</span> <span class="fu">as.character</span>(sub.dat[<span class="dv">1</span>,<span class="st">&quot;country&quot;</span>])))[[<span class="st">&quot;plain&quot;</span>]]</span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>           res[,<span class="st">&quot;trend&quot;</span>]   <span class="ot">&lt;-</span> <span class="fu">diff</span>(res[,<span class="st">&quot;est&quot;</span>])</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>           res[,<span class="st">&quot;trendSE&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(res[,<span class="st">&quot;se&quot;</span>]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">unique</span>(sub.dat[,<span class="st">&quot;leScore&quot;</span>])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>           <span class="fu">return</span>(res)})</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 62 replicate weights according to JK2 procedure.
@@ -1366,7 +1364,7 @@ the squared standard errors for 2010, 2015 and the link:</p>
 ## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 48 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, results)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, results)</span></code></pre></div>
 </div>
 </div>
 <div id="frequency-analyses-reptable" class="section level2">
@@ -1385,24 +1383,24 @@ you can test for each competence level 1, 2, 3, 4, and 5 with a separate
 <em>t</em> test, whether males and females differ. The comparisons,
 however, are not independent—a Bonferroni correction might be
 appropriate then. In the following, both variants are sketched:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="do">### first example: group comparisons with a chi^2-Test: we check for each country </span></span>
-<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a><span class="do">### whether the distribution of competence levels differs between males and females</span></span>
-<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a>freq1 <span class="ot">&lt;-</span> <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a>         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a>         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, <span class="at">dependent =</span> <span class="st">&quot;comp&quot;</span>, </span>
-<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a>         <span class="at">chiSquare =</span> <span class="cn">TRUE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="do">### first example: group comparisons with a chi^2-Test: we check for each country </span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="do">### whether the distribution of competence levels differs between males and females</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>freq1 <span class="ot">&lt;-</span> <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, <span class="at">dependent =</span> <span class="st">&quot;comp&quot;</span>, </span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">chiSquare =</span> <span class="cn">TRUE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a>res1  <span class="ot">&lt;-</span> <span class="fu">report2</span>(freq1, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>res1  <span class="ot">&lt;-</span> <span class="fu">report2</span>(freq1, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>In the second example, the group comparisons are conducted applying
 five separate <em>t</em> tests. For each country and each single
 competence level, <code>repTable()</code> checks whether the
 distribution differs between males and females. Technically,
 <code>repMean()</code> is called five times consecutively.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a>freq2 <span class="ot">&lt;-</span> <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>         <span class="at">repInd=</span><span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </span>
-<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a>         <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, <span class="at">dependent =</span> <span class="st">&quot;comp&quot;</span>, <span class="at">chiSquare =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>freq2 <span class="ot">&lt;-</span> <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">repInd=</span><span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, <span class="at">dependent =</span> <span class="st">&quot;comp&quot;</span>, <span class="at">chiSquare =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.
@@ -1418,7 +1416,7 @@ distribution differs between males and females. Technically,
 ## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a>res2  <span class="ot">&lt;-</span> <span class="fu">report2</span>(freq2, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>res2  <span class="ot">&lt;-</span> <span class="fu">report2</span>(freq2, <span class="at">add =</span> <span class="fu">list</span>( <span class="at">kb =</span> <span class="st">&quot;reading&quot;</span>))[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <p>In <code>repTable()</code>, the computation of cross-level
 differences and trends works analogously to <code>repMean()</code>.</p>
 <div id="looping-across-several-dependent-variables" class="section level3">
@@ -1430,13 +1428,13 @@ have several dichotomous criteria (e.g. “failed to reach minimal
 standard”, “pass regular standard”, “pass optimal standard”),
 represented by several variables. A <code>lapply()</code> loop ca be
 applied then:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="do">### abhaengige Variablen definieren</span></span>
-<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</span>
-<span id="cb77-3"><a href="#cb77-3" tabindex="-1"></a>freq3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(DVs, <span class="at">FUN =</span> <span class="cf">function</span> (dv) { </span>
-<span id="cb77-4"><a href="#cb77-4" tabindex="-1"></a>         <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb77-5"><a href="#cb77-5" tabindex="-1"></a>            <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb77-6"><a href="#cb77-6" tabindex="-1"></a>            <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb77-7"><a href="#cb77-7" tabindex="-1"></a>            <span class="at">dependent =</span> dv, <span class="at">progress =</span> <span class="cn">FALSE</span>) })</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">### abhaengige Variablen definieren</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>freq3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(DVs, <span class="at">FUN =</span> <span class="cf">function</span> (dv) { </span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">repTable</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">dependent =</span> dv, <span class="at">progress =</span> <span class="cn">FALSE</span>) })</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.
@@ -1448,7 +1446,7 @@ applied then:</p>
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
 <p>The reporting function <code>report()</code> must be called three
 times, likewise in a <code>lapply()</code> loop:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>allResults3     <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(freq3, report))</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>allResults3     <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(freq3, report))</span></code></pre></div>
 </div>
 <div id="nested-loops" class="section level3">
 <h3>3.2 Nested loops</h3>
@@ -1457,13 +1455,13 @@ several dependent variables) may be combined. In the following example,
 we want to analyze three dependent variables for two domains. Hence, a
 two-stage loop for <span class="math inline">\(3\times 2=6\)</span>
 analyses is necessary:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</span>
-<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>freq4 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(DVs, <span class="at">FUN =</span> <span class="cf">function</span> (dv) { </span>
-<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a>         f4 <span class="ot">&lt;-</span> <span class="fu">by</span> ( <span class="at">data =</span> bt2010, <span class="at">INDICES =</span> bt2010[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> (sub.dat) {</span>
-<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a>               <span class="fu">repTable</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a>                         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb80-6"><a href="#cb80-6" tabindex="-1"></a>                         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb80-7"><a href="#cb80-7" tabindex="-1"></a>                         <span class="at">dependent =</span> dv, <span class="at">progress =</span> <span class="cn">FALSE</span>)})})</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>freq4 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(DVs, <span class="at">FUN =</span> <span class="cf">function</span> (dv) { </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>         f4 <span class="ot">&lt;-</span> <span class="fu">by</span> ( <span class="at">data =</span> bt2010, <span class="at">INDICES =</span> bt2010[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> (sub.dat) {</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">repTable</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">dependent =</span> dv, <span class="at">progress =</span> <span class="cn">FALSE</span>)})})</span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.
@@ -1483,27 +1481,27 @@ analyses is necessary:</p>
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
 <p>To convert the results in a more user-friendly format:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a>allResults4  <span class="ot">&lt;-</span> <span class="fu">lapply</span>(freq4, <span class="at">FUN =</span> <span class="cf">function</span> (av) { </span>
-<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>                       <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">names</span>(av), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
-<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>                         <span class="fu">report2</span>(av[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]}))})</span>
-<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a>allResults4  <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults4)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>allResults4  <span class="ot">&lt;-</span> <span class="fu">lapply</span>(freq4, <span class="at">FUN =</span> <span class="cf">function</span> (av) { </span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">names</span>(av), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">report2</span>(av[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]}))})</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>allResults4  <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults4)</span></code></pre></div>
 <p>A combination of two loops also works for trend analyses. Please note
 that each dependent variable potentially has its own linking error. If
 so, one solution is to store the variable name along with its linking
 error in a <code>data.frame</code> and use an <code>apply()</code>
 loop:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="do">### two-stage nested loop with trend analysis</span></span>
-<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a><span class="do">### first we define the dependent variables (dv) and their linking errors (le)</span></span>
-<span id="cb83-3"><a href="#cb83-3" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">data.frame</span> ( <span class="at">dv =</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>), </span>
-<span id="cb83-4"><a href="#cb83-4" tabindex="-1"></a>                      <span class="at">le =</span> <span class="fu">c</span>(<span class="st">&quot;leFailMin&quot;</span>, <span class="st">&quot;lePassReg&quot;</span>, <span class="st">&quot;lePassOpt&quot;</span>), </span>
-<span id="cb83-5"><a href="#cb83-5" tabindex="-1"></a>                      <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb83-6"><a href="#cb83-6" tabindex="-1"></a>freq5 <span class="ot">&lt;-</span> <span class="fu">apply</span>(DVs, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span> (depVars) { </span>
-<span id="cb83-7"><a href="#cb83-7" tabindex="-1"></a>         f4 <span class="ot">&lt;-</span> <span class="fu">by</span> ( <span class="at">data =</span> bt, <span class="at">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> (sub.dat) {</span>
-<span id="cb83-8"><a href="#cb83-8" tabindex="-1"></a>               <span class="fu">repTable</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb83-9"><a href="#cb83-9" tabindex="-1"></a>                         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
-<span id="cb83-10"><a href="#cb83-10" tabindex="-1"></a>                         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb83-11"><a href="#cb83-11" tabindex="-1"></a>                         <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">dependent =</span> depVars[[<span class="st">&quot;dv&quot;</span>]],</span>
-<span id="cb83-12"><a href="#cb83-12" tabindex="-1"></a>                         <span class="at">linkErr =</span> depVars[[<span class="st">&quot;le&quot;</span>]], <span class="at">progress =</span> <span class="cn">FALSE</span>)})})</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="do">### two-stage nested loop with trend analysis</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="do">### first we define the dependent variables (dv) and their linking errors (le)</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>DVs   <span class="ot">&lt;-</span> <span class="fu">data.frame</span> ( <span class="at">dv =</span> <span class="fu">c</span>(<span class="st">&quot;failMin&quot;</span>, <span class="st">&quot;passReg&quot;</span>, <span class="st">&quot;passOpt&quot;</span>), </span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">le =</span> <span class="fu">c</span>(<span class="st">&quot;leFailMin&quot;</span>, <span class="st">&quot;lePassReg&quot;</span>, <span class="st">&quot;lePassOpt&quot;</span>), </span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>freq5 <span class="ot">&lt;-</span> <span class="fu">apply</span>(DVs, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span> (depVars) { </span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>         f4 <span class="ot">&lt;-</span> <span class="fu">by</span> ( <span class="at">data =</span> bt, <span class="at">INDICES =</span> bt[,<span class="st">&quot;domain&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> (sub.dat) {</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>               <span class="fu">repTable</span>(<span class="at">datL =</span> sub.dat, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;sex&quot;</span>), </span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">group.differences.by =</span> <span class="st">&quot;sex&quot;</span>, <span class="at">cross.differences =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, <span class="at">dependent =</span> depVars[[<span class="st">&quot;dv&quot;</span>]],</span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">linkErr =</span> depVars[[<span class="st">&quot;le&quot;</span>]], <span class="at">progress =</span> <span class="cn">FALSE</span>)})})</span></code></pre></div>
 <pre><code>## 
 ## Trend group: &#39;2010&#39;
 ## 1 analyse(s) overall according to: &#39;group.splits = 2&#39;.
@@ -1576,13 +1574,13 @@ loop:</p>
 ## Assume unnested structure with 3 imputations.
 ## Create 73 replicate weights according to JK2 procedure.</code></pre>
 <p>To convert the results in a more user-friendly format:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a>allResults5 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(freq5, <span class="at">FUN =</span> <span class="cf">function</span> (av) { </span>
-<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a>                       <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">names</span>(av), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
-<span id="cb85-3"><a href="#cb85-3" tabindex="-1"></a>                          <span class="fu">report2</span>(av[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]}))})</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>allResults5 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(freq5, <span class="at">FUN =</span> <span class="cf">function</span> (av) { </span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="fu">lapply</span>(<span class="fu">names</span>(av), <span class="at">FUN =</span> <span class="cf">function</span> ( x ) { </span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">report2</span>(av[[x]], <span class="at">add =</span> <span class="fu">list</span>(<span class="at">kb=</span>x))[[<span class="st">&quot;plain&quot;</span>]]}))})</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): Found 6 missing linking errors for dependent variable &#39;failMin&#39; and parameter(s) &#39;NcasesValid&#39;. Assume linking error of 0 for these cases.
 ## Warning in FUN(X[[i]], ...): Found 6 missing linking errors for dependent variable &#39;passReg&#39; and parameter(s) &#39;NcasesValid&#39;. Assume linking error of 0 for these cases.
 ## Warning in FUN(X[[i]], ...): Found 6 missing linking errors for dependent variable &#39;passOpt&#39; and parameter(s) &#39;NcasesValid&#39;. Assume linking error of 0 for these cases.</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a>allResults5 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults5)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>allResults5 <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, allResults5)</span></code></pre></div>
 </div>
 </div>
 <div id="analyses-of-ranges-repquantile" class="section level2">
@@ -1593,11 +1591,11 @@ the computation of group differences is not supported yet.
 <code>probs</code> argument. The following example illustrates the usage
 of the function for the domain “reading” for 2010 and 2015. We compute
 the 5., 10., 25., 75., 90., and 95. percentile:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>btRead <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
-<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a>quan   <span class="ot">&lt;-</span> <span class="fu">repQuantile</span>(<span class="at">datL =</span> btRead, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, </span>
-<span id="cb88-4"><a href="#cb88-4" tabindex="-1"></a>               <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, </span>
-<span id="cb88-5"><a href="#cb88-5" tabindex="-1"></a>               <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">1</span>, .<span class="dv">25</span>, .<span class="dv">75</span>, .<span class="dv">90</span>, .<span class="dv">95</span>), <span class="at">progress =</span> <span class="cn">FALSE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>btRead <span class="ot">&lt;-</span> bt[<span class="fu">which</span>(bt[,<span class="st">&quot;domain&quot;</span>] <span class="sc">==</span> <span class="st">&quot;reading&quot;</span>),]</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>quan   <span class="ot">&lt;-</span> <span class="fu">repQuantile</span>(<span class="at">datL =</span> btRead, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>, <span class="at">trend =</span> <span class="st">&quot;year&quot;</span>, </span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">dependent =</span> <span class="st">&quot;score&quot;</span>, <span class="at">linkErr =</span> <span class="st">&quot;leScore&quot;</span>, </span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">1</span>, .<span class="dv">25</span>, .<span class="dv">75</span>, .<span class="dv">90</span>, .<span class="dv">95</span>), <span class="at">progress =</span> <span class="cn">FALSE</span> )</span></code></pre></div>
 <pre><code>## 
 ## Trend group: &#39;2010&#39;
 ## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
@@ -1609,7 +1607,7 @@ the 5., 10., 25., 75., 90., and 95. percentile:</p>
 ## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 73 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a>res    <span class="ot">&lt;-</span> <span class="fu">report</span>(quan, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>res    <span class="ot">&lt;-</span> <span class="fu">report</span>(quan, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>))</span></code></pre></div>
 </div>
 <div id="regression-analyses-repglm" class="section level2">
 <h2>5. Regression analyses (repGlm)</h2>
@@ -1621,17 +1619,17 @@ results to the console (if <code>printGlm</code> is set to
 competence on sex, SES is estimated in each country separately. For a
 valid interpretation of interaction effects, SES variable is
 standardized within each imputation:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data=</span>bt2010read, <span class="at">INDICES =</span> bt2010read[,<span class="st">&quot;imp&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> ( i ) { </span>
-<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a>                i[,<span class="st">&quot;ses_std&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">scale</span>(i[,<span class="st">&quot;ses&quot;</span>])[,<span class="dv">1</span>]</span>
-<span id="cb91-3"><a href="#cb91-3" tabindex="-1"></a>                <span class="fu">return</span>(i)})</span>
-<span id="cb91-4"><a href="#cb91-4" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, bt2010read)              </span>
-<span id="cb91-5"><a href="#cb91-5" tabindex="-1"></a>reg1   <span class="ot">&lt;-</span> <span class="fu">repGlm</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb91-6"><a href="#cb91-6" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>,  <span class="at">formula =</span> score<span class="sc">~</span>sex<span class="sc">*</span>ses_std, </span>
-<span id="cb91-7"><a href="#cb91-7" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link=</span><span class="st">&quot;identity&quot;</span>), <span class="at">progress =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> <span class="fu">by</span>(<span class="at">data=</span>bt2010read, <span class="at">INDICES =</span> bt2010read[,<span class="st">&quot;imp&quot;</span>], <span class="at">FUN =</span> <span class="cf">function</span> ( i ) { </span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>                i[,<span class="st">&quot;ses_std&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">scale</span>(i[,<span class="st">&quot;ses&quot;</span>])[,<span class="dv">1</span>]</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">return</span>(i)})</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>bt2010read <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, bt2010read)              </span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>reg1   <span class="ot">&lt;-</span> <span class="fu">repGlm</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">groups =</span> <span class="st">&quot;country&quot;</span>,  <span class="at">formula =</span> score<span class="sc">~</span>sex<span class="sc">*</span>ses_std, </span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">gaussian</span>(<span class="at">link=</span><span class="st">&quot;identity&quot;</span>), <span class="at">progress =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 1&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a>res1   <span class="ot">&lt;-</span> <span class="fu">report2</span>(reg1, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="at">printGlm =</span> <span class="cn">TRUE</span>)[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>res1   <span class="ot">&lt;-</span> <span class="fu">report2</span>(reg1, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="at">printGlm =</span> <span class="cn">TRUE</span>)[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>##        Trend group: &#39;noTrend&#39;.
 ##             groups: type = point; country = countryA; row = 1; id = 14574361_1
 ##             domain: reading
@@ -1675,13 +1673,13 @@ standardized within each imputation:</p>
 the regular standard was passed (<code>passReg</code>) is the dependent
 variable. The variable <code>country</code> is now used as a
 predictor.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a>reg2   <span class="ot">&lt;-</span> <span class="fu">repGlm</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
-<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">formula =</span> passReg<span class="sc">~</span>country<span class="sc">*</span>ses_std, </span>
-<span id="cb95-3"><a href="#cb95-3" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">progress =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>reg2   <span class="ot">&lt;-</span> <span class="fu">repGlm</span>(<span class="at">datL =</span> bt2010read, <span class="at">ID=</span><span class="st">&quot;idstud&quot;</span>, <span class="at">wgt=</span><span class="st">&quot;wgt&quot;</span>, <span class="at">type=</span><span class="st">&quot;jk2&quot;</span>, <span class="at">PSU=</span><span class="st">&quot;jkzone&quot;</span>, </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">repInd =</span> <span class="st">&quot;jkrep&quot;</span>, <span class="at">imp=</span><span class="st">&quot;imp&quot;</span>, <span class="at">formula =</span> passReg<span class="sc">~</span>country<span class="sc">*</span>ses_std, </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">progress =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
 <pre><code>## 1 analyse(s) overall according to: &#39;group.splits = 0&#39;.
 ## Assume unnested structure with 3 imputations.
 ## Create 92 replicate weights according to JK2 procedure.</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a>res2   <span class="ot">&lt;-</span> <span class="fu">report2</span>(reg2, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="at">printGlm =</span> <span class="cn">TRUE</span>)[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>res2   <span class="ot">&lt;-</span> <span class="fu">report2</span>(reg2, <span class="at">add =</span> <span class="fu">list</span>(<span class="at">domain =</span> <span class="st">&quot;reading&quot;</span>), <span class="at">printGlm =</span> <span class="cn">TRUE</span>)[[<span class="st">&quot;plain&quot;</span>]]</span></code></pre></div>
 <pre><code>##        Trend group: &#39;noTrend&#39;.
 ##             groups: type = point; row = 1; id = 14575099_1
 ##             domain: reading
@@ -1702,13 +1700,7 @@ linear regression models) as well as Nagelkerke’s <span class="math inline">\(
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0" line-spacing="2">
-<div id="ref-RN11" class="csl-entry">
-Davier, M. von, Gonzalez, E., &amp; Mislevy, R. J. (2009). What are
-plausible values and why are they useful? [Journal Article]. <em>IERI
-Monograph Series: Issues and Methodologies in Large Scale
-Assessments</em>, <em>2</em>, 9–36.
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
 <div id="ref-RN3" class="csl-entry">
 Foy, P., Galia, J., &amp; Li, I. (2008). Scaling the data from the TIMSS
 2007 mathematics and science asssessment [Book Section]. In J. F. Olson,
@@ -1722,17 +1714,6 @@ Schmidt-Catran, A., &amp; Konig, R. (2017). When size matters:
 Advantages of weighted effect coding in observational studies [Journal
 Article]. <em>International Journal of Public Health</em>, <em>62</em>,
 163–167.
-</div>
-<div id="ref-RN366" class="csl-entry">
-Hambleton, R. K., &amp; Jones, R. W. (1993). An NCME instructional
-module on: Comparison of classical test theory and item response theory
-and their applications to test development [Journal Article].
-<em>Educational Measurement: Issues and Practice</em>, <em>12</em>(3),
-38–47.
-</div>
-<div id="ref-RN142" class="csl-entry">
-Hambleton, R. K., Swaminathan, H., &amp; Rogers, H. J. (1991).
-<em>Fundamentals of item response theory</em> [Book]. Sage.
 </div>
 <div id="ref-RN487" class="csl-entry">
 Krewski, D., &amp; Rao, J. N. K. (1981). Inference from stratified
@@ -1749,22 +1730,6 @@ Mayer, A., Dietzfelbinger, L., Rosseel, Y., &amp; Steyer, R. (2016). The
 EffectLiteR approach for analyzing average and conditional effects
 [Journal Article]. <em>Multivariate Behavioral Research</em>,
 <em>51</em>, 374–391.
-</div>
-<div id="ref-RN6" class="csl-entry">
-Mislevy, R. J., Beaton, A. E., Kaplan, B., &amp; Sheehan, K. M. (1992).
-Estimating population characteristics from sparse matrix samples of item
-responses [Journal Article]. <em>Journal of Educational
-Measurement</em>, <em>29</em>, 133–161.
-</div>
-<div id="ref-RN213" class="csl-entry">
-Mislevy, R. J., Johnson, E. G., &amp; Muraki, E. (1992). Scaling
-procedures in NAEP [Journal Article]. <em>Journal of Educational and
-Behavioral Statistics</em>, <em>17</em>(2), 131–154.
-</div>
-<div id="ref-RN394" class="csl-entry">
-Monseur, C., &amp; Adams, R. (2009). Plausible values: How to deal with
-their limitations [Journal Article]. <em>Journal of Applied
-Measurement</em>, <em>10</em>(3), 320–334.
 </div>
 <div id="ref-RN523" class="csl-entry">
 Nachtigall, C., Kröhne, U., Enders, U., &amp; Steyer, R. (2008). Causal
